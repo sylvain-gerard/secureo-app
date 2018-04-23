@@ -1,20 +1,32 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container" [style.minHeight.%]="100" fxLayout="column" fxLayoutAlign="space-between">
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="app-name">Secureo</h1>
+  </mat-toolbar>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #snav class="sidenav">
+      <mat-nav-list>
+        <a href="" routerLink='/home' mat-list-item>Acceuil</a>
+        <a href="" routerLink='/admin' mat-list-item>Admin</a>
+        <a href="" routerLink='/manager' mat-list-item>Manager</a>
+        <a href="" routerLink='/employee' mat-list-item>Agent</a>
+        <a href="" routerLink='/employee' mat-list-item>Catalogue</a>
+        <a href="" routerLink='/employee' mat-list-item>Règlement</a>
+        <a href="" routerLink='/employee' mat-list-item>Fournisseurs</a>
+        <a href="" routerLink='/employee' mat-list-item>Historique</a>
+        <a href="" routerLink='/employee' mat-list-item>Connexion</a>
+        <a href="" routerLink='/employee' mat-list-item>Déconnexion</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxLayout="column" fxLayoutAlign="space-between">
+      <div class="content" fxLayout="row" fxFlex="1 0 auto" fxLayoutAlign="center center">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <mat-toolbar class="toolbar">
+        <p style="font-size: small">© 2018 Copyright Sylvain </p>
+  </mat-toolbar>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
