@@ -8,20 +8,21 @@
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #snav class="sidenav">
       <mat-nav-list>
-        <a href="" routerLink='/home' mat-list-item>Acceuil</a>
-        <a href="" routerLink='/admin' mat-list-item>Admin</a>
-        <a href="" routerLink='/manager' mat-list-item>Manager</a>
-        <a href="" routerLink='/employee' mat-list-item>Agent</a>
-        <a href="" routerLink='/employee' mat-list-item>Catalogue</a>
-        <a href="" routerLink='/employee' mat-list-item>Règlement</a>
-        <a href="" routerLink='/employee' mat-list-item>Fournisseurs</a>
-        <a href="" routerLink='/employee' mat-list-item>Historique</a>
-        <a href="" routerLink='/employee' mat-list-item>Connexion</a>
-        <a href="" routerLink='/employee' mat-list-item>Déconnexion</a>
+        <a href="" routerLink='home' mat-list-item>Acceuil</a>
+        <a href="" routerLink='users' mat-list-item>Utilisateur</a>
+        <a href="" routerLink='admin' mat-list-item>Admin</a>
+        <a href="" routerLink='manager' mat-list-item>Manager</a>
+        <a href="" routerLink='employee' mat-list-item>Agent</a>
+        <a href="" routerLink='employee' mat-list-item>Catalogue</a>
+        <a href="" routerLink='employee' mat-list-item>Règlement</a>
+        <a href="" routerLink='employee' mat-list-item>Fournisseurs</a>
+        <a href="" routerLink='employee' mat-list-item>Historique</a>
+        <a href="" routerLink='employee' mat-list-item>Connexion</a>
+        <a href="" routerLink='employee' mat-list-item>Déconnexion</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content fxLayout="column" fxLayoutAlign="space-between">
-      <div class="content" fxLayout="row" fxFlex="1 0 auto" fxLayoutAlign="center center">
+      <div [style.minHeight.%]="100" fxLayout="column" layout-fill flex>
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>
