@@ -6,3 +6,7 @@ html,body{
     margin: 0%;
     height: 100%;
 }
+
+.mat-header-row {
+    background-color: #3F51B5;
+}

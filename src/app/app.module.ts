@@ -5,15 +5,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+// import './rxjs-operators';
+
 import { AppComponent } from './app.component';
-import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 import { UserService } from './user/user.service';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserDetailComponent
+    UserListComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -21,10 +30,13 @@ import { UserService } from './user/user.service';
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
-    UserService
+    UserService,
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

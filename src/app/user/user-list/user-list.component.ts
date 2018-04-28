@@ -9,29 +9,35 @@ import {
   MatDialogConfig,
   MatSort,
   MatSnackBar,
-  MatSelectModule
+  MatSelectModule,
+  MatCheckboxModule,
+  PageEvent,
+  MatPaginator,
 } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
-  selector: 'app-user-detail',
-  templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
-export class UserDetailComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
   user: User;
   selectedRowIndex = -1;
   edition = false;
 
-  constructor(
-    private snackBar: MatSnackBar,
-    private userService: UserService
-  ) { }
-
   displayedColumns = ['userName', 'email', 'active', 'role'];
   dataSourceUser = new MatTableDataSource();
 
   @ViewChild(MatSort) sort: MatSort;
+
+
+  constructor(
+    private snackBar: MatSnackBar,
+    private userService: UserService
+  ) { }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -96,18 +102,17 @@ export class UserDetailComponent implements OnInit {
     }
   }
   */
+  /*
+    deleteSuspect() {
+      this.edition = false;
+      this.userService.deleteUser(this.user.id).subscribe();
+      this.clearInput();
+    }
+  */
 
   afficherMessage(message: string, erreur: string) {
     this.snackBar.open(message, erreur, {
       duration: 2000,
        });
   }
-/*
-  deleteSuspect() {
-    this.edition = false;
-    this.userService.deleteUser(this.user.id).subscribe();
-    this.clearInput();
-  }
-*/
-
 }

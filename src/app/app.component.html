@@ -1,15 +1,18 @@
 <div class="container" [style.minHeight.%]="100" fxLayout="column" fxLayoutAlign="space-between">
-  <mat-toolbar class="toolbar">
-    <button mat-icon-button (click)="snav.toggle()">
+  <mat-toolbar class="toolbar" fxLayoutAlign="space-between center">
+    <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn$ | async">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1 class="app-name">Secureo</h1>
+    <h1 class="app-name">{{title}}</h1>
+    <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$">
+      <mat-icon>exit_to_app</mat-icon>Logout
+    </button>
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #snav class="sidenav">
       <mat-nav-list>
-        <a href="" routerLink='home' mat-list-item>Acceuil</a>
-        <a href="" routerLink='users' mat-list-item>Utilisateur</a>
+        <a href="" routerLink='' mat-list-item (click)="snav.toggle()">Acceuil</a>
+        <a href="" routerLink='users' mat-list-item (click)="snav.toggle()">Utilisateur</a>
         <a href="" routerLink='admin' mat-list-item>Admin</a>
         <a href="" routerLink='manager' mat-list-item>Manager</a>
         <a href="" routerLink='employee' mat-list-item>Agent</a>
@@ -22,12 +25,12 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content fxLayout="column" fxLayoutAlign="space-between">
-      <div [style.minHeight.%]="100" fxLayout="column" layout-fill flex>
+      <div  [style.padding.em]="2" [style.minHeight.%]="100" fxLayout="column" layout-fill flex>
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
   <mat-toolbar class="toolbar">
-        <p style="font-size: small">© 2018 Copyright Sylvain </p>
+        <p style="font-size: small"><mat-icon>copyright</mat-icon>Sylvain</p>
   </mat-toolbar>
 </div>

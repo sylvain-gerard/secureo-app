@@ -1,0 +1,30 @@
+.home-content {
+   
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    background-color: lightgrey;
+    padding:1rem;
+}
+
+.bloc-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: white;
+    margin: 10px;
+    align-content: center;
+    padding-left: 60px 1rem;
+    padding-right: 60px 1rem;
+    max-width: 400px;
+}
+
+a {
+    text-decoration: none;
+}
+

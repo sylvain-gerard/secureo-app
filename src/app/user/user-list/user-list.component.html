@@ -4,7 +4,7 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
     </mat-form-field>
   </div>
-
+  
   <mat-table class="filtreTableUser" #table [dataSource]="dataSourceUser" matSort>
 
     <!-- Login Column -->
@@ -35,3 +35,4 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></mat-row>
   </mat-table>
 </div>
+
