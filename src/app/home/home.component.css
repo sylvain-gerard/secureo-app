@@ -4,7 +4,6 @@
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    background-color: lightgrey;
     padding:1rem;
 }
 
@@ -16,7 +15,7 @@
 }
 
 .card {
-    background-color: white;
+    
     margin: 10px;
     align-content: center;
     padding-left: 60px 1rem;

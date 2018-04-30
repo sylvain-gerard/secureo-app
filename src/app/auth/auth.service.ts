@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { User } from '../user/iuser';
+import { IUser } from '../user/iuser';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +15,7 @@ export class AuthService {
     private router: Router
   ) { }
 
-  login(user: User) {
+  login(user: IUser) {
     if (user.userName !== '' && user.password !== '' ) { // {3}
       this.loggedIn.next(true);
       this.router.navigate(['/']);

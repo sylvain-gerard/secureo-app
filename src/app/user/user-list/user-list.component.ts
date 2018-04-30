@@ -1,6 +1,7 @@
 
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { User } from './../iuser';
+import { IUser } from './../iuser';
+import { IRole } from '../irole';
 import { UserService } from '../user.service';
 import { MaterialModule } from '../../material.module';
 import {
@@ -15,7 +16,6 @@ import {
   MatPaginator,
 } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-user-list',
@@ -24,7 +24,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class UserListComponent implements AfterViewInit {
 
-  user: User;
+  user: IUser;
+  role: IRole;
   selectedRowIndex = -1;
   edition = false;
 
@@ -34,7 +35,7 @@ export class UserListComponent implements AfterViewInit {
   // MatPaginator Inputs
   length = 100;
   pageSize = 10;
-  pageSizeOptions = [5, 10, 25, 100];
+  pageSizeOptions = [5, 10, 25, 50, 100];
 
   // MatPaginator Output
   pageEvent: PageEvent;
@@ -60,7 +61,7 @@ export class UserListComponent implements AfterViewInit {
       password: '',
       email: '',
       active: false,
-      role: 0
+      role: null
     };
     this.refreshTab();
     this.userService.update$.subscribe(() => this.refreshTab());
@@ -71,7 +72,7 @@ export class UserListComponent implements AfterViewInit {
   }
 
   refreshTab() {
-    this.userService.getUsers().subscribe((data: User[]) => {
+    this.userService.getUsers().subscribe((data: IUser[]) => {
       this.dataSourceUser = new MatTableDataSource(data);
       this.dataSourceUser.sort = this.sort;
       this.dataSourceUser.paginator = this.paginator;
@@ -97,7 +98,7 @@ export class UserListComponent implements AfterViewInit {
       password: '',
       email: '',
       active: false,
-      role: 0
+      role: null
     };
   }
 
@@ -116,7 +117,7 @@ export class UserListComponent implements AfterViewInit {
   }
   */
   /*
-    deleteSuspect() {
+    deleteUser() {
       this.edition = false;
       this.userService.deleteUser(this.user.id).subscribe();
       this.clearInput();

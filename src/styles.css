@@ -1,12 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
 
-html,body{
-    margin: 0%;
-    height: 100%;
+html,
+body {
+  margin: 0%;
+  height: 100%;
 }
 
-.mat-header-row {
-    background-color: #3F51B5;
+.sidenav {
+  width: 200px;
+}
+
+.toolbar {
+  background-color: #004d40;
+  color: white;
+}
+
+.mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  flex: 1;
+}
+
+.highlight {
+  background: #00bcd4;
+}
+
+.sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.footer {
+  background-color: #004d40;
+  color: white;
+}
+
+.mat-table {
+  overflow: auto;
+  /* max-height: 500px;*/
+}
+.tab-name {
+  font-family: 'Roboto', Georgia, 'Times New Roman', Times, serif;
 }

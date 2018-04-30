@@ -1,36 +1,36 @@
-<div class="container" [style.minHeight.%]="100" fxLayout="column" fxLayoutAlign="space-between">
+<div [style.minHeight.%]="100" fxLayout="column" fxLayoutAlign="space-between">
   <mat-toolbar class="toolbar" fxLayoutAlign="space-between center">
     <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn$ | async">
       <mat-icon>menu</mat-icon>
     </button>
     <h1 class="app-name">{{title}}</h1>
-    <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$">
-      <mat-icon>exit_to_app</mat-icon>Logout
+    <button mat-button (click)="onLogout()"  *ngIf="isLoggedIn$ | async">
+      <mat-icon>exit_to_app</mat-icon> Sortie
     </button>
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #snav class="sidenav">
+    <mat-sidenav #snav>
       <mat-nav-list>
-        <a href="" routerLink='' mat-list-item (click)="snav.toggle()">Acceuil</a>
-        <a href="" routerLink='users' mat-list-item (click)="snav.toggle()">Utilisateur</a>
-        <a href="" routerLink='admin' mat-list-item>Admin</a>
-        <a href="" routerLink='manager' mat-list-item>Manager</a>
-        <a href="" routerLink='employee' mat-list-item>Agent</a>
-        <a href="" routerLink='employee' mat-list-item>Catalogue</a>
-        <a href="" routerLink='employee' mat-list-item>Règlement</a>
-        <a href="" routerLink='employee' mat-list-item>Fournisseurs</a>
-        <a href="" routerLink='employee' mat-list-item>Historique</a>
-        <a href="" routerLink='employee' mat-list-item>Connexion</a>
-        <a href="" routerLink='employee' mat-list-item>Déconnexion</a>
+        <a href="" routerLink='' mat-list-item (click)="snav.toggle()"><mat-icon>home</mat-icon> Acceuil</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>account_circle</mat-icon> Mon Compte</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>shopping_basket</mat-icon> Mes Commandes</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>picture_as_pdf</mat-icon> Catalogue</a>      
+        <a href="" routerLink='admin' mat-list-item><mat-icon>settings_applications</mat-icon> Admin</a>
+        <a href="" routerLink='products' mat-list-item (click)="snav.toggle()"><mat-icon>view_list</mat-icon> Produits</a>
+        <a href="" routerLink='users' mat-list-item (click)="snav.toggle()"><mat-icon>view_list</mat-icon> Utilisateurs</a>
+        <a href="" routerLink='manager' mat-list-item (click)="snav.toggle()"><mat-icon>supervisor_account</mat-icon> Manager</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>person</mat-icon> Agent</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>perm_identity</mat-icon> Fournisseurs</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>exit_to_app</mat-icon> Déconnexion</a>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content fxLayout="column" fxLayoutAlign="space-between">
-      <div  [style.padding.em]="2" [style.minHeight.%]="100" fxLayout="column" layout-fill flex>
+    <mat-sidenav-content>
+      <div [style.padding.em]="2">
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
-  <mat-toolbar class="toolbar">
-        <p style="font-size: small"><mat-icon>copyright</mat-icon>Sylvain</p>
+  <mat-toolbar class="footer">
+        <p style="font-size: small">© 2018, Sylvain Gérard</p>
   </mat-toolbar>
 </div>

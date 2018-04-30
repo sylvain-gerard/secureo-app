@@ -6,7 +6,7 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-// import './rxjs-operators';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UserListComponent } from './user/user-list/user-list.component';
@@ -15,6 +15,10 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { ProductsComponent } from './products/products/products.component';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductService } from './products/product.service';
 
 
 @NgModule({
@@ -22,7 +26,10 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     UserListComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ProductsComponent,
+    UserDetailComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -31,12 +38,15 @@ import { HomeComponent } from './home/home.component';
     MaterialModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
+
   ],
   providers: [
     UserService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

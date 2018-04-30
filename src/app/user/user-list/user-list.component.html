@@ -1,41 +1,49 @@
 <div class="table-container">
-  <div class="filtreTableUser">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
-    </mat-form-field>
+  <div class="filtreTableUser" fxLayoutAlign="space-between">
+    <div>
+      <mat-icon>search</mat-icon>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+      </mat-form-field>
+    </div>
+    <div>
+      <h1 class="tab-name">Utilisateurs</h1>
+    </div>
+
   </div>
+
+  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+  </mat-paginator>
 
   <mat-table class="filtreTableUser" #table [dataSource]="dataSourceUser" matSort>
 
     <!-- Login Column -->
     <ng-container matColumnDef="userName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header><button mat-raised-button>Login</button></mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Login</mat-header-cell>
       <mat-cell *matCellDef="let User"> {{User.userName}} </mat-cell>
     </ng-container>
 
     <!--Email Column -->
     <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef mat-sort-header><button mat-raised-button>Email</button></mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
       <mat-cell *matCellDef="let User"> {{User.email}} </mat-cell>
     </ng-container>
 
     <!-- Active Column -->
     <ng-container matColumnDef="active">
-      <mat-header-cell *matHeaderCellDef mat-sort-header><button mat-raised-button>Active</button></mat-header-cell>
-      <mat-cell *matCellDef="let User"> {{User.active}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Active</mat-header-cell>
+      <mat-cell *matCellDef="let User"><mat-checkbox disabled="disabled" [(ngModel)]="User.active"></mat-checkbox></mat-cell>
     </ng-container>
 
     <!-- Role Column -->
     <ng-container matColumnDef="role">
-      <mat-header-cell *matHeaderCellDef mat-sort-header><button mat-raised-button>Role</button></mat-header-cell>
-      <mat-cell *matCellDef="let User"> {{User.role}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+      <mat-cell *matCellDef="let User"> {{User.role.name}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></mat-row>
   </mat-table>
-  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
-  </mat-paginator>
 
   <div *ngIf="pageEvent">
     <h5>Page Change Event Properties</h5>
