@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { User } from './../iuser';
 import { UserService } from '../user.service';
 import { MaterialModule } from '../../material.module';
@@ -22,7 +22,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements AfterViewInit {
 
   user: User;
   selectedRowIndex = -1;
@@ -31,8 +31,16 @@ export class UserListComponent implements OnInit {
   displayedColumns = ['userName', 'email', 'active', 'role'];
   dataSourceUser = new MatTableDataSource();
 
-  @ViewChild(MatSort) sort: MatSort;
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions = [5, 10, 25, 100];
 
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -45,7 +53,7 @@ export class UserListComponent implements OnInit {
     this.dataSourceUser.filter = filterValue;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.user = {
       id: 0,
       userName: '',
@@ -58,10 +66,15 @@ export class UserListComponent implements OnInit {
     this.userService.update$.subscribe(() => this.refreshTab());
   }
 
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+
   refreshTab() {
     this.userService.getUsers().subscribe((data: User[]) => {
       this.dataSourceUser = new MatTableDataSource(data);
       this.dataSourceUser.sort = this.sort;
+      this.dataSourceUser.paginator = this.paginator;
     });
   }
 
