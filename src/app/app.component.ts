@@ -9,15 +9,15 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'Secureo';
-  isLoggedIn$: Observable<boolean>;                  // {1}
+  isLoggedIn$: Observable<boolean>; // {1}
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
   }
 
-  onLogout(){
-    this.authService.logout();                      // {3}
+  onLogout() {
+    this.authService.logout(); // {3}
   }
 }

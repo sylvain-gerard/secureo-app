@@ -19,6 +19,8 @@ import { ProductsComponent } from './products/products/products.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { ProductService } from './products/product.service';
+import { ProductRoutingModule } from './products/product-routing.module';
+import { ProductsModule } from './products/products.module';
 
 
 @NgModule({
@@ -27,19 +29,21 @@ import { ProductService } from './products/product.service';
     UserListComponent,
     LoginComponent,
     HomeComponent,
-    ProductsComponent,
+    // ProductsComponent,
     UserDetailComponent,
-    ProductDetailComponent
+    // ProductDetailComponent
   ],
   imports: [
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ProductRoutingModule,
+    ProductsModule,
+    AppRoutingModule
 
   ],
   providers: [

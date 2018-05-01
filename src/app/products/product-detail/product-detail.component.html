@@ -1,3 +1,56 @@
-<p>
-  product-detail works!
-</p>
+<div class="product-content" *ngIf="product$ | async as product">
+  <h2>Détails du produit :</h2>
+  <mat-card>
+    <mat-card-content>
+      <form #productForm="ngForm">
+        
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Référence" name="productCode" [(ngModel)]="product.productCode">
+        </mat-form-field>
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Nom" name="productName" [(ngModel)]="product.productName">
+        </mat-form-field>
+
+ 
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Modèle" name="model" [(ngModel)]="product.model">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <textarea matInput placeholder="Description" matTextareaAutosize name="description" [(ngModel)]="product.description"></textarea>
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Taille" name="size" [(ngModel)]="product.size">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <textarea matInput placeholder="Description" matTextareaAutosize name="sizeDescription" [(ngModel)]="product.sizeDescription"></textarea>
+        </mat-form-field>
+        
+
+        <mat-form-field class="inputFullWidth">
+            <textarea matInput placeholder="Categorie" matTextareaAutosize name="category" [(ngModel)]="product.category.description"></textarea>
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Fournisseur" name="supplier" [(ngModel)]="product.supplier.supplierName">
+        </mat-form-field>
+
+  
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Disponibilité" name="stock" [(ngModel)]="product.stock.unitInStock">
+        </mat-form-field>
+    
+  
+        <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

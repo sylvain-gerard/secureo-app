@@ -27,7 +27,7 @@ export class UserListComponent implements AfterViewInit {
   user: IUser;
   role: IRole;
   selectedRowIndex = -1;
-  edition = false;
+  // edition = false;
 
   displayedColumns = ['userName', 'email', 'active', 'role'];
   dataSourceUser = new MatTableDataSource();
@@ -82,12 +82,12 @@ export class UserListComponent implements AfterViewInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.user = Object.assign({}, row);
-    this.edition = true;
+    // this.edition = true;
   }
-
+  /*
   cancelSelect() {
     this.selectedRowIndex = -1;
-    this.edition = false;
+    // this.edition = false;
     this.clearInput();
   }
 
@@ -101,7 +101,7 @@ export class UserListComponent implements AfterViewInit {
       role: null
     };
   }
-
+  */
  /* onSubmit() {
     if (this.edition) {
       this.userService.updateUser(this.user).subscribe(

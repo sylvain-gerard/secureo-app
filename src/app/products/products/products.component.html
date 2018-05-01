@@ -1,21 +1,15 @@
 <div class="table-container">
-    <div class="filtreTableProduct" fxLayoutAlign="space-between">
-        <div>
-          <mat-icon>search</mat-icon>
-          <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
-          </mat-form-field>
-        </div>
-        <div>
-          <h1 class="tab-name">Produits</h1>
-        </div>
-    
-      </div>
+  <div>
+      <h1 class="tab-name">Produits</h1>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+      </mat-form-field>
+  </div>
 
   <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
   </mat-paginator>
 
-  <mat-table class="filtreTableProduct" #table [dataSource]="dataSourceProduct" matSort>
+  <mat-table #table [dataSource]="dataSourceProduct" matSort>
 
     <!-- Name Column -->
     <ng-container matColumnDef="productName">
@@ -50,7 +44,9 @@
     <!-- Disabled Column -->
     <ng-container matColumnDef="disabled">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Disponible</mat-header-cell>
-      <mat-cell *matCellDef="let Product"><mat-checkbox disabled="disabled" [(ngModel)]="!Product.disabled"></mat-checkbox></mat-cell>
+      <mat-cell *matCellDef="let Product">
+        <mat-checkbox disabled="disabled" [(ngModel)]="!Product.disabled"></mat-checkbox>
+      </mat-cell>
     </ng-container>
 
     <!-- Category Column -->
@@ -64,9 +60,19 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>Fournisseur</mat-header-cell>
       <mat-cell *matCellDef="let Product"> {{Product.supplier.supplierName}} </mat-cell>
     </ng-container>
-
+    <!--
+    <ng-container matColumnDef="details">
+      <mat-header-cell *matHeaderCellDef>Détails</mat-header-cell>
+      <mat-cell *matCellDef>
+        <a [routerLink]="['/products', product.id]">Détails</a>
+      </mat-cell>
+    </ng-container>
+    -->
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" 
+    [ngClass]="{'highlight': selectedRowIndex == row.id}" 
+    (dblclick)="goToDetail(row)"
+    (click)="highlight(row)"></mat-row>
   </mat-table>
 
   <div *ngIf="pageEvent">

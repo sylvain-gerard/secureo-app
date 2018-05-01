@@ -1,3 +1,4 @@
+import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IProduct } from './../iproduct';
 import { ICategory } from '../../catogories/icategory';
@@ -12,10 +13,11 @@ import {
   MatSelectModule,
   MatCheckboxModule,
   PageEvent,
-  MatPaginator,
+  MatPaginator
 } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ISupplier } from '../../suppliers/isupplier';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -23,14 +25,26 @@ import { ISupplier } from '../../suppliers/isupplier';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements AfterViewInit {
-
   product: IProduct;
   category: ICategory;
   supplier: ISupplier;
   selectedRowIndex = -1;
-  edition = false;
+  // edition = false;
+  selectedProduct = false;
 
-  displayedColumns = ['productName', 'model', 'productCode', 'size', 'sizeDescription', 'disabled', 'category', 'supplier'];
+  products$: Observable<IProduct[]>;
+  selectedId: number;
+
+  displayedColumns = [
+    'productName',
+    'model',
+    'productCode',
+    'size',
+    'sizeDescription',
+    'disabled',
+    'category',
+    'supplier'
+  ];
   dataSourceProduct = new MatTableDataSource();
 
   // MatPaginator Inputs
@@ -45,9 +59,11 @@ export class ProductsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    private router: Router,
     private snackBar: MatSnackBar,
-    private productService: ProductService
-  ) { }
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -77,6 +93,22 @@ export class ProductsComponent implements AfterViewInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
+  highlight(row) {
+    this.selectedRowIndex = row.id;
+    this.product = Object.assign({}, row);
+    // this.router.navigate(['/products', this.product.id]);
+    // this.productService.getProduct(this.product.id).subscribe(product => this.product = product);
+    // this.edition = true;
+    console.log(this.product);
+    console.log(this.selectedRowIndex);
+  }
+
+  goToDetail(row) {
+    this.selectedRowIndex = row.id;
+    this.product = Object.assign({}, row);
+    this.router.navigate(['/products', this.product.id]);
+  }
+
   refreshTab() {
     this.productService.getProducts().subscribe((data: IProduct[]) => {
       this.dataSourceProduct = new MatTableDataSource(data);
@@ -85,15 +117,9 @@ export class ProductsComponent implements AfterViewInit {
     });
   }
 
-  highlight(row) {
-    this.selectedRowIndex = row.id;
-    this.product = Object.assign({}, row);
-    this.edition = true;
-  }
-
   cancelSelect() {
     this.selectedRowIndex = -1;
-    this.edition = false;
+    // this.edition = false;
     this.clearInput();
   }
 
@@ -112,5 +138,4 @@ export class ProductsComponent implements AfterViewInit {
       supplier: null
     };
   }
-
 }
