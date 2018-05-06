@@ -1,0 +1,60 @@
+<div class="supplier-content" *ngIf="supplier$ | async as supplier">
+  <h2>Détails du fournisseur : {{ supplier.supplierName }}</h2>
+  <mat-card>
+    <mat-card-content>
+      <form #supplierForm="ngForm">
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Nom" name="supplierName" [(ngModel)]="supplier.supplierName">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Nuéro de rue" name="streetNumber" [(ngModel)]="supplier.address.streetNumber">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Nom de rue" name="streetName" [(ngModel)]="supplier.address.streetName">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Ligne 1" name="line1" [(ngModel)]="supplier.address.line1">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Ligne 2" name="line2" [(ngModel)]="supplier.address.line2">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Ligne 3" name="line3" [(ngModel)]="supplier.address.line3">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Ville" name="city" [(ngModel)]="supplier.address.city">
+        </mat-form-field>
+
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Code postale" name="zipCode" [(ngModel)]="supplier.address.zipCode">
+        </mat-form-field>
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Pays" name="country" [(ngModel)]="supplier.address.country">
+        </mat-form-field>
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Téléphone" name="phone" [(ngModel)]="supplier.address.phone">
+        </mat-form-field>
+
+        <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+        <button (click)="showProducts(supplier.id)" mat-raised-button color="primary">Produits</button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

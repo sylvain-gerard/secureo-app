@@ -1,5 +1,5 @@
 <div class="product-content" *ngIf="product$ | async as product">
-  <h2>Détails du produit :</h2>
+  <h2>Détails du produit : {{ product.productName }}</h2>
   <mat-card>
     <mat-card-content>
       <form #productForm="ngForm">

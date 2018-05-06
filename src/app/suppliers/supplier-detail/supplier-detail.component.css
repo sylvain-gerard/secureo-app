@@ -1,0 +1,13 @@
+mat-card {
+    /*max-width: 400px;*/
+    margin: 2em auto;
+    text-align: center;
+  }
+  .supplier-content {
+    padding: 20px;
+  }
+  .inputFullWidth {
+    font-size: 18px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 100%;
+  }

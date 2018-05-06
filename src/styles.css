@@ -8,7 +8,7 @@ body {
   height: 100%;
 }
 
-.sidenav {
+sidenav {
   width: 200px;
 }
 
@@ -30,6 +30,7 @@ body {
 
 .highlight {
   background: #00bcd4;
+  cursor: pointer;
 }
 
 .sidenav-container {

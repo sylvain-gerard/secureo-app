@@ -4,7 +4,7 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <p>Please login to continue</p>
           <mat-form-field class="full-width-input">
-            <input matInput placeholder="User" 
+            <input matInput placeholder="Login" 
                    formControlName="userName" required>
             <mat-error *ngIf="isFieldInvalid('userName')">
               Please inform your user name

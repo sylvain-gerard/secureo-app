@@ -1,15 +1,20 @@
 <div class="table-container">
-  <div>
-      <h1 class="tab-name">Produits</h1>
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
-      </mat-form-field>
+  <div class="filtreTableProduit" fxLayoutAlign="space-between">
+      <div>
+        <mat-icon>search</mat-icon>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+        </mat-form-field>
+      </div>
+      <div>
+        <h1 class="tab-name">Produits</h1>
+      </div>
   </div>
 
   <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
   </mat-paginator>
 
-  <mat-table #table [dataSource]="dataSourceProduct" matSort>
+  <mat-table class="filtreTableProduit" #table [dataSource]="dataSourceProduct" matSort>
 
     <!-- Name Column -->
     <ng-container matColumnDef="productName">
@@ -71,8 +76,8 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" 
     [ngClass]="{'highlight': selectedRowIndex == row.id}" 
-    (dblclick)="goToDetail(row)"
-    (click)="highlight(row)"></mat-row>
+    (mouseover)="highlight(row)"
+    (click)="goToDetail(row)"></mat-row>
   </mat-table>
 
   <div *ngIf="pageEvent">

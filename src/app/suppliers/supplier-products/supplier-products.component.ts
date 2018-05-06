@@ -1,8 +1,8 @@
-import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { IProduct } from './../iproduct';
+import { Component, OnInit, AfterViewInit, ViewChild, Input, Output } from '@angular/core';
+import { IProduct } from '../../products/iproduct';
 import { ICategory } from '../../catogories/icategory';
-import { ProductService } from '../product.service';
+import { ISupplier } from '../isupplier';
+import { Observable } from 'rxjs/Observable';
 import { MaterialModule } from '../../material.module';
 import {
   MatTableDataSource,
@@ -15,22 +15,22 @@ import {
   PageEvent,
   MatPaginator
 } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { ISupplier } from '../../suppliers/isupplier';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { SuppliersService } from '../suppliers.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: 'app-supplier-products',
+  templateUrl: './supplier-products.component.html',
+  styleUrls: ['./supplier-products.component.css']
 })
-export class ProductsComponent implements AfterViewInit {
+export class SupplierProductsComponent implements AfterViewInit {
+  @Output() supplier: ISupplier;
   product: IProduct;
   category: ICategory;
-  supplier: ISupplier;
+  supplier$: ISupplier;
   selectedRowIndex = -1;
-  // edition = false;
   selectedProduct = false;
+  id: number;
 
   products$: Observable<IProduct[]>;
   selectedId: number;
@@ -42,8 +42,7 @@ export class ProductsComponent implements AfterViewInit {
     'size',
     'sizeDescription',
     'disabled',
-    'category',
-    'supplier'
+    'category'
   ];
   dataSourceProduct = new MatTableDataSource();
 
@@ -61,7 +60,7 @@ export class ProductsComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
-    private productService: ProductService,
+    private supplierService: SuppliersService,
     private route: ActivatedRoute
   ) {}
 
@@ -86,19 +85,22 @@ export class ProductsComponent implements AfterViewInit {
       supplier: null
     };
     this.refreshTab();
-    this.productService.update$.subscribe(() => this.refreshTab());
+    this.supplierService.update$.subscribe(() => this.refreshTab());
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  refreshTab() {
+    this.supplierService
+      .getProductsOfSupplier(this.supplier.id)
+      .subscribe((data: IProduct[]) => {
+        this.dataSourceProduct = new MatTableDataSource(data);
+        this.dataSourceProduct.sort = this.sort;
+        this.dataSourceProduct.paginator = this.paginator;
+      });
   }
 
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.product = Object.assign({}, row);
-    // this.router.navigate(['/products', this.product.id]);
-    // this.productService.getProduct(this.product.id).subscribe(product => this.product = product);
-    // this.edition = true;
     console.log(this.product);
     console.log(this.selectedRowIndex);
   }
@@ -109,34 +111,7 @@ export class ProductsComponent implements AfterViewInit {
     this.router.navigate(['/products', this.product.id]);
   }
 
-  refreshTab() {
-    this.productService.getProducts().subscribe((data: IProduct[]) => {
-      this.dataSourceProduct = new MatTableDataSource(data);
-      this.dataSourceProduct.sort = this.sort;
-      this.dataSourceProduct.paginator = this.paginator;
-    });
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
-  /*
-  cancelSelect() {
-    this.selectedRowIndex = -1;
-    // this.edition = false;
-    this.clearInput();
-  }
-
-  clearInput() {
-    this.product = {
-      id: 0,
-      productName: '',
-      productCode: '',
-      model: '',
-      description: '',
-      productPrice: 0,
-      size: '',
-      sizeDescription: '',
-      disabled: false,
-      category: null,
-      supplier: null
-    };
-  }
-  */
 }

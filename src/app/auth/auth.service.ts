@@ -8,7 +8,14 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
   get isLoggedIn() {
-    return this.loggedIn.asObservable(); // {2}
+    if (sessionStorage.getItem('loggedIn').valueOf) {
+     this.loggedIn.next(true);
+     console.log(sessionStorage.getItem('loggedIn'));
+    } else {
+     this.loggedIn.next(false);
+     console.log(sessionStorage.getItem('loggedIn'));
+    }
+    return this.loggedIn.asObservable();
   }
 
   constructor(
@@ -16,13 +23,19 @@ export class AuthService {
   ) { }
 
   login(user: IUser) {
-    if (user.userName !== '' && user.password !== '' ) { // {3}
+    if (user.userName !== '' && user.password !== '') { // {3}
+
       this.loggedIn.next(true);
+      sessionStorage.setItem('loggedIn', JSON.stringify(true));
       this.router.navigate(['/']);
+
     }
   }
 
-  logout() {                            // {4}
+  logout() {
+    // this.loggedIn = new BehaviorSubject(false);
+    sessionStorage.setItem('loggedIn', JSON.stringify(false));
+    // sessionStorage.removeItem('loggedIn');                            // {4}
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }

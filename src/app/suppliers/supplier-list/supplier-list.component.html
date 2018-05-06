@@ -1,0 +1,39 @@
+<div class="table-container">
+  <div class="filtreTableSupplier" fxLayoutAlign="space-between">
+    <div>
+      <mat-icon>search</mat-icon>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+      </mat-form-field>
+    </div>
+    <div>
+      <h1 class="tab-name">Fournisseurs</h1>
+    </div>
+  </div>
+
+  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+  </mat-paginator>
+
+  <mat-table class="filtreTableSupplier" #table [dataSource]="dataSourceSupplier" matSort>
+
+      <ng-container matColumnDef="supplierName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+          <mat-cell *matCellDef="let Supplier"> {{Supplier.supplierName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Ville</mat-header-cell>
+          <mat-cell *matCellDef="let Supplier"> {{Supplier.address.city}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="country">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Pays</mat-header-cell>
+          <mat-cell *matCellDef="let Supplier"> {{Supplier.address.country}} </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
+      (click)="goToDetail(row)"></mat-row>
+  </mat-table>
+
+</div>
