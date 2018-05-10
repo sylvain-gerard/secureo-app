@@ -24,7 +24,7 @@ import { SuppliersService } from '../suppliers.service';
   styleUrls: ['./supplier-products.component.css']
 })
 export class SupplierProductsComponent implements AfterViewInit {
-  @Output() supplier: ISupplier;
+  supplier: ISupplier;
   product: IProduct;
   category: ICategory;
   supplier$: ISupplier;

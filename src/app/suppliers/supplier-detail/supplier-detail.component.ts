@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./supplier-detail.component.css']
 })
 export class SupplierDetailComponent implements OnInit {
-  @Input() supplier: ISupplier;
+  supplier: ISupplier;
   supplier$: Observable<ISupplier>;
   address: IAddress;
   products: Observable<IProduct[]>;

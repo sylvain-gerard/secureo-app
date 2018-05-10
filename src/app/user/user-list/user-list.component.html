@@ -9,8 +9,51 @@
     <div>
       <h1 class="tab-name">Utilisateurs</h1>
     </div>
-
+    <div>
+        <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
+        <button (click)="create()" mat-raised-button color="primary">Créer</button>
+    </div>
   </div>
+  <br><!-- Formulaire de création d'un utilisateur -->
+  <div class="user-content" *ngIf="creation">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2>Formulaire de création :</h2>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form #userForm="ngForm" (ngSubmit)="createUser(user)">
+    
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Nom" name="userName"  [(ngModel)]="user.userName">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Email" name="email" [(ngModel)]="user.email">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+                <input matInput placeholder="Password" name="password" [(ngModel)]="user.password">
+              </mat-form-field>
+              <br>
+            <mat-form-field>
+              <mat-select placeholder=" Rôle : " name="role"  [(ngModel)]="user.role">
+                  <mat-option *ngFor="let role of roles" [value]="role.value">
+                      {{ role.viewValue }}
+                    </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p>Actif</p>
+              <mat-checkbox name="active" [(ngModel)]="user.active"></mat-checkbox>
+            <br>
+            <br>       
+            <button type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Valider cet ajout</button>
+            <button (click)="closeForm()" mat-raised-button color="primary">Fermer</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
   <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
   </mat-paginator>
@@ -32,7 +75,9 @@
     <!-- Active Column -->
     <ng-container matColumnDef="active">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Active</mat-header-cell>
-      <mat-cell *matCellDef="let User"><mat-checkbox disabled="disabled" [(ngModel)]="User.active"></mat-checkbox></mat-cell>
+      <mat-cell *matCellDef="let User">
+        <mat-checkbox disabled="disabled" [(ngModel)]="User.active"></mat-checkbox>
+      </mat-cell>
     </ng-container>
 
     <!-- Role Column -->
@@ -42,13 +87,19 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
+      (click)="goToDetail(row)"></mat-row>
   </mat-table>
-
+  <!--
   <div *ngIf="pageEvent">
     <h5>Page Change Event Properties</h5>
     <div>List length: {{pageEvent.length}}</div>
     <div>Page size: {{pageEvent.pageSize}}</div>
     <div>Page index: {{pageEvent.pageIndex + 1}}</div>
-  </div>
+  </div>-->
 </div>
+
+
+
+  
+

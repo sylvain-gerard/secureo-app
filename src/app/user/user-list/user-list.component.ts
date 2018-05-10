@@ -16,6 +16,7 @@ import {
   MatPaginator,
 } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -27,9 +28,13 @@ export class UserListComponent implements AfterViewInit {
   user: IUser;
   role: IRole;
   selectedRowIndex = -1;
-  // edition = false;
+  selectedUser: false;
+  selectedId: number;
+  user$: Observable<IUser>;
+  creation = false;
 
   displayedColumns = ['userName', 'email', 'active', 'role'];
+  formColumns = ['nom', 'mail', 'actif', 'rôle'];
   dataSourceUser = new MatTableDataSource();
 
   // MatPaginator Inputs
@@ -40,10 +45,18 @@ export class UserListComponent implements AfterViewInit {
   // MatPaginator Output
   pageEvent: PageEvent;
 
+  roles = [
+    {value: {id: 3, name: 'EMPLOYEE' }, viewValue: 'Agent'},
+    {value: {id: 2, name: 'MANAGER' }, viewValue: 'Manager'},
+    {value: {id: 1, name: 'ADMIN' }, viewValue: 'Administrateur'}
+  ];
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private userService: UserService
   ) { }
@@ -82,13 +95,42 @@ export class UserListComponent implements AfterViewInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.user = Object.assign({}, row);
-    // this.edition = true;
+    console.log(this.user);
+    this.creation = false;
   }
-  /*
-  cancelSelect() {
-    this.selectedRowIndex = -1;
-    // this.edition = false;
+
+  afficherMessage(message: string, erreur: string) {
+    this.snackBar.open(message, erreur, {
+      duration: 2000,
+       });
+  }
+
+  goToDetail(row) {
+    this.selectedRowIndex = row.id;
+    this.user = Object.assign({}, row);
+    this.router.navigate(['/users', this.user.id]);
+  }
+
+  backTohome() {
+    this.router.navigate(['']);
+  }
+
+  createUser(user) {
+    console.log(this.user);
+    this.userService.createUser(this.user).subscribe(
+      result => {this.afficherMessage('Création effectuée', ''); },
+     error => {this.afficherMessage('', 'Email déjà utilisé !'); }
+    );
+
+  }
+
+  create() {
     this.clearInput();
+    this.creation = true;
+  }
+
+  closeForm() {
+    this.creation = false;
   }
 
   clearInput() {
@@ -100,6 +142,13 @@ export class UserListComponent implements AfterViewInit {
       active: false,
       role: null
     };
+  }
+}
+  /*
+  cancelSelect() {
+    this.selectedRowIndex = -1;
+    // this.edition = false;
+    this.clearInput();
   }
   */
  /* onSubmit() {
@@ -123,10 +172,3 @@ export class UserListComponent implements AfterViewInit {
       this.clearInput();
     }
   */
-
-  afficherMessage(message: string, erreur: string) {
-    this.snackBar.open(message, erreur, {
-      duration: 2000,
-       });
-  }
-}

@@ -6,6 +6,7 @@ import { SuppliersRoutingModule } from './suppliers-routing.module';
 import { SupplierDetailComponent } from './supplier-detail/supplier-detail.component';
 import { SupplierListComponent } from './supplier-list/supplier-list.component';
 import { SuppliersService } from './suppliers.service';
+import { SupplierProductsComponent } from './supplier-products/supplier-products.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SuppliersService } from './suppliers.service';
   ],
   declarations: [
     SupplierDetailComponent,
-    SupplierListComponent
+    SupplierListComponent,
+    SupplierProductsComponent
   ],
   providers: [SuppliersService]
 })

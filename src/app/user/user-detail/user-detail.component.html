@@ -1,3 +1,45 @@
-<p>
-  user-detail works!
-</p>
+
+<div class="user-content" *ngIf="user$ | async as user">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Détails de l'utilisateur : {{ user.userName }}</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form #userForm="ngForm" (ngSubmit)="edit(user)">
+
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Nom" name="userName" [(ngModel)]="user.userName">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="inputFullWidth">
+          <input matInput placeholder="Email" name="email" [(ngModel)]="user.email">
+        </mat-form-field>
+        <!--
+        <br>
+        <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Rôle" name="role" [(ngModel)]="user.role.name">
+        </mat-form-field>
+        -->
+        <br>
+        <mat-form-field>
+          <mat-select placeholder=" Rôle : {{user.role.name}}"  [(ngModel)]="user.role" name="role">
+              <mat-option *ngFor="let role of roles" [value]="role.value">
+                  {{ role.viewValue }}
+                </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p>Actif</p>
+          <mat-checkbox name="active" [(ngModel)]="user.active"></mat-checkbox>
+        <br>
+        <br>       
+        <button type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Modifier</button>
+      </form>
+        <button (click)="deleteUser()" mat-raised-button color="primary">Supprimer</button>
+        <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>    
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

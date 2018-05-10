@@ -8,7 +8,7 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
   get isLoggedIn() {
-    if (sessionStorage.getItem('loggedIn').valueOf) {
+    if (sessionStorage.getItem('loggedIn')) {
      this.loggedIn.next(true);
      console.log(sessionStorage.getItem('loggedIn'));
     } else {

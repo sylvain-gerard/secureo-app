@@ -1,0 +1,20 @@
+.user-content {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputFullWidth {
+  font-size: 18px;
+  font-family: Verdana, Georgia, 'Times New Roman', Times, serif;
+  width: 100%;
+}
+
+.bloc-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  /*border: 2px solid;
+    border-color: blue;*/
+}
