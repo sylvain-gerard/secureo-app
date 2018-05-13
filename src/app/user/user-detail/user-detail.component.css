@@ -18,3 +18,8 @@
   /*border: 2px solid;
     border-color: blue;*/
 }
+
+.formButton {
+  margin: 2px;
+  padding: 2px;
+}

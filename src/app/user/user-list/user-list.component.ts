@@ -23,7 +23,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements AfterViewInit {
+export class UserListComponent implements OnInit {
 
   user: IUser;
   role: IRole;
@@ -67,7 +67,7 @@ export class UserListComponent implements AfterViewInit {
     this.dataSourceUser.filter = filterValue;
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.user = {
       id: 0,
       userName: '',

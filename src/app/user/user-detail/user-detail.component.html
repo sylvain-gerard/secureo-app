@@ -34,10 +34,11 @@
           <mat-checkbox name="active" [(ngModel)]="user.active"></mat-checkbox>
         <br>
         <br>       
-        <button type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Modifier</button>
+        <button class="formButton" type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Modifier</button>
+        
       </form>
-        <button (click)="deleteUser()" mat-raised-button color="primary">Supprimer</button>
-        <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>    
+        <button class="formButton" (click)="deleteUser()" mat-raised-button color="primary">Supprimer</button>
+        <button class="formButton" (click)="goBackToList()" mat-raised-button color="primary">Retour</button>    
     </mat-card-content>
   </mat-card>
 </div>

@@ -17,6 +17,7 @@ export class UserDetailComponent implements OnInit {
   user$: Observable<IUser>;
   role: IRole;
   private selectedId: number;
+  urlParam: any;
   // edition: boolean;
   roles = [
     {value: {id: 3, name: 'EMPLOYEE' }, viewValue: 'Agent'},
@@ -32,6 +33,7 @@ export class UserDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.urlParam = this.route.snapshot.params;
     this.user$ = this.route.paramMap.switchMap((params: ParamMap) =>
     this.userService.getUser(params.get('id'))
   );
@@ -51,17 +53,16 @@ export class UserDetailComponent implements OnInit {
   );
   }
 
-  deleteUser() {
-    console.log(this.user);
-    this.user$.subscribe(console.log);
+  deleteUser(id) {
     window.alert('Attention ! Cette action supprimera cet utilisateur du système. Continuer ?');
     try {
-      this.userService.deleteUser(this.user.id);
+      this.userService.deleteUser(this.urlParam.id).subscribe((response) =>
+        console.log('deleted'));
       this.showMessage('Suppression effectuée !', '');
+      this.goBackToList();
     } catch {
       this.showMessage('', 'ERREUR lors de la suppression.');
     }
-    this.goBackToList();
   }
 
   showMessage(message: string, erreur: string) {

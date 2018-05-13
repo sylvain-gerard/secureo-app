@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { IUser } from './iuser';
 import { Subject } from 'rxjs/Subject';
 import { environment } from '../../environments/environment';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -34,6 +34,6 @@ export class UserService {
   }
 
   deleteUser(id) {
-    this.http.delete<any>(`${this.url}/${id}`).pipe(tap(data => this.update$.next()));
+    return this.http.delete(`${this.url}/${id}`);
   }
 }
