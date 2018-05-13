@@ -13,9 +13,8 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./supplier-detail.component.css']
 })
 export class SupplierDetailComponent implements OnInit {
-  supplier: ISupplier;
+
   supplier$: Observable<ISupplier>;
-  address: IAddress;
   products: Observable<IProduct[]>;
 
   constructor(
@@ -23,13 +22,12 @@ export class SupplierDetailComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private supplierService: SuppliersService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.supplier$ = this.route.paramMap.switchMap((params: ParamMap) =>
       this.supplierService.getSupplier(params.get('id'))
     );
-    this.supplier$.subscribe(console.log);
   }
 
   goBackToList() {
@@ -41,6 +39,5 @@ export class SupplierDetailComponent implements OnInit {
       this.supplierService.getProductsOfSupplier(params.get('id'))
     );
     this.router.navigate(['suppliers', id, 'products']);
-    this.products.subscribe(console.log);
   }
 }

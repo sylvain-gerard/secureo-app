@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input, Output } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input, Output, Inject } from '@angular/core';
 import { IProduct } from '../../products/iproduct';
 import { ICategory } from '../../catogories/icategory';
 import { ISupplier } from '../isupplier';
@@ -24,17 +24,10 @@ import { SuppliersService } from '../suppliers.service';
   styleUrls: ['./supplier-products.component.css']
 })
 export class SupplierProductsComponent implements AfterViewInit {
-  supplier: ISupplier;
+
   product: IProduct;
-  category: ICategory;
-  supplier$: ISupplier;
   selectedRowIndex = -1;
-  selectedProduct = false;
-  id: number;
-
-  products$: Observable<IProduct[]>;
-  selectedId: number;
-
+  urlParam: any;
   displayedColumns = [
     'productName',
     'model',
@@ -71,6 +64,7 @@ export class SupplierProductsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.urlParam = this.route.snapshot.params;
     this.product = {
       id: 0,
       productName: '',
@@ -89,13 +83,12 @@ export class SupplierProductsComponent implements AfterViewInit {
   }
 
   refreshTab() {
-    this.supplierService
-      .getProductsOfSupplier(this.supplier.id)
-      .subscribe((data: IProduct[]) => {
-        this.dataSourceProduct = new MatTableDataSource(data);
-        this.dataSourceProduct.sort = this.sort;
-        this.dataSourceProduct.paginator = this.paginator;
-      });
+
+    this.supplierService.getProductsOfSupplier(this.urlParam.id).subscribe((data: IProduct[]) => {
+      this.dataSourceProduct = new MatTableDataSource(data);
+      this.dataSourceProduct.sort = this.sort;
+      this.dataSourceProduct.paginator = this.paginator;
+    });
   }
 
   highlight(row) {
