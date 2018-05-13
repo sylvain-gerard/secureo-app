@@ -25,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private productService: ProductService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.product$ = this.route.paramMap.switchMap((params: ParamMap) =>
@@ -37,4 +37,5 @@ export class ProductDetailComponent implements OnInit {
   goBackToList() {
     this.router.navigate(['products']);
   }
+
 }

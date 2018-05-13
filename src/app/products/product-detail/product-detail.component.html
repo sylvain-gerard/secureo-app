@@ -1,56 +1,81 @@
-<div class="product-content" *ngIf="product$ | async as product">
-  <h2>Détails du produit : {{ product.productName }}</h2>
-  <mat-card>
-    <mat-card-content>
-      <form #productForm="ngForm">
-        
-        <mat-form-field class="inputFullWidth">
-          <input matInput placeholder="Référence" name="productCode" [(ngModel)]="product.productCode">
-        </mat-form-field>
+<div class="page-content" *ngIf="product$ | async as product">
+  <div class="product-content">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h2>Détails du produit : {{ product.productName }}</h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #productForm="ngForm">
 
-        <mat-form-field class="inputFullWidth">
-          <input matInput placeholder="Nom" name="productName" [(ngModel)]="product.productName">
-        </mat-form-field>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Référence" name="productCode" [(ngModel)]="product.productCode">
+          </mat-form-field>
 
- 
-        <mat-form-field class="inputFullWidth">
-          <input matInput placeholder="Modèle" name="model" [(ngModel)]="product.model">
-        </mat-form-field>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Nom" name="productName" [(ngModel)]="product.productName">
+          </mat-form-field>
 
 
-        <mat-form-field class="inputFullWidth">
-          <textarea matInput placeholder="Description" matTextareaAutosize name="description" [(ngModel)]="product.description"></textarea>
-        </mat-form-field>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Modèle" name="model" [(ngModel)]="product.model">
+          </mat-form-field>
 
 
-        <mat-form-field class="inputFullWidth">
-          <input matInput placeholder="Taille" name="size" [(ngModel)]="product.size">
-        </mat-form-field>
+          <mat-form-field class="inputFullWidth">
+            <textarea matInput placeholder="Description" matTextareaAutosize name="description" [(ngModel)]="product.description"></textarea>
+          </mat-form-field>
 
 
-        <mat-form-field class="inputFullWidth">
-          <textarea matInput placeholder="Description" matTextareaAutosize name="sizeDescription" [(ngModel)]="product.sizeDescription"></textarea>
-        </mat-form-field>
-        
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Taille" name="size" [(ngModel)]="product.size">
+          </mat-form-field>
 
-        <mat-form-field class="inputFullWidth">
+
+          <mat-form-field class="inputFullWidth">
+            <textarea matInput placeholder="Description" matTextareaAutosize name="sizeDescription" [(ngModel)]="product.sizeDescription"></textarea>
+          </mat-form-field>
+
+          <!--
+          <mat-form-field class="inputFullWidth">
             <textarea matInput placeholder="Categorie" matTextareaAutosize name="category" [(ngModel)]="product.category.description"></textarea>
-        </mat-form-field>
+          </mat-form-field>
+          -->
+
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Fournisseur" name="supplier" [(ngModel)]="product.supplier.supplierName">
+          </mat-form-field>
 
 
-        <mat-form-field class="inputFullWidth">
-          <input matInput placeholder="Fournisseur" name="supplier" [(ngModel)]="product.supplier.supplierName">
-        </mat-form-field>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Disponibilité" name="stock" [(ngModel)]="product.stock.unitInStock">
+          </mat-form-field>
 
-  
-        <mat-form-field class="inputFullWidth">
-          <input matInput placeholder="Disponibilité" name="stock" [(ngModel)]="product.stock.unitInStock">
-        </mat-form-field>
-    
-  
-        <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
 
-      </form>
-    </mat-card-content>
-  </mat-card>
+          <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="option-content">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ product.productName }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content style="text-align: left;">
+        <p><u>Description :</u></p>
+        <p>{{product.description}}</p>
+        <p><u>Catégorie :</u></p>
+        <p>{{product.category.description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>
+          <mat-icon>add_shopping_cart</mat-icon>AJOUTER</button>
+        <button mat-button>
+          <mat-icon>remove_shopping_cart</mat-icon>SUPPRIMER</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
+
