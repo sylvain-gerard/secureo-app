@@ -1,29 +1,46 @@
 <div [style.minHeight.%]="100" fxLayout="column" fxLayoutAlign="space-between">
-  <mat-toolbar class="toolbar" fxLayoutAlign="space-between center">
-    <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn$ | async">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="app-name">{{title}}</h1>
-    <button mat-button (click)="onLogout()"  *ngIf="isLoggedIn$ | async">
-      <mat-icon>exit_to_app</mat-icon> Sortie
-    </button>
+  <mat-toolbar class="toolbar" fxLayoutAlign="space-between center" layout-fill flex>
+    <div>
+      <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn$ | async">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <h1 class="app-name">{{title}}</h1>
+    </div>
+    <div>
+      <button mat-button>
+        <mat-icon>shopping_cart</mat-icon>Panier</button>
+      <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async"><mat-icon>exit_to_app</mat-icon>Déconnexion</button>
+    </div>
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #snav>
+    <mat-sidenav #snav class="mat-sidenav">
       <mat-nav-list>
-        <a href="" routerLink='' mat-list-item (click)="snav.toggle()"><mat-icon>home</mat-icon> Acceuil</a>
-        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>account_circle</mat-icon> Mon Compte</a>       
-        <a href="" routerLink='products' mat-list-item (click)="snav.toggle()"><mat-icon>view_list</mat-icon> Produits</a>
-        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>picture_as_pdf</mat-icon> Catalogues</a>
-        <hr style="width:100%">           
-        <a href="" routerLink='admin' mat-list-item><mat-icon>settings_applications</mat-icon> Admin</a>
-        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()"><mat-icon>business</mat-icon> Affectations</a>
-        <a href="" routerLink='users' mat-list-item (click)="snav.toggle()"><mat-icon>view_list</mat-icon> Utilisateurs</a>
-        <a href="" routerLink='manager' mat-list-item (click)="snav.toggle()"><mat-icon>supervisor_account</mat-icon> Manager</a>
-        <a href="" routerLink='employees' mat-list-item (click)="snav.toggle()"><mat-icon>person</mat-icon> Agent</a>
-        <a href="" routerLink='suppliers' mat-list-item (click)="snav.toggle()"><mat-icon>perm_identity</mat-icon> Fournisseurs</a>
+        <a href="" routerLink='' mat-list-item (click)="snav.toggle()">
+          <mat-icon>home</mat-icon> Acceuil</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()">
+          <mat-icon>account_circle</mat-icon> Mon Compte</a>
+        <a href="" routerLink='products' mat-list-item (click)="snav.toggle()">
+          <mat-icon>view_list</mat-icon> Produits</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()">
+          <mat-icon>picture_as_pdf</mat-icon> Catalogues</a>
         <hr style="width:100%">
-        <a href="" mat-list-item (click)="snav.toggle()"><mat-icon>exit_to_app</mat-icon> Déconnexion</a>
+        <a href="" routerLink='admin' mat-list-item>
+          <mat-icon>settings_applications</mat-icon> Admin</a>
+        <a href="" routerLink='employee' mat-list-item (click)="snav.toggle()">
+          <mat-icon>business</mat-icon> Affectations</a>
+        <a href="" routerLink='users' mat-list-item (click)="snav.toggle()">
+          <mat-icon>view_list</mat-icon> Utilisateurs</a>
+        <a href="" routerLink='manager' mat-list-item (click)="snav.toggle()">
+          <mat-icon>supervisor_account</mat-icon> Manager</a>
+        <a href="" routerLink='employees' mat-list-item (click)="snav.toggle()">
+          <mat-icon>person</mat-icon> Agent</a>
+        <a href="" routerLink='suppliers' mat-list-item (click)="snav.toggle()">
+          <mat-icon>perm_identity</mat-icon> Fournisseurs</a>
+        <hr style="width:100%">
+        <a href="" mat-list-item (click)="snav.toggle()">
+          <mat-icon>exit_to_app</mat-icon> Déconnexion</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -33,6 +50,7 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
   <mat-toolbar class="footer">
-        <p style="font-size: small">© 2018, Sylvain Gérard</p>
+    <p style="font-size: small">© 2018, Sylvain Gérard</p>
   </mat-toolbar>
 </div>
+

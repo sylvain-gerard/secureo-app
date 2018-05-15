@@ -24,29 +24,20 @@ import { ProductsModule } from './products/products.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { SuppliersRoutingModule } from './suppliers/suppliers-routing.module';
 
-// import { ProductsComponent } from './products/products/products.component';
-// import { UserDetailComponent } from './user/user-detail/user-detail.component';
-// import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-// import { ProductService } from './products/product.service';
-// import { UserListComponent } from './user/user-list/user-list.component';
-// import { UserService } from './user/user.service';
-// import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
-// import { SupplierDetailComponent } from './suppliers/supplier-detail/supplier-detail.component';
-// import { SuppliersService } from './suppliers/suppliers.service';
-// import { SupplierProductsComponent } from './suppliers/supplier-products/supplier-products.component';
+import { EmployeeModule } from './employees/employee.module';
+import { EmployeeRoutingModule } from './employees/employee-routing.module';
+
+import { OrdersRoutingModule } from './orders/orders-routing.module';
+import { OrdersModule } from './orders/orders.module';
+
+import { PostingsModule } from './posting/postings.module';
+import { PostingsRoutingModule } from './posting/postings-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent
-   // UserListComponent,
-    // ProductsComponent,
-    // UserDetailComponent,
-    // SupplierProductsComponent,
-    // SupplierListComponent,
-    // SupplierDetailComponent,
-    // ProductDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -62,15 +53,18 @@ import { SuppliersRoutingModule } from './suppliers/suppliers-routing.module';
     SuppliersModule,
     SuppliersRoutingModule,
     UsersModule,
-    UserRoutingModule
+    UserRoutingModule,
+    EmployeeModule,
+    EmployeeRoutingModule,
+    OrdersRoutingModule,
+    OrdersModule,
+    PostingsModule,
+    PostingsRoutingModule
 
   ],
   providers: [
     AuthService,
     AuthGuard
-    // UserService,
-    // ProductService,
-    // SuppliersService
   ],
   bootstrap: [AppComponent]
 })

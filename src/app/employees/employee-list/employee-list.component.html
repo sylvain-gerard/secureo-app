@@ -1,0 +1,139 @@
+<div class="table-container">
+  <div class="filtreTableEmployee" fxLayoutAlign="space-between">
+    <div>
+      <mat-icon>search</mat-icon>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+      </mat-form-field>
+    </div>
+    <div>
+      <h1 class="tab-name">Employés</h1>
+    </div>
+    <div>
+      <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
+      <!--<button (click)="create()" mat-raised-button color="primary">Créer</button>-->
+    </div>
+  </div>
+  <br>
+  <!-- Formulaire de création d'un utilisateur -->
+  <div class="employee-content" *ngIf="creation">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Formulaire de création :</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #EmployeeForm="ngForm">
+
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Nom" name="EmployeeName" [(ngModel)]="employee.firstName">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Prenom" name="lastName" [(ngModel)]="employee.lastName">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Email" name="email" [(ngModel)]="employee.email">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Phone" name="phone" [(ngModel)]="employee.phone">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="IdRh" name="idRh" [(ngModel)]="employee.idRh">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Fonction" name="jobTitle" [(ngModel)]="employee.jobTitle">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Genre" name="genre" [(ngModel)]="employee.gender">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Grade" name="grade" [(ngModel)]="employee.grade">
+          </mat-form-field>
+          <br><!--
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Affectation" name="postingName" [(ngModel)]="employee.posting.postingName">
+          </mat-form-field>-->
+          <br>
+          <br>
+          <button type="submit" mat-raised-button color="primary" [disabled]="!EmployeeForm.valid">Valider cet ajout</button>
+          <button (click)="closeForm()" mat-raised-button color="primary">Fermer</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+  </mat-paginator>
+
+  <mat-table class="filtreTableEmployee" #table [dataSource]="dataSourceEmployee" matSort *ngIf='dataSourceEmployee'>
+
+    <!-- FirstName Column -->
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.firstName}} </mat-cell>
+    </ng-container>
+
+    <!--LastName Column -->
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Prénom</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.lastName}} </mat-cell>
+    </ng-container>
+
+    <!--Email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.email}} </mat-cell>
+    </ng-container>
+
+    <!--Phone Column -->
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Téléphone</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.phone}} </mat-cell>
+    </ng-container>
+
+    <!-- IdRh Column -->
+    <ng-container matColumnDef="idRh">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>ID RH</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.idRh}} </mat-cell>
+    </ng-container>
+
+    <!-- Fonction Column -->
+    <ng-container matColumnDef="jobTitle">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Fonction</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.jobTitle}} </mat-cell>
+    </ng-container>
+
+    <!-- Grade Column -->
+    <ng-container matColumnDef="grade">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Grade</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.grade}} </mat-cell>
+    </ng-container>
+
+    <!-- Posting Column 
+    <ng-container matColumnDef="postingName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Affectation</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.posting.postingName}} </mat-cell>
+    </ng-container>-->
+
+    <!-- Sexe Column -->
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Sexe</mat-header-cell>
+      <mat-cell *matCellDef="let Employee"> {{Employee.gender}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
+      (click)="goToDetail(row)"></mat-row>
+  </mat-table>
+  <div *ngIf='!dataSourceEmployee' fxLayoutAlign='center' class='spinner'>
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

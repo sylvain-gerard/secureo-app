@@ -51,7 +51,7 @@
           </mat-form-field>
 
 
-          <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+          <button (click)="goBackToList(product)" mat-raised-button color="primary">Retour</button>
 
         </form>
       </mat-card-content>
@@ -70,12 +70,22 @@
         <p>{{product.category.description}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>
+        <button mat-button (click)="AddProduct(product)">
           <mat-icon>add_shopping_cart</mat-icon>AJOUTER</button>
-        <button mat-button>
+        <button mat-button (click)="RemoveProduct(product)">
           <mat-icon>remove_shopping_cart</mat-icon>SUPPRIMER</button>
       </mat-card-actions>
     </mat-card>
+      <div>
+         <ul>
+           <li *ngFor="let item of products">
+             <span>{{item.productName}}</span>
+             <span>{{item.model}}</span>
+           </li>
+         </ul>
+      </div>
   </div>
+  
 </div>
+
 
