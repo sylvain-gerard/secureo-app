@@ -24,7 +24,7 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeeListComponent implements OnInit {
   employee: IEmployees;
-  posting: IPosting;
+  // posting: IPosting;
   selectedRowIndex = -1;
   selectedemployee: false;
   selectedId: number;

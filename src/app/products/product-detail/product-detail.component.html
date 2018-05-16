@@ -2,7 +2,10 @@
   <div class="product-content">
     <mat-card>
       <mat-card-header>
-        <mat-card-title><h2>Détails du produit : {{ product.productName }}</h2></mat-card-title>
+        <mat-card-title>
+          <h2>Détails du produit : </h2>
+          <h4>{{ product.productName }}</h4>
+        </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form #productForm="ngForm">

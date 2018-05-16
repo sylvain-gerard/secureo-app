@@ -16,7 +16,7 @@ export class UserDetailComponent implements OnInit {
   id: number;
   user$: Observable<IUser>;
   role: IRole;
-  private selectedId: number;
+  // private selectedId: number;
   urlParam: any;
   // edition: boolean;
   roles = [

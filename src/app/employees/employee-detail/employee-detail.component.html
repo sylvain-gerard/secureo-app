@@ -1,3 +1,158 @@
-<p>
-  employee-detail works!
-</p>
+<div class="page-content">
+  <div class="employee-content" *ngIf="employee$ | async as employee">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Détails de l'agent : </h2>
+          <h4>{{employee.firstName}} {{employee.lastName}}</h4>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #EmployeeForm="ngForm">
+
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Nom" name="EmployeeName" [(ngModel)]="employee.firstName">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Prenom" name="lastName" [(ngModel)]="employee.lastName">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Email" name="email" [(ngModel)]="employee.email">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Phone" name="phone" [(ngModel)]="employee.phone">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="IdRh" name="idRh" [(ngModel)]="employee.idRh">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Fonction" name="jobTitle" [(ngModel)]="employee.jobTitle">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Genre" name="genre" [(ngModel)]="employee.gender">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Grade" name="grade" [(ngModel)]="employee.grade">
+          </mat-form-field>
+          <br>
+          <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+        </form><br>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="employee-content" *ngIf="manager$ | async as manager">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2>Manager de l'agent : </h2>
+            <h4>{{manager.firstName}} {{manager.lastName}}</h4>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form #ManagerForm="ngForm">
+  
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Nom" name="manager.firstName" [(ngModel)]="manager.firstName">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Prenom" name="manager.lastName" [(ngModel)]="manager.lastName">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Email" name="manager.email" [(ngModel)]="manager.email">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Phone" name="manager.phone" [(ngModel)]="manager.phone">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="IdRh" name="manager.idRh" [(ngModel)]="manager.idRh">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Fonction" name="manager.jobTitle" [(ngModel)]="manager.jobTitle">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Genre" name="manager.genre" [(ngModel)]="manager.gender">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="inputFullWidth">
+              <input matInput placeholder="Grade" name="manager.grade" [(ngModel)]="manager.grade">
+            </mat-form-field>
+            <br>
+            <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+          </form><br>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  <div class="posting-content" *ngIf="posting$ | async as posting">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Affectation de l'agent : </h2>
+          <h4>{{posting.postingName}}</h4>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #PostingForm="ngForm">
+
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Nom" name="PostingName" [(ngModel)]="posting.postingName">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Numéro" name="streetNumber" [(ngModel)]="posting.address.streetNumber">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Rue" name="streetName" [(ngModel)]="posting.address.streetName">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Ligne 1" name="line1" [(ngModel)]="posting.address.line1">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Ligne 2" name="line2" [(ngModel)]="posting.address.line2">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Ligne 3" name="line3" [(ngModel)]="posting.address.line3">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Ville" name="city" [(ngModel)]="posting.address.city">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Pays" name="country" [(ngModel)]="posting.address.country">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Téléphone" name="phone" [(ngModel)]="posting.address.phone">
+          </mat-form-field>
+          <br>
+          <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
