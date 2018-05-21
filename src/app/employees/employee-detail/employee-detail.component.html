@@ -1,5 +1,10 @@
+<div class="nav-content">
+  <button (click)="goHome()" mat-raised-button color="primary">Accueil</button>
+  <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+</div>
 <div class="page-content">
   <div class="employee-content" *ngIf="employee$ | async as employee">
+    <!-- Détails de l'employée -->
     <mat-card>
       <mat-card-header>
         <mat-card-title>
@@ -9,7 +14,6 @@
       </mat-card-header>
       <mat-card-content>
         <form #EmployeeForm="ngForm">
-
           <mat-form-field class="inputFullWidth">
             <input matInput placeholder="Nom" name="EmployeeName" [(ngModel)]="employee.firstName">
           </mat-form-field>
@@ -41,61 +45,61 @@
           <mat-form-field class="inputFullWidth">
             <input matInput placeholder="Grade" name="grade" [(ngModel)]="employee.grade">
           </mat-form-field>
-          <br>
-          <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
-        </form><br>
+        </form>
+        <div class="nav-content">
+          <button (click)="viewOrders(employee.id)" mat-raised-button color="primary">Commandes</button>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
   <div class="employee-content" *ngIf="manager$ | async as manager">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            <h2>Manager de l'agent : </h2>
-            <h4>{{manager.firstName}} {{manager.lastName}}</h4>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form #ManagerForm="ngForm">
-  
-            <mat-form-field class="inputFullWidth">
-              <input matInput placeholder="Nom" name="manager.firstName" [(ngModel)]="manager.firstName">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="inputFullWidth">
-              <input matInput placeholder="Prenom" name="manager.lastName" [(ngModel)]="manager.lastName">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="inputFullWidth">
-              <input matInput placeholder="Email" name="manager.email" [(ngModel)]="manager.email">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="inputFullWidth">
-              <input matInput placeholder="Phone" name="manager.phone" [(ngModel)]="manager.phone">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="inputFullWidth">
-              <input matInput placeholder="IdRh" name="manager.idRh" [(ngModel)]="manager.idRh">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="inputFullWidth">
-              <input matInput placeholder="Fonction" name="manager.jobTitle" [(ngModel)]="manager.jobTitle">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="inputFullWidth">
-              <input matInput placeholder="Genre" name="manager.genre" [(ngModel)]="manager.gender">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="inputFullWidth">
-              <input matInput placeholder="Grade" name="manager.grade" [(ngModel)]="manager.grade">
-            </mat-form-field>
-            <br>
-            <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
-          </form><br>
-        </mat-card-content>
-      </mat-card>
-    </div>
+    <!-- Manager de l'employé -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Manager de l'agent : </h2>
+          <h4>{{manager.firstName}} {{manager.lastName}}</h4>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #ManagerForm="ngForm">
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Nom" name="manager.firstName" [(ngModel)]="manager.firstName">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Prenom" name="manager.lastName" [(ngModel)]="manager.lastName">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Email" name="manager.email" [(ngModel)]="manager.email">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Phone" name="manager.phone" [(ngModel)]="manager.phone">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="IdRh" name="manager.idRh" [(ngModel)]="manager.idRh">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Fonction" name="manager.jobTitle" [(ngModel)]="manager.jobTitle">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Genre" name="manager.genre" [(ngModel)]="manager.gender">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="inputFullWidth">
+            <input matInput placeholder="Grade" name="manager.grade" [(ngModel)]="manager.grade">
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
   <div class="posting-content" *ngIf="posting$ | async as posting">
+    <!-- Affectation de 'employé -->
     <mat-card>
       <mat-card-header>
         <mat-card-title>
@@ -105,7 +109,6 @@
       </mat-card-header>
       <mat-card-content>
         <form #PostingForm="ngForm">
-
           <mat-form-field class="inputFullWidth">
             <input matInput placeholder="Nom" name="PostingName" [(ngModel)]="posting.postingName">
           </mat-form-field>
@@ -149,8 +152,6 @@
           <mat-form-field class="inputFullWidth">
             <input matInput placeholder="Téléphone" name="phone" [(ngModel)]="posting.address.phone">
           </mat-form-field>
-          <br>
-          <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
         </form>
       </mat-card-content>
     </mat-card>

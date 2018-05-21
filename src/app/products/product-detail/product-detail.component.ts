@@ -19,6 +19,7 @@ import { Subject } from 'rxjs/Subject';
 })
 export class ProductDetailComponent implements OnInit {
   product$: Observable<IProduct>;
+  productsInCarts: Observable<IProduct[]>;
   product: IProduct;
   category: ICategory;
   supplier: ISupplier;
@@ -54,18 +55,22 @@ export class ProductDetailComponent implements OnInit {
   goBackToList() {
     this.router.navigate(['products']);
   }
-
+  /*
   AddProduct(product) {
     product.added = true;
     this.productService.addProduct(product);
   }
+  */
   RemoveProduct(product) {
     product.added = false;
     this.productService.removeProduct(product.id);
+    sessionStorage.setItem('cart', JSON.stringify(this.products));
+
   }
 
   addToCart(product) {
-    sessionStorage.setItem('cart', JSON.stringify(product));
     this.productService.addProduct(product);
+    sessionStorage.setItem('cart', JSON.stringify(this.products));
+    product.added = true;
   }
 }

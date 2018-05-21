@@ -1,0 +1,56 @@
+<div class="page-content">
+  <div class="filtreTableOrder" fxLayoutAlign="space-between">
+    <div>
+      <mat-icon>search</mat-icon>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+      </mat-form-field>
+    </div>
+    <div>
+      <h1 class="tab-name">Commandes</h1>
+    </div>
+    <div>
+      <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
+      <!--<button (click)="backToDetail()" mat-raised-button color="primary">Retour</button>-->
+    </div>
+  </div>
+
+  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+  </mat-paginator>
+
+  <mat-table class="filtreTableOrder" #table [dataSource]="dataSourceOrder" matSort *ngIf='dataSourceOrder'>
+
+    <!-- Creation Date Column -->
+    <ng-container matColumnDef="createdOn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Date de création</mat-header-cell>
+      <mat-cell *matCellDef="let Order"> {{Order.created_on}} </mat-cell>
+    </ng-container>
+
+    <!--LastName Column -->
+    <ng-container matColumnDef="shipped">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Date de livraison</mat-header-cell>
+      <mat-cell *matCellDef="let Order"> {{Order.shipped}} </mat-cell>
+    </ng-container>
+
+    <!--Email Column -->
+    <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+      <mat-cell *matCellDef="let Order"> {{Order.total}} </mat-cell>
+    </ng-container>
+
+    <!--Phone Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let Order"> {{Order.status}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
+      (click)="viewItem(row)"></mat-row>
+  </mat-table>
+  <div *ngIf='!dataSourceOrder' fxLayoutAlign='center' class='spinner'>
+    <mat-spinner></mat-spinner>
+  </div>
+
+
+</div>

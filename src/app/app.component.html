@@ -6,10 +6,10 @@
       </button>
     </div>
     <div>
-      <h1 class="app-name">{{title}}</h1>
+      <button mat-button (click)="goHome()"><mat-icon>home</mat-icon> SECUREO</button>
     </div>
     <div>
-      <button mat-button>
+      <button mat-button *ngIf="isLoggedIn$ | async">
         <mat-icon>shopping_cart</mat-icon>Panier</button>
       <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async"><mat-icon>exit_to_app</mat-icon>Déconnexion</button>
     </div>

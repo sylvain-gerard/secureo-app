@@ -12,8 +12,8 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
-    { path: 'users', component: UserListComponent, canActivate: [AuthGuard] },
-    // { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] } //
+    // { path: 'users', component: UserListComponent, canActivate: [AuthGuard] },
+    // { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

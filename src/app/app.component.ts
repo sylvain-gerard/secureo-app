@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'Secureo';
   isLoggedIn$: Observable<boolean>; // {1}
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
@@ -20,5 +21,9 @@ export class AppComponent implements OnInit {
 
   onLogout() {
     this.authService.logout(); // {3}
+  }
+
+  goHome() {
+    this.router.navigate(['']);
   }
 }

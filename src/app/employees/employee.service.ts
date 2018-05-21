@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { HttpClient } from '@angular/common/http';
 import { IEmployees } from './iemployees';
 import { IPosting } from '../posting/iposting';
+import { IOrder } from '../orders/iorder';
 
 @Injectable()
 export class EmployeeService {
@@ -32,5 +33,9 @@ export class EmployeeService {
 
   getManagerOfEmployee(id): Observable<IEmployees> {
     return this.http.get<IEmployees>(`${this.url}/${id}/manager`) as Observable<IEmployees>;
+  }
+
+  getOrdersOfEmployee(id): Observable<IOrder[]> {
+    return this.http.get<IOrder[]>(`${this.url}/${id}/orders`) as Observable<IOrder[]>;
   }
 }

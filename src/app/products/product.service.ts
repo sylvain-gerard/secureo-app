@@ -5,17 +5,19 @@ import { Subject } from 'rxjs/Subject';
 import { environment } from '../../environments/environment';
 import { IProduct } from './iproduct';
 import { CartState } from './CartState';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ProductService {
   private url = environment.REST_API_URL + 'products';
   update$: Subject<any> = new Subject<any>();
-  selectedProduct: IProduct;
+  // selectedProduct: IProduct;
 
   // CART SERVICE ESSAI
 
   private cartSubject = new Subject<CartState>();
   Products: IProduct[] = [];
+  product: IProduct;
   CartState = this.cartSubject.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -29,9 +31,11 @@ export class ProductService {
   }
 
   // CART SERVICE ESSAI
-  addProduct(product: any) {
+  addProduct(product) {
     console.log('in service');
+    console.log(' produit choisi :', product);
     this.Products.push(product);
+    console.log('panier en l état :', this.Products);
     this.cartSubject.next(<any>{ loaded: true, products: this.Products });
   }
   removeProduct(id: number) {

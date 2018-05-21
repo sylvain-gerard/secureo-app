@@ -90,8 +90,8 @@ export class EmployeeListComponent implements OnInit {
       grade: '',
       posting: null,
       manager: null,
-      employees: null,
-      orders: null
+      employees: null
+      // orders: null
     };
     this.refreshTab();
     this.employeeService.update$.subscribe(() => this.refreshTab());
@@ -166,8 +166,8 @@ export class EmployeeListComponent implements OnInit {
       grade: '',
       posting: null,
       manager: null,
-      employees: null,
-      orders: null
+      employees: null
+      // orders: null
     };
   }
 }

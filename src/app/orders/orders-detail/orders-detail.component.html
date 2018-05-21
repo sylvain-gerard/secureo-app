@@ -1,3 +1,53 @@
-<p>
-  orders-detail works!
-</p>
+<div class="table-container">
+  <div class="filtreTableItems" fxLayoutAlign="space-between">
+    <div>
+      <mat-icon>search</mat-icon>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+      </mat-form-field>
+    </div>
+    <div>
+      <h1 class="tab-name">Produits commandés</h1>
+    </div>
+  </div>
+
+  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+  </mat-paginator>
+
+  <mat-table class="filtreTableItems" #table [dataSource]="dataSource" matSort>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="productName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+        <mat-cell *matCellDef="let Item"> {{Item.product.productName}} </mat-cell>
+      </ng-container>
+  
+      <!--Code Column -->
+      <ng-container matColumnDef="productCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
+        <mat-cell *matCellDef="let Item"> {{Item.product.productCode}} </mat-cell>
+      </ng-container>
+  
+      <!-- Model Column -->
+      <ng-container matColumnDef="model">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Modèle</mat-header-cell>
+        <mat-cell *matCellDef="let Item"> {{Item.product.model}} </mat-cell>
+      </ng-container>
+  
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</mat-header-cell>
+        <mat-cell *matCellDef="let Item"> {{Item.quantity}} </mat-cell>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="totalPrice">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+          <mat-cell *matCellDef="let Item"> {{Item.totalPrice}} </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)">
+    </mat-row>
+  </mat-table>
+</div>

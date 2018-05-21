@@ -56,10 +56,10 @@
     </mat-card>
   </div>
 
-  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event" *ngIf='!creation '>
   </mat-paginator>
 
-  <mat-table class="filtreTableUser" #table [dataSource]="dataSourceUser" matSort *ngIf='dataSourceUser'>
+  <mat-table class="filtreTableUser" #table [dataSource]="dataSourceUser" matSort *ngIf='!creation '>
 
     <!-- Login Column -->
     <ng-container matColumnDef="userName">
