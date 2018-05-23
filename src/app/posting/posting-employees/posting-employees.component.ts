@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { MaterialModule } from '../../material.module';
 import {
   MatTableDataSource,
@@ -11,26 +12,19 @@ import {
   PageEvent,
   MatPaginator
 } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { Router, ActivatedRoute } from '@angular/router';
-import { IEmployees } from '../iemployees';
-import { IPosting } from '../../posting/iposting';
-import { EmployeeService } from '../employee.service';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { IEmployees } from '../../employees/iemployees';
+import { PostingService } from '../posting.service';
 
 @Component({
-  selector: 'app-employee-list',
-  templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  selector: 'app-posting-employees',
+  templateUrl: './posting-employees.component.html',
+  styleUrls: ['./posting-employees.component.css']
 })
-export class EmployeeListComponent implements OnInit {
+export class PostingEmployeesComponent implements OnInit {
   employee: IEmployees;
-  // posting: IPosting;
   selectedRowIndex = -1;
-  // selectedemployee: false;
-  // selectedId: number;
-  employee$: Observable<IEmployees>;
-  creation = false;
-
+  urlParam: any;
   displayedColumns = [
     'firstName',
     'lastName',
@@ -41,18 +35,7 @@ export class EmployeeListComponent implements OnInit {
     'gender',
     'grade'
   ];
-  formColumns = [
-    'firstName',
-    'lastName',
-    'email',
-    'phone',
-    'idRh',
-    'jobTitle',
-    'gender',
-    'grade'
-  ];
   dataSourceEmployee = new MatTableDataSource();
-
   // MatPaginator Inputs
   length = 100;
   pageSize = 10;
@@ -68,8 +51,8 @@ export class EmployeeListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private employeeService: EmployeeService
-  ) {}
+    private postingService: PostingService
+  ) { }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -78,6 +61,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.urlParam = this.route.snapshot.params;
     this.employee = {
       id: 0,
       firstName: '',
@@ -94,7 +78,7 @@ export class EmployeeListComponent implements OnInit {
       // orders: null
     };
     this.refreshTab();
-    this.employeeService.update$.subscribe(() => this.refreshTab());
+    this.postingService.update$.subscribe(() => this.refreshTab());
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -102,7 +86,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   refreshTab() {
-    this.employeeService.getEmployees().subscribe((data: IEmployees[]) => {
+    this.postingService.getEmployeesOfPosting(this.urlParam.id).subscribe((data: IEmployees[]) => {
       this.dataSourceEmployee = new MatTableDataSource(data);
       this.dataSourceEmployee.sort = this.sort;
       this.dataSourceEmployee.paginator = this.paginator;
@@ -113,7 +97,7 @@ export class EmployeeListComponent implements OnInit {
     this.selectedRowIndex = row.id;
     this.employee = Object.assign({}, row);
     console.log(this.employee);
-    this.creation = false;
+    console.log(this.selectedRowIndex);
   }
 
   goToDetail(row) {
@@ -122,52 +106,12 @@ export class EmployeeListComponent implements OnInit {
     this.router.navigate(['/employees', this.employee.id]);
   }
 
-  createEmployee(employee) {
-    console.log(this.employee);
-    this.employeeService.createEmployee(this.employee).subscribe(
-      result => {
-        this.afficherMessage('Création effectuée', '');
-      },
-      error => {
-        this.afficherMessage('', 'Email déjà utilisé !');
-      }
-    );
-  }
-
   backTohome() {
     this.router.navigate(['']);
   }
 
-  create() {
-    this.clearInput();
-    this.creation = true;
+  goBackToList() {
+    this.router.navigate(['postings', this.urlParam.id]);
   }
 
-  closeForm() {
-    this.creation = false;
-  }
-
-  afficherMessage(message: string, erreur: string) {
-    this.snackBar.open(message, erreur, {
-      duration: 2000
-    });
-  }
-
-  clearInput() {
-    this.employee = {
-      id: 0,
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      idRh: '',
-      jobTitle: '',
-      gender: '',
-      grade: '',
-      posting: null,
-      manager: null,
-      employees: null
-      // orders: null
-    };
-  }
 }

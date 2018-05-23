@@ -89,18 +89,14 @@ export class EmployeeOrdersComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  backToEmployee() {
+    this.router.navigate(['employees', this.urlParam.id]);
+  }
+
   viewItem(row) {
     this.selectedRowIndex = row.id;
     this.order = Object.assign({}, row);
     this.router.navigate(['/orders', this.order.id, 'items']);
   }
 
-  backToDetail() {
-    this.employee$ = this.route.paramMap.switchMap((params: ParamMap) =>
-      this.employeeService.getEmployee(params.get('id'))
-    );
-    // this.employee = Object.assign({}, this.employee$);
-    console.log(this.id);
-    this.router.navigate(['employees/', this.id]);
-  }
 }

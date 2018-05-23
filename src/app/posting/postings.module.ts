@@ -6,6 +6,7 @@ import { PostingsRoutingModule } from './postings-routing.module';
 import { PostingDetailComponent } from './posting-detail/posting-detail.component';
 import { PostingListComponent } from './posting-list/posting-list.component';
 import { PostingService } from './posting.service';
+import { PostingEmployeesComponent } from './posting-employees/posting-employees.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { PostingService } from './posting.service';
   ],
   declarations: [
     PostingDetailComponent,
-    PostingListComponent
+    PostingListComponent,
+    PostingEmployeesComponent
   ],
   providers: [PostingService]
 })

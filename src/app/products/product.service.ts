@@ -34,9 +34,13 @@ export class ProductService {
   addProduct(product) {
     console.log('in service');
     this.products.push(product);
-    console.log('panier en l état :', this.products);
+    console.log('cart in service 1:', this.products);
     this.cartSubject.next(<any>{ loaded: true, products: this.products });
+    console.log('cart in service 2:', this.products);
+    this.cartSubject.subscribe(console.log);
+    this.CartState.subscribe(console.log);
   }
+
   removeProduct(id: number) {
     this.products = this.products.filter(item => item.id !== id);
     this.cartSubject.next(<any>{
@@ -44,12 +48,8 @@ export class ProductService {
       products: this.products
     });
   }
-  /*
-  getAllProducts(): Observable<any> {
-    return this.httpclient
-      .get(url)
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw('Server error'));
+
+  getCartState(): Observable<CartState> {
+    return this.cartSubject.asObservable();
   }
-  */
 }

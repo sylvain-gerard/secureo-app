@@ -7,6 +7,7 @@ import { CartState } from '../../products/CartState';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { CartService } from '../cart.service';
+import { ProductService } from '../../products/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,8 +17,7 @@ import { CartService } from '../cart.service';
 export class CartComponent implements OnInit {
 
   product$: Observable<IProduct>;
-
-  private cart = new BehaviorSubject<any>(this.product$);
+  // private cart = new BehaviorSubject<any>(this.product$);
   products: IProduct[];
   private subscription: Subscription;
   private cartSubject = new Subject<CartState>();
@@ -27,24 +27,18 @@ export class CartComponent implements OnInit {
   public shoppingCartItems: IProduct[] = [];
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private productService: ProductService
   ) {
+    this.CartState = this.productService.getCartState();
     // this.shoppingCartItems$ = this.cartService.getItems();
-    this.shoppingCartItems$.subscribe(_ => this.shoppingCartItems = _);
+    // his.shoppingCartItems$.subscribe(_ => this.shoppingCartItems = _);
    }
 
   ngOnInit() {
-
-    this.subscription = this
-            .cartService
-            .CartState
-            .subscribe((state: CartState) => {
-                this.products = state.products;
-                console.log('SUBSRIPTION');
-                console.log(this.products);
-            });
-    console.log('SHOPPING CART ITEMS');
-    this.shoppingCartItems$.subscribe(console.log);
+    console.log('CART COMPONENT INIT');
+    this.CartState = this.productService.getCartState();
+    console.log(this.CartState, 'subscription on init DU CART');
 
   }
 

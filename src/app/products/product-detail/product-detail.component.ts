@@ -46,11 +46,11 @@ export class ProductDetailComponent implements OnInit {
     this.product$ = this.route.paramMap.switchMap((params: ParamMap) =>
       this.productService.getProduct(params.get('id'))
     );
-    this.product$.subscribe(product => console.log(product));
+    // this.product$.subscribe(product => console.log(product));
     this.subscription = this.productService.CartState.subscribe(
       (state: CartState) => {
         this.products = state.products;
-        console.log(this.products);
+        console.log(this.products, 'subscription on init');
       }
     );
   }
@@ -58,11 +58,14 @@ export class ProductDetailComponent implements OnInit {
   goBackToList() {
     this.router.navigate(['products']);
   }
-    AddProduct(product) {
+  /*
+  AddProduct(product) {
     product.added = true;
     this.productService.addProduct(product);
   }
-  RemoveProduct(product) {
+  */
+
+  removeProduct(product) {
     product.added = false;
     this.productService.removeProduct(product.id);
     sessionStorage.setItem('cart', JSON.stringify(this.products));
@@ -71,13 +74,13 @@ export class ProductDetailComponent implements OnInit {
   addProduct(product) {
     this.productService.addProduct(product);
     sessionStorage.setItem('cart', JSON.stringify(this.products));
-    this.cartService.addToCart(product);
+    // this.cartService.addToCart(product);
     product.added = true;
   }
 
   // METHOD FOR CART
 
   public addToCart(item: IProduct) {
-    this.cartService.addToCart(item);
+    // this.cartService.addToCart(item);
   }
 }
