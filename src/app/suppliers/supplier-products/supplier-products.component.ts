@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input, Output, Inject } from '@angular/core';
 import { IProduct } from '../../products/iproduct';
-import { ICategory } from '../../catogories/icategory';
+import { ICategory } from '../../categories/icategory';
 import { ISupplier } from '../isupplier';
 import { Observable } from 'rxjs/Observable';
 import { MaterialModule } from '../../material.module';
@@ -76,7 +76,8 @@ export class SupplierProductsComponent implements AfterViewInit {
       sizeDescription: '',
       disabled: false,
       category: null,
-      supplier: null
+      supplier: null,
+      added: false
     };
     this.refreshTab();
     this.supplierService.update$.subscribe(() => this.refreshTab());

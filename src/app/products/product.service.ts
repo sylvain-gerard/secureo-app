@@ -16,7 +16,7 @@ export class ProductService {
   // CART SERVICE ESSAI
 
   private cartSubject = new Subject<CartState>();
-  Products: IProduct[] = [];
+  products: IProduct[] = [];
   product: IProduct;
   CartState = this.cartSubject.asObservable();
 
@@ -33,16 +33,15 @@ export class ProductService {
   // CART SERVICE ESSAI
   addProduct(product) {
     console.log('in service');
-    console.log(' produit choisi :', product);
-    this.Products.push(product);
-    console.log('panier en l état :', this.Products);
-    this.cartSubject.next(<any>{ loaded: true, products: this.Products });
+    this.products.push(product);
+    console.log('panier en l état :', this.products);
+    this.cartSubject.next(<any>{ loaded: true, products: this.products });
   }
   removeProduct(id: number) {
-    this.Products = this.Products.filter(item => item.id !== id);
+    this.products = this.products.filter(item => item.id !== id);
     this.cartSubject.next(<any>{
       loaded: false,
-      products: this.Products
+      products: this.products
     });
   }
   /*

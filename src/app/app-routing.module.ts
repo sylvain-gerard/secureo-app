@@ -5,6 +5,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './login/login.component';
+import { CartComponent } from './cart/cart/cart.component';
 // import { ProductsComponent } from './products/products/products.component';
 // import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 
@@ -12,7 +13,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
-    // { path: 'users', component: UserListComponent, canActivate: [AuthGuard] },
+    { path: 'cart', component: CartComponent, canActivate: [AuthGuard] }
     // { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] }
 ];
 

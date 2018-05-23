@@ -1,4 +1,4 @@
-import { ICategory } from '../catogories/icategory';
+import { ICategory } from '../categories/icategory';
 import { ISupplier } from '../suppliers/isupplier';
 
 export interface IProduct {
@@ -13,4 +13,5 @@ export interface IProduct {
     disabled: boolean;
     category: ICategory;
     supplier: ISupplier;
+    added: false;
   }

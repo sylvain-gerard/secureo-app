@@ -33,6 +33,10 @@ import { OrdersModule } from './orders/orders.module';
 import { PostingsModule } from './posting/postings.module';
 import { PostingsRoutingModule } from './posting/postings-routing.module';
 
+import { CartModule } from './cart/cart.module';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +63,8 @@ import { PostingsRoutingModule } from './posting/postings-routing.module';
     OrdersRoutingModule,
     OrdersModule,
     PostingsModule,
-    PostingsRoutingModule
+    PostingsRoutingModule,
+    CartModule
 
   ],
   providers: [

@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IProduct } from './../iproduct';
-import { ICategory } from '../../catogories/icategory';
+import { ICategory } from '../../categories/icategory';
 import { ProductService } from '../product.service';
 import { MaterialModule } from '../../material.module';
 import {
@@ -83,7 +83,8 @@ export class ProductsComponent implements AfterViewInit {
       sizeDescription: '',
       disabled: false,
       category: null,
-      supplier: null
+      supplier: null,
+      added: false
     };
     this.refreshTab();
     this.productService.update$.subscribe(() => this.refreshTab());
