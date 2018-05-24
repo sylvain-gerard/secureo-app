@@ -20,17 +20,11 @@ import { CartService } from '../../cart/cart.service';
 })
 export class ProductDetailComponent implements OnInit {
   product$: Observable<IProduct>;
-  // productsInCarts: Observable<IProduct[]>;
-  // product: IProduct;
-  // category: ICategory;
-  // supplier: ISupplier;
-  // edition = false;
-
-  private cart = new BehaviorSubject<any>(this.product$);
+  // private cart = new BehaviorSubject<any>(this.product$);
   products: IProduct[];
   private subscription: Subscription;
   private cartSubject = new Subject<CartState>();
-  CartState = this.cartSubject.asObservable();
+  Cart = this.cartSubject.asObservable();
 
   @Input() product: IProduct;
 
@@ -46,41 +40,37 @@ export class ProductDetailComponent implements OnInit {
     this.product$ = this.route.paramMap.switchMap((params: ParamMap) =>
       this.productService.getProduct(params.get('id'))
     );
-    // this.product$.subscribe(product => console.log(product));
     this.subscription = this.productService.CartState.subscribe(
       (state: CartState) => {
         this.products = state.products;
-        console.log(this.products, 'subscription on init');
+        console.log(
+          this.products,
+          'products[] in subscription in PRODCT-DETAIL component'
+        );
       }
     );
+  }
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   goBackToList() {
     this.router.navigate(['products']);
   }
-  /*
-  AddProduct(product) {
-    product.added = true;
-    this.productService.addProduct(product);
-  }
-  */
 
   removeProduct(product) {
     product.added = false;
+    // this.cartService.removeFromCart(product.id);
     this.productService.removeProduct(product.id);
     sessionStorage.setItem('cart', JSON.stringify(this.products));
   }
 
   addProduct(product) {
+    product.added = true;
+    // this.cartService.addToCart(product);
     this.productService.addProduct(product);
     sessionStorage.setItem('cart', JSON.stringify(this.products));
-    // this.cartService.addToCart(product);
-    product.added = true;
   }
 
-  // METHOD FOR CART
-
-  public addToCart(item: IProduct) {
-    // this.cartService.addToCart(item);
-  }
 }

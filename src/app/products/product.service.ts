@@ -11,10 +11,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class ProductService {
   private url = environment.REST_API_URL + 'products';
   update$: Subject<any> = new Subject<any>();
-  // selectedProduct: IProduct;
-
   // CART SERVICE ESSAI
-
   private cartSubject = new Subject<CartState>();
   products: IProduct[] = [];
   product: IProduct;
@@ -34,9 +31,8 @@ export class ProductService {
   addProduct(product) {
     console.log('in service');
     this.products.push(product);
-    console.log('cart in service 1:', this.products);
+    console.log('products: IProduct[] in productService:', this.products);
     this.cartSubject.next(<any>{ loaded: true, products: this.products });
-    console.log('cart in service 2:', this.products);
     this.cartSubject.subscribe(console.log);
     this.CartState.subscribe(console.log);
   }

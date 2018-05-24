@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IProduct } from '../../products/iproduct';
 import { Subscription } from 'rxjs/Subscription';
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { CartService } from '../cart.service';
 import { ProductService } from '../../products/product.service';
+import { MatTableDataSource, PageEvent, MatSort, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-cart',
@@ -15,31 +16,49 @@ import { ProductService } from '../../products/product.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  cart: IProduct[] = [];
+  selectedRowIndex = -1;
+  product: IProduct;
 
-  product$: Observable<IProduct>;
-  // private cart = new BehaviorSubject<any>(this.product$);
-  products: IProduct[];
-  private subscription: Subscription;
-  private cartSubject = new Subject<CartState>();
-  CartState = this.cartSubject.asObservable();
+  displayedColumns = [
+    'productName',
+    'model',
+    'productCode',
+    'size',
+    'sizeDescription',
+    'disabled',
+    'category',
+    'supplier'
+  ];
+  dataSource = new MatTableDataSource();
 
-  public shoppingCartItems$: Observable<IProduct[]> = of([]);
-  public shoppingCartItems: IProduct[] = [];
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions = [5, 10, 25, 50, 100];
 
-  constructor(
-    private cartService: CartService,
-    private productService: ProductService
-  ) {
-    this.CartState = this.productService.getCartState();
-    // this.shoppingCartItems$ = this.cartService.getItems();
-    // his.shoppingCartItems$.subscribe(_ => this.shoppingCartItems = _);
-   }
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private cartService: CartService) {}
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 
   ngOnInit() {
     console.log('CART COMPONENT INIT');
-    this.CartState = this.productService.getCartState();
-    console.log(this.CartState, 'subscription on init DU CART');
+    this.cart = this.cartService.getCart();
+    console.log('CART IN SESSIONSTORAGE', this.cart);
+  }
 
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
 }

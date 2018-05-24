@@ -4,6 +4,7 @@ import { IProduct } from '../products/iproduct';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+import { Subscriber } from 'rxjs/Subscriber';
 import { of } from 'rxjs/observable/of';
 
 import { CartState } from '../products/CartState';
@@ -13,31 +14,32 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CartService {
-  private url = environment.REST_API_URL + 'products';
-  selectedItems: IProduct[] = [];
-  item: Observable<IProduct>;
-
-  // CART SERVICE ESSAI
-  private cartSubject = new Subject<CartState>();
-  products: IProduct[] = [];
   product: IProduct;
+  products: IProduct[] = [];
+
+  private cartSubject = new Subject<CartState>();
   CartState = this.cartSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(`${this.url}`) as Observable<IProduct[]>;
+  addToCart(product) {
+    this.products.push(product);
+    console.log('products: IProduct[] in cartService:', this.products);
+    this.cartSubject.next(<any>{ loaded: true, products: this.products });
+    // sessionStorage.setItem('cart', JSON.stringify(this.products));
   }
-  // TO USE ?
-  getProduct(id): Observable<IProduct> {
-    return this.http.get<IProduct>(`${this.url}/${id}`) as Observable<IProduct>;
+
+  removeFromCart(id: number) {
+    this.products = this.products.filter(item => item.id !== id);
+    this.cartSubject.next(<any>{
+      loaded: false,
+      products: this.products
+    });
+    // sessionStorage.setItem('cart', JSON.stringify(this.products));
   }
-  /*
-  addItem(id: number): void {
-    let item = this.http.get<IProduct>(`${this.url}/${id}`);
-    if (this.selectedItems.indexOf(item) < 0) {
-      this.selectedItems.push(item);
-    }
+
+  getCart() {
+    return JSON.parse(sessionStorage.getItem('cart'));
   }
-  */
+
 }
