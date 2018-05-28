@@ -144,31 +144,4 @@ export class UserListComponent implements OnInit {
     };
   }
 }
-  /*
-  cancelSelect() {
-    this.selectedRowIndex = -1;
-    // this.edition = false;
-    this.clearInput();
-  }
-  */
- /* onSubmit() {
-    if (this.edition) {
-      this.userService.updateUser(this.user).subscribe(
-        result => {this.afficherMessage('Update effectué', ''); },
-       error => {this.afficherMessage('', 'Suspect déjà présent'); }
-      );
-    } else {
-      this.userService.createUser(this.user).subscribe(
-        result => {this.afficherMessage('Enregistrement effectué', ''); },
-       error => {this.afficherMessage('', 'Suspect déjà présent'); }
-      );
-    }
-  }
-  */
-  /*
-    deleteUser() {
-      this.edition = false;
-      this.userService.deleteUser(this.user.id).subscribe();
-      this.clearInput();
-    }
-  */
+

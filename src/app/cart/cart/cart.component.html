@@ -2,26 +2,31 @@
   <div>
     <h1 class="tab-name">Produits Commandés</h1>
   </div>
-</div>
-<table id="cartTable">
-  <thead>
-    <th>Nom</th>
-    <th>Model</th>
-    <th>Code</th>
-    <th>Taille</th>
-    <th>Taille Desc.</th>
-    <th>Fournisseurs</th>
-    
-    <tr *ngFor="let item of cart">
-      <td>{{item.productName}}</td>
-      <td>{{item.model}}</td>
-      <td>{{item.productCode}}</td>
-      <td>{{item.size}}</td>
-      <td>{{item.sizeDescription}}</td>
-      <td>{{item.supplier.supplierName}}</td>
-      
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
 
+  <table id="cartTable">
+    <thead>
+      <th>Nom</th>
+      <th>Model</th>
+      <th>Code</th>
+      <th>Taille</th>
+      <th>Taille Desc.</th>
+      <th>Fournisseurs</th>
+      <th>Quantité</th>
+
+      <tr *ngFor="let item of items">
+        <td>{{item.product.productName}}</td>
+        <td>{{item.product.model}}</td>
+        <td>{{item.product.productCode}}</td>
+        <td>{{item.product.size}}</td>
+        <td>{{item.product.sizeDescription}}</td>
+        <td>{{item.product.supplier.supplierName}}</td>
+        <td>
+          <button (click)="quantityPlus(this.item, items.indexOf(this.item))"> + </button> {{ item.quantity }}
+          <button *ngIf="item.quantity > 1" (click)="quantityMinus(this.item, items.indexOf(this.item))"> - </button>
+        </td>
+
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>

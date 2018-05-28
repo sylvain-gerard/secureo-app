@@ -18,11 +18,11 @@ export class UserDetailComponent implements OnInit {
   role: IRole;
   // private selectedId: number;
   urlParam: any;
-  // edition: boolean;
+  edition: boolean;
   roles = [
-    {value: {id: 3, name: 'EMPLOYEE' }, viewValue: 'Agent'},
-    {value: {id: 2, name: 'MANAGER' }, viewValue: 'Manager'},
-    {value: {id: 1, name: 'ADMIN' }, viewValue: 'Administrateur'}
+    { value: { id: 3, name: 'EMPLOYEE' }, viewValue: 'Agent' },
+    { value: { id: 2, name: 'MANAGER' }, viewValue: 'Manager' },
+    { value: { id: 1, name: 'ADMIN' }, viewValue: 'Administrateur' }
   ];
 
   constructor(
@@ -30,13 +30,13 @@ export class UserDetailComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.urlParam = this.route.snapshot.params;
     this.user$ = this.route.paramMap.switchMap((params: ParamMap) =>
-    this.userService.getUser(params.get('id'))
-  );
+      this.userService.getUser(params.get('id'))
+    );
     this.user$.subscribe(console.log);
   }
 
@@ -44,20 +44,35 @@ export class UserDetailComponent implements OnInit {
     this.router.navigate(['users']);
   }
 
+  editMode() {
+    this.edition = true;
+  }
+
+  viewMode() {
+    this.edition = false;
+  }
+
   edit(user) {
     this.user = user;
     console.log(this.user);
-  this.userService.updateUser(this.user).subscribe(
-    result => {this.showMessage('Modification enregistrée !', ''); },
-    error => {this.showMessage('', 'ERREUR lors de l\'édition.'); }
-  );
+    this.userService.updateUser(this.user).subscribe(
+      result => {
+        this.showMessage('Modification enregistrée !', '');
+      },
+      error => {
+        this.showMessage('', 'ERREUR lors de l\'édition.');
+      }
+    );
   }
 
   deleteUser(id) {
-    window.alert('Attention ! Cette action supprimera cet utilisateur du système. Continuer ?');
+    window.alert(
+      'Attention ! Cette action supprimera cet utilisateur du système. Continuer ?'
+    );
     try {
-      this.userService.deleteUser(this.urlParam.id).subscribe((response) =>
-        console.log('deleted'));
+      this.userService
+        .deleteUser(this.urlParam.id)
+        .subscribe(response => console.log('deleted'));
       this.showMessage('Suppression effectuée !', '');
       this.goBackToList();
     } catch {
@@ -67,8 +82,7 @@ export class UserDetailComponent implements OnInit {
 
   showMessage(message: string, erreur: string) {
     this.snackBar.open(message, erreur, {
-      duration: 2000,
-       });
+      duration: 2000
+    });
   }
-
 }

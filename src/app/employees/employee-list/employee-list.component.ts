@@ -61,6 +61,34 @@ export class EmployeeListComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
 
+  jobTitles = [
+    {value: 'POSTMAN', viewValue: 'Facteur'},
+    {value: 'MAIL_AGENT', viewValue: 'Agent Courrier'},
+    {value: 'HANDLER', viewValue: 'Manutentionnaire'},
+    {value: 'DELIVERER', viewValue: 'Livreur'},
+    {value: 'MANAGER', viewValue: 'Manager'}
+  ];
+
+  genders = [
+    {value: 'M', viewValue: 'Homme'},
+    {value: 'F', viewValue: 'Femme'}
+  ];
+
+  grades = [
+    {value: 'I2', viewValue: '1.2'},
+    {value: 'I3', viewValue: '1.3'},
+    {value: 'II1', viewValue: '2.1'},
+    {value: 'II1', viewValue: '2.2'},
+    {value: 'II3', viewValue: '2.3'},
+    {value: 'III1', viewValue: '3.1'},
+    {value: 'III2', viewValue: '3.2'},
+    {value: 'III3', viewValue: '3.3'},
+    {value: 'GROUP_A', viewValue: 'Groupe A'},
+    {value: 'GROUP_B', viewValue: 'Groupe B'},
+    {value: 'GROUP_C', viewValue: 'Groupe C'}
+  ];
+
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -123,19 +151,27 @@ export class EmployeeListComponent implements OnInit {
   }
 
   createEmployee(employee) {
-    console.log(this.employee);
+    console.log('EMPLOYEE INPUT', this.employee);
     this.employeeService.createEmployee(this.employee).subscribe(
       result => {
         this.afficherMessage('Création effectuée', '');
       },
       error => {
-        this.afficherMessage('', 'Email déjà utilisé !');
+        this.afficherMessage('', 'Création en echec !');
       }
     );
   }
 
   backTohome() {
     this.router.navigate(['']);
+  }
+
+  createEmpployee(employee) {
+    console.log(this.employee);
+    this.employeeService.createEmployee(employee).subscribe(
+      result => {this.afficherMessage('Création effectuée', ''); },
+     error => {this.afficherMessage('', 'Email déjà utilisé !'); }
+    );
   }
 
   create() {

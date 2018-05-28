@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { IEmployees } from './iemployees';
 import { IPosting } from '../posting/iposting';
 import { IOrder } from '../orders/iorder';
+import { tap, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class EmployeeService {
@@ -23,8 +24,18 @@ export class EmployeeService {
     return this.http.get<IEmployees>(`${this.url}/${id}`) as Observable<IEmployees>;
   }
 
-  createEmployee(id): Observable<IEmployees> {
-    return this.http.get<IEmployees>(`${this.url}/${id}`) as Observable<IEmployees>;
+  createEmployee(employee: IEmployees): Observable<IEmployees> {
+    return this.http.post<IEmployees>(`${this.url}`, employee).pipe(tap(data => this.update$.next()));
+  }
+
+  updateEmployee(employee: IEmployees): Observable<IEmployees> {
+    return this.http
+      .put<IEmployees>(`${this.url}/${employee.id}`, employee)
+      .pipe(tap(data => this.update$.next()));
+  }
+
+  deleteEmployee(id) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 
   getEmployeePosting(id): Observable<IPosting> {

@@ -1,5 +1,6 @@
 <div class="nav-content">
   <button (click)="goHome()" mat-raised-button color="primary">Accueil</button>
+  <button (click)="viewOrders(employee.id)" mat-raised-button color="primary">Voir Commandes</button>
   <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
 </div>
 <div class="page-content">
@@ -13,42 +14,57 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form #EmployeeForm="ngForm">
+        <form #EmployeeForm="ngForm" (ngSubmit)="edit(employee)">
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Nom" name="EmployeeName" [(ngModel)]="employee.firstName">
+            <input matInput [readonly]="!edition" placeholder="Nom" name="EmployeeName" [(ngModel)]="employee.firstName">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Prenom" name="lastName" [(ngModel)]="employee.lastName">
+            <input matInput [readonly]="!edition" placeholder="Prenom" name="lastName" [(ngModel)]="employee.lastName">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Email" name="email" [(ngModel)]="employee.email">
+            <input matInput [readonly]="!edition" placeholder="Email" name="email" [(ngModel)]="employee.email">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Phone" name="phone" [(ngModel)]="employee.phone">
+            <input matInput [readonly]="!edition" placeholder="Phone" name="phone" [(ngModel)]="employee.phone">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="IdRh" name="idRh" [(ngModel)]="employee.idRh">
+            <input matInput [readonly]="!edition" placeholder="IdRh" name="idRh" [(ngModel)]="employee.idRh">
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Fonction" name="jobTitle" [(ngModel)]="employee.jobTitle">
+          <mat-form-field>
+            <mat-select [disabled]="!edition" placeholder=" Fonction : " name="jobTitle" [(ngModel)]="employee.jobTitle">
+              <mat-option *ngFor="let jobTitle of jobTitles" [value]="jobTitle.value">
+                {{ jobTitle.viewValue }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Genre" name="genre" [(ngModel)]="employee.gender">
+          <mat-form-field>
+            <mat-select [disabled]="!edition" placeholder=" Genre : " name="gender" [(ngModel)]="employee.gender">
+              <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                {{ gender.viewValue }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Grade" name="grade" [(ngModel)]="employee.grade">
+          <br>
+          <mat-form-field>
+            <mat-select [disabled]="!edition" placeholder=" Grade : " name="grade" [(ngModel)]="employee.grade">
+              <mat-option *ngFor="let grade of grades" [value]="grade.value">
+                {{ grade.viewValue }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
+          <br>
+          <button type="submit" *ngIf="edition" mat-raised-button color="primary" [disabled]="!EmployeeForm.valid">Modifier</button><br><br>
+          <button class="formButton" *ngIf="!edition" (click)="editMode()" mat-raised-button color="primary">Edition</button><br><br>
+          <button class="formButton"*ngIf="edition" (click)="viewMode()" mat-raised-button color="primary">Lecture seule</button><br><br>
+          <button class="formButton" (click)="delete()" mat-raised-button color="primary">Supprimer</button>
         </form>
-        <div class="nav-content">
-          <button (click)="viewOrders(employee.id)" mat-raised-button color="primary">Commandes</button>
-        </div>
       </mat-card-content>
     </mat-card>
   </div>
@@ -64,35 +80,35 @@
       <mat-card-content>
         <form #ManagerForm="ngForm">
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Nom" name="manager.firstName" [(ngModel)]="manager.firstName">
+            <input [readonly]="true" matInput placeholder="Nom" name="manager.firstName" [(ngModel)]="manager.firstName">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Prenom" name="manager.lastName" [(ngModel)]="manager.lastName">
+            <input [readonly]="true" matInput placeholder="Prenom" name="manager.lastName" [(ngModel)]="manager.lastName">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Email" name="manager.email" [(ngModel)]="manager.email">
+            <input [readonly]="true" matInput placeholder="Email" name="manager.email" [(ngModel)]="manager.email">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Phone" name="manager.phone" [(ngModel)]="manager.phone">
+            <input [readonly]="true" matInput placeholder="Phone" name="manager.phone" [(ngModel)]="manager.phone">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="IdRh" name="manager.idRh" [(ngModel)]="manager.idRh">
+            <input [readonly]="true" matInput placeholder="IdRh" name="manager.idRh" [(ngModel)]="manager.idRh">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Fonction" name="manager.jobTitle" [(ngModel)]="manager.jobTitle">
+            <input [readonly]="true" matInput placeholder="Fonction" name="manager.jobTitle" [(ngModel)]="manager.jobTitle">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Genre" name="manager.genre" [(ngModel)]="manager.gender">
+            <input [readonly]="true" matInput placeholder="Genre" name="manager.genre" [(ngModel)]="manager.gender">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Grade" name="manager.grade" [(ngModel)]="manager.grade">
+            <input [readonly]="true" matInput placeholder="Grade" name="manager.grade" [(ngModel)]="manager.grade">
           </mat-form-field>
         </form>
       </mat-card-content>
@@ -110,47 +126,47 @@
       <mat-card-content>
         <form #PostingForm="ngForm">
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Nom" name="PostingName" [(ngModel)]="posting.postingName">
+            <input [readonly]="true" matInput placeholder="Nom" name="PostingName" [(ngModel)]="posting.postingName">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Numéro" name="streetNumber" [(ngModel)]="posting.address.streetNumber">
+            <input [readonly]="true" matInput placeholder="Numéro" name="streetNumber" [(ngModel)]="posting.address.streetNumber">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Rue" name="streetName" [(ngModel)]="posting.address.streetName">
+            <input [readonly]="true" matInput placeholder="Rue" name="streetName" [(ngModel)]="posting.address.streetName">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Ligne 1" name="line1" [(ngModel)]="posting.address.line1">
+            <input [readonly]="true" matInput placeholder="Ligne 1" name="line1" [(ngModel)]="posting.address.line1">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Ligne 2" name="line2" [(ngModel)]="posting.address.line2">
+            <input [readonly]="true" matInput placeholder="Ligne 2" name="line2" [(ngModel)]="posting.address.line2">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Ligne 3" name="line3" [(ngModel)]="posting.address.line3">
+            <input [readonly]="true" matInput placeholder="Ligne 3" name="line3" [(ngModel)]="posting.address.line3">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Ville" name="city" [(ngModel)]="posting.address.city">
+            <input [readonly]="true" matInput placeholder="Ville" name="city" [(ngModel)]="posting.address.city">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
+            <input [readonly]="true" matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Pays" name="country" [(ngModel)]="posting.address.country">
+            <input [readonly]="true" matInput placeholder="Pays" name="country" [(ngModel)]="posting.address.country">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
+            <input [readonly]="true" matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
           </mat-form-field>
           <br>
           <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Téléphone" name="phone" [(ngModel)]="posting.address.phone">
+            <input [readonly]="true" matInput placeholder="Téléphone" name="phone" [(ngModel)]="posting.address.phone">
           </mat-form-field>
         </form>
       </mat-card-content>

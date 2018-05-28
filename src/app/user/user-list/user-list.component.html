@@ -25,7 +25,6 @@
       </mat-card-header>
       <mat-card-content>
         <form #userForm="ngForm" (ngSubmit)="createUser(user)">
-
           <mat-form-field class="inputFullWidth">
             <input matInput placeholder="Nom" name="userName" [(ngModel)]="user.userName">
           </mat-form-field>

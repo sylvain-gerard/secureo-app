@@ -11,11 +11,11 @@
     </div>
     <div>
       <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
-      <!--<button (click)="create()" mat-raised-button color="primary">Créer</button>-->
+      <button (click)="create()" mat-raised-button color="primary">Créer</button>
     </div>
   </div>
   <br>
-  <!-- Formulaire de création d'un utilisateur -->
+  <!-- Formulaire de création d'un EMPLOYE -->
   <div class="employee-content" *ngIf="creation">
     <mat-card>
       <mat-card-header>
@@ -24,7 +24,7 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form #EmployeeForm="ngForm">
+        <form #EmployeeForm="ngForm" (ngSubmit)="createEmployee(employee)">
 
           <mat-form-field class="inputFullWidth">
             <input matInput placeholder="Nom" name="EmployeeName" [(ngModel)]="employee.firstName">
@@ -46,16 +46,28 @@
             <input matInput placeholder="IdRh" name="idRh" [(ngModel)]="employee.idRh">
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Fonction" name="jobTitle" [(ngModel)]="employee.jobTitle">
+          <mat-form-field>
+            <mat-select placeholder=" Fonction : " name="jobTitle" [(ngModel)]="employee.jobTitle">
+              <mat-option *ngFor="let jobTitle of jobTitles" [value]="jobTitle.value">
+                {{ jobTitle.viewValue }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Genre" name="genre" [(ngModel)]="employee.gender">
+          <mat-form-field>
+            <mat-select placeholder=" Genre : " name="gender" [(ngModel)]="employee.gender">
+              <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                {{ gender.viewValue }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Grade" name="grade" [(ngModel)]="employee.grade">
+          <mat-form-field>
+            <mat-select placeholder=" Grade : " name="grade" [(ngModel)]="employee.grade">
+              <mat-option *ngFor="let grade of grades" [value]="grade.value">
+                {{ grade.viewValue }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br><!--
           <mat-form-field class="inputFullWidth">
@@ -70,10 +82,10 @@
     </mat-card>
   </div>
 
-  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+  <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event" *ngIf='!creation '>
   </mat-paginator>
 
-  <mat-table class="filtreTableEmployee" #table [dataSource]="dataSourceEmployee" matSort *ngIf='dataSourceEmployee'>
+  <mat-table class="filtreTableEmployee" #table [dataSource]="dataSourceEmployee" matSort *ngIf='dataSourceEmployee && !creation '>
 
     <!-- FirstName Column -->
     <ng-container matColumnDef="firstName">

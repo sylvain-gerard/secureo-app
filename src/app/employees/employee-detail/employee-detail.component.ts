@@ -23,7 +23,34 @@ export class EmployeeDetailComponent implements OnInit {
   orders$: Observable<IOrder[]>;
   private id: any;
   urlParam: any;
-  // creation = false;
+  edition = false;
+
+  jobTitles = [
+    {value: 'POSTMAN', viewValue: 'Facteur'},
+    {value: 'MAIL_AGENT', viewValue: 'Agent Courrier'},
+    {value: 'HANDLER', viewValue: 'Manutentionnaire'},
+    {value: 'DELIVERER', viewValue: 'Livreur'},
+    {value: 'MANAGER', viewValue: 'Manager'}
+  ];
+
+  genders = [
+    {value: 'M', viewValue: 'Homme'},
+    {value: 'F', viewValue: 'Femme'}
+  ];
+
+  grades = [
+    {value: 'I2', viewValue: '1.2'},
+    {value: 'I3', viewValue: '1.3'},
+    {value: 'II1', viewValue: '2.1'},
+    {value: 'II1', viewValue: '2.2'},
+    {value: 'II3', viewValue: '2.3'},
+    {value: 'III1', viewValue: '3.1'},
+    {value: 'III2', viewValue: '3.2'},
+    {value: 'III3', viewValue: '3.3'},
+    {value: 'GROUP_A', viewValue: 'Groupe A'},
+    {value: 'GROUP_B', viewValue: 'Groupe B'},
+    {value: 'GROUP_C', viewValue: 'Groupe C'}
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -55,16 +82,48 @@ export class EmployeeDetailComponent implements OnInit {
   goHome() {
     this.router.navigate(['']);
   }
-  /*
-  closeForm() {
-    this.creation = false;
+
+  editMode() {
+    this.edition = true;
   }
-  */
+
+  viewMode() {
+    this.edition = false;
+  }
+
   viewOrders(id) {
     this.orders$ = this.route.paramMap.switchMap((params: ParamMap) =>
       this.employeeService.getOrdersOfEmployee(params.get('id'))
     );
     this.router.navigate(['employee', id, 'orders']);
+  }
+
+  edit(employee) {
+    this.employee = employee;
+    console.log(this.employee);
+    this.employeeService.updateEmployee(this.employee).subscribe(
+      result => {
+        this.showMessage('Modification enregistrée !', '');
+      },
+      error => {
+        this.showMessage('', 'ERREUR lors de l\'édition.');
+      }
+    );
+  }
+
+  delete(id) {
+    window.alert(
+      'Attention ! Cette action supprimera cet employé du système. Continuer ?'
+    );
+    try {
+      this.employeeService
+        .deleteEmployee(this.urlParam.id)
+        .subscribe(response => console.log('deleted'));
+      this.showMessage('Suppression effectuée !', '');
+      this.goBackToList();
+    } catch {
+      this.showMessage('', 'ERREUR lors de la suppression.');
+    }
   }
 
   showMessage(message: string, erreur: string) {

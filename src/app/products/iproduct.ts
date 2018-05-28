@@ -13,5 +13,5 @@ export interface IProduct {
     disabled: boolean;
     category: ICategory;
     supplier: ISupplier;
-    added: false;
+    added: boolean;
   }

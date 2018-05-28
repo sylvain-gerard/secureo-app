@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CartState } from '../CartState';
 import { Subject } from 'rxjs/Subject';
 import { CartService } from '../../cart/cart.service';
+import { CartItem } from '../../cart/CartItem';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,11 +23,16 @@ export class ProductDetailComponent implements OnInit {
   product$: Observable<IProduct>;
   // private cart = new BehaviorSubject<any>(this.product$);
   products: IProduct[];
+  product: IProduct;
   private subscription: Subscription;
   private cartSubject = new Subject<CartState>();
   Cart = this.cartSubject.asObservable();
 
-  @Input() product: IProduct;
+  // CartItem
+  cartItem: CartItem;
+  cartItems: CartItem[];
+  itemsArray: CartItem[];
+  id: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,20 +46,26 @@ export class ProductDetailComponent implements OnInit {
     this.product$ = this.route.paramMap.switchMap((params: ParamMap) =>
       this.productService.getProduct(params.get('id'))
     );
-    this.subscription = this.productService.CartState.subscribe(
-      (state: CartState) => {
-        this.products = state.products;
-        console.log(
-          this.products,
-          'products[] in subscription in PRODCT-DETAIL component'
-        );
+
+    console.log(this.cartService.getCart());
+
+    if (this.cartService.getCart() !== null) {
+      this.itemsArray = JSON.parse(sessionStorage.getItem('cart'));
+
+      for (let i = 0; i < this.cartService.getCart().length; i++) {
+        this.route.params.subscribe(params => console.log(params)); // => un objet {id: ""}
+        // console.log(this.route.params.map(val => val.id)); // => AnonymousSubject
+        console.log(this.itemsArray[i].product.id); // => un number
+        /*if (this.itemsArray[i].product.id = this.route.params.map(id => id.json())) {
+          console.log('PRODUCT ALREADY ADDED !');
+          // console.log(this.itemsArray[i].product); // => AnonymousObjet
+          this.product$.subscribe(console.log);
+          // this.cartItem.product.added = true;
+        }*/
       }
-    );
+    }
   }
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+
 
   goBackToList() {
     this.router.navigate(['products']);
@@ -61,16 +73,20 @@ export class ProductDetailComponent implements OnInit {
 
   removeProduct(product) {
     product.added = false;
-    // this.cartService.removeFromCart(product.id);
-    this.productService.removeProduct(product.id);
-    sessionStorage.setItem('cart', JSON.stringify(this.products));
+    // CART SERVICE
+    this.cartService.removeFromCart(product.id);
+
+    // this.productService.removeProduct(product.id);
+    // sessionStorage.setItem('cart', JSON.stringify(this.products));
   }
 
   addProduct(product) {
     product.added = true;
-    // this.cartService.addToCart(product);
-    this.productService.addProduct(product);
-    sessionStorage.setItem('cart', JSON.stringify(this.products));
+    // CART SERVICE
+    this.cartService.addToCart(product);
+
+    // this.productService.addProduct(product);
+    // sessionStorage.setItem('cart', JSON.stringify(this.products));
   }
 
 }

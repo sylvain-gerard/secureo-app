@@ -1,4 +1,3 @@
-
 <div class="user-content" *ngIf="user$ | async as user">
   <mat-card>
     <mat-card-header>
@@ -10,11 +9,11 @@
       <form #userForm="ngForm" (ngSubmit)="edit(user)">
 
         <mat-form-field class="inputFullWidth">
-          <input matInput placeholder="Nom" name="userName" [(ngModel)]="user.userName">
+          <input matInput [readonly]="!edition" placeholder="Nom" name="userName" [(ngModel)]="user.userName">
         </mat-form-field>
         <br>
         <mat-form-field class="inputFullWidth">
-          <input matInput placeholder="Email" name="email" [(ngModel)]="user.email">
+          <input matInput [readonly]="!edition" placeholder="Email" name="email" [(ngModel)]="user.email">
         </mat-form-field>
         <!--
         <br>
@@ -24,23 +23,26 @@
         -->
         <br>
         <mat-form-field>
-          <mat-select placeholder=" Rôle : {{user.role.name}}"  [(ngModel)]="user.role" name="role">
-              <mat-option *ngFor="let role of roles" [value]="role.value">
-                  {{ role.viewValue }}
-                </mat-option>
+          <mat-select [disabled]="!edition" placeholder=" Rôle : {{user.role.name}}" [(ngModel)]="user.role" name="role">
+            <mat-option *ngFor="let role of roles" [value]="role.value">
+              {{ role.viewValue }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
         <p>Actif</p>
-          <mat-checkbox name="active" [(ngModel)]="user.active"></mat-checkbox>
+        <mat-checkbox [disabled]="!edition" name="active" [(ngModel)]="user.active"></mat-checkbox>
         <br>
-        <br>       
-        <button class="formButton" type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Modifier</button>
-        
+        <br>
+        <button *ngIf="edition" class="formButton" type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Modifier</button>
+
       </form>
-        <button class="formButton" (click)="deleteUser()" mat-raised-button color="primary">Supprimer</button>
-        <button class="formButton" (click)="goBackToList()" mat-raised-button color="primary">Retour</button>    
+      <br>
+      <button *ngIf="!edition" class="formButton" (click)="editMode()" mat-raised-button color="primary">Edition</button>
+      <button *ngIf="edition" class="formButton" (click)="viewMode()" mat-raised-button color="primary">Lecture seule</button>
+      <br><br>
+      <button class="formButton" (click)="deleteUser()" mat-raised-button color="primary">Supprimer</button>
+      <br><br>
+      <button class="formButton" (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
     </mat-card-content>
   </mat-card>
 </div>
-
-
