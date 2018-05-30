@@ -110,6 +110,10 @@ export class ProductsComponent implements AfterViewInit {
     this.router.navigate(['/products', this.product.id]);
   }
 
+  backTohome() {
+    this.router.navigate(['']);
+  }
+
   refreshTab() {
     this.productService.getProducts().subscribe((data: IProduct[]) => {
       this.dataSourceProduct = new MatTableDataSource(data);

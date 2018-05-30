@@ -26,4 +26,8 @@ export class PostingService {
     return this.http.get<IEmployees[]>(`${this.url}/${id}/employees`) as Observable<IEmployees[]>;
   }
 
+  getManagersOfPosting(id): Observable<IEmployees[]> {
+    return this.http.get<IEmployees[]>(`${this.url}/${id}/managers`) as Observable<IEmployees[]>;
+  }
+
 }

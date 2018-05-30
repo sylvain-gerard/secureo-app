@@ -105,6 +105,10 @@ export class SupplierProductsComponent implements AfterViewInit {
     this.router.navigate(['/products', this.product.id]);
   }
 
+  goBackToSupplier() {
+    this.router.navigate(['suppliers', this.urlParam.id]);
+  }
+
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }

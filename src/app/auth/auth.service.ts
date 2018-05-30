@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IUser } from '../user/iuser';
+import { LogginUser } from '../user/LogginUser';
+import { UserService } from '../user/user.service';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthService {
@@ -9,35 +12,54 @@ export class AuthService {
 
   get isLoggedIn() {
     if (sessionStorage.getItem('loggedIn')) {
-     this.loggedIn.next(true);
-     console.log(sessionStorage.getItem('loggedIn'));
+      this.loggedIn.next(true);
+      console.log(sessionStorage.getItem('loggedIn'));
     } else {
-     this.loggedIn.next(false);
-     console.log(sessionStorage.getItem('loggedIn'));
+      this.loggedIn.next(false);
+      console.log(sessionStorage.getItem('loggedIn'));
     }
     return this.loggedIn.asObservable();
   }
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private userService: UserService
+  ) {}
 
-  login(user: IUser) {
-    if (user.userName !== '' && user.password !== '') { // {3}
-
-      this.loggedIn.next(true);
-      sessionStorage.setItem('loggedIn', JSON.stringify(true));
-      this.router.navigate(['/']);
-
+  login(loggedUser: LogginUser) {
+    console.log('loggedUser in login() AUTHSERVICE', loggedUser);
+    if (loggedUser.email !== '' && loggedUser.password !== '') {
+      this.userService.postUserInfos(loggedUser).subscribe(
+        result => {
+          console.log(result);
+          console.log('Auth Service accept ', loggedUser.email);
+          this.loggedIn.next(true);
+          sessionStorage.setItem('loggedIn', JSON.stringify(true));
+          this.router.navigate(['/']);
+          this.showMessage('Utilisateur accepté !', '');
+        },
+        error => {
+          console.log(error);
+          console.log('Auth Service refuse ', loggedUser.email);
+          this.loggedIn.next(false);
+          sessionStorage.setItem('loggedIn', JSON.stringify(false)); // {4}
+          this.router.navigate(['/login']);
+          this.showMessage('', 'Utilisateur rejeté !');
+        }
+      );
     }
   }
 
   logout() {
-    // this.loggedIn = new BehaviorSubject(false);
-    sessionStorage.setItem('loggedIn', JSON.stringify(false));
-    // sessionStorage.removeItem('loggedIn');                            // {4}
     this.loggedIn.next(false);
+    sessionStorage.setItem('loggedIn', JSON.stringify(false)); // {4}
     this.router.navigate(['/login']);
   }
 
+  showMessage(message: string, erreur: string) {
+    this.snackBar.open(message, erreur, {
+      duration: 3000
+    });
+  }
 }

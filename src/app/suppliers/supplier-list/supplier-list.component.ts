@@ -94,5 +94,9 @@ export class SupplierListComponent implements AfterViewInit {
     this.router.navigate(['/suppliers', this.supplier.id]);
   }
 
+  backTohome() {
+    this.router.navigate(['']);
+  }
+
 
 }

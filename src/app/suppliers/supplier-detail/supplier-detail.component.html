@@ -1,5 +1,9 @@
 <div class="supplier-content" *ngIf="supplier$ | async as supplier">
   <h2>Détails du fournisseur : {{ supplier.supplierName }}</h2>
+  <div>
+      <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+      <button (click)="showProducts(supplier.id)" mat-raised-button color="primary">Produits</button>
+  </div>
   <mat-card>
     <mat-card-content>
       <form #supplierForm="ngForm">
@@ -50,9 +54,6 @@
         <mat-form-field class="inputFullWidth">
           <input matInput placeholder="Téléphone" name="phone" [(ngModel)]="supplier.address.phone">
         </mat-form-field>
-
-        <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
-        <button (click)="showProducts(supplier.id)" mat-raised-button color="primary">Produits</button>
 
       </form>
     </mat-card-content>

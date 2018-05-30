@@ -1,14 +1,17 @@
 <div class="table-container">
   <div class="filtreTableProduit" fxLayoutAlign="space-between">
-      <div>
-        <mat-icon>search</mat-icon>
-        <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
-        </mat-form-field>
-      </div>
-      <div>
-        <h1 class="tab-name">Produits</h1>
-      </div>
+    <div>
+      <mat-icon>search</mat-icon>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+      </mat-form-field>
+    </div>
+    <div>
+      <h1 class="tab-name">Produits</h1>
+    </div>
+    <div>
+      <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
+    </div>
   </div>
 
   <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
@@ -74,10 +77,8 @@
     </ng-container>
     -->
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" 
-    [ngClass]="{'highlight': selectedRowIndex == row.id}" 
-    (mouseover)="highlight(row)"
-    (click)="goToDetail(row)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
+      (click)="goToDetail(row)"></mat-row>
   </mat-table>
 
   <div *ngIf="pageEvent">

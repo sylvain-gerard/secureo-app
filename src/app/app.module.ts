@@ -34,6 +34,7 @@ import { PostingsModule } from './posting/postings.module';
 import { PostingsRoutingModule } from './posting/postings-routing.module';
 
 import { CartModule } from './cart/cart.module';
+import { Page404Component } from './page404/page404.component';
 
 
 
@@ -41,7 +42,8 @@ import { CartModule } from './cart/cart.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

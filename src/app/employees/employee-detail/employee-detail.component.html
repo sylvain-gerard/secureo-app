@@ -60,13 +60,23 @@
             </mat-select>
           </mat-form-field>
           <br>
-          <button type="submit" *ngIf="edition" mat-raised-button color="primary" [disabled]="!EmployeeForm.valid">Modifier</button><br><br>
-          <button class="formButton" *ngIf="!edition" (click)="editMode()" mat-raised-button color="primary">Edition</button><br><br>
-          <button class="formButton"*ngIf="edition" (click)="viewMode()" mat-raised-button color="primary">Lecture seule</button><br><br>
-          <button class="formButton" (click)="delete()" mat-raised-button color="primary">Supprimer</button>
+          <button type="submit" *ngIf="edition" mat-raised-button color="primary" [disabled]="!EmployeeForm.valid">Modifier</button>
+          <br>
+          <br>
         </form>
+        <button class="formButton" *ngIf="!edition" (click)="editMode()" mat-raised-button color="primary">Edition</button>
+        <br>
+        <br>
+        <button class="formButton" *ngIf="edition" (click)="viewMode()" mat-raised-button color="primary">Lecture seule</button>
+        <br>
+        <br>
+        <button class="formButton" (click)="delete()" mat-raised-button color="primary">Supprimer</button>
       </mat-card-content>
     </mat-card>
+  </div>
+  <!-- Affecter un manager -->
+  <div class="employee-content" *ngIf="!manager && posting">
+    <p>MANAGER ADD</p>
   </div>
   <div class="employee-content" *ngIf="manager$ | async as manager">
     <!-- Manager de l'employé -->
@@ -114,8 +124,32 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="posting-content" *ngIf="posting$ | async as posting">
-    <!-- Affectation de 'employé -->
+  <!-- choisir une affectation
+  <div class="employee-content" *ngIf="!posting && postingList | async as postings">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Choisir une affectation :</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #PostingListForm="ngForm" (ngSubmit)="setPosting(posting)">
+          <mat-form-field>
+            <mat-select placeholder=" Affectation : " name="postingList" [(ngModel)]="postings.postingName">
+              <mat-option *ngFor="let posting of postings" [value]="posting.postingName">
+                {{ posting.postingName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <button class="formButton" type="submit" mat-raised-button color="primary">Affecter</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  -->
+  <div class="employee-content" *ngIf="posting$ | async as posting">
+    <!-- Affectation de l'employé -->
     <mat-card>
       <mat-card-header>
         <mat-card-title>

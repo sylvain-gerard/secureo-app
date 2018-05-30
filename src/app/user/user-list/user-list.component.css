@@ -1,0 +1,10 @@
+.creation-form {
+  padding: 20px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.inputFullWidth {
+  width: 100%;
+}
+

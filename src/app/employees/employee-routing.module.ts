@@ -27,11 +27,10 @@ const employeeRoutes: Routes = [
     component: OrdersDetailComponent,
     canActivate: [AuthGuard]
   }
-
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(employeeRoutes)],
   exports: [RouterModule]
 })
-export class EmployeeRoutingModule { }
+export class EmployeeRoutingModule {}

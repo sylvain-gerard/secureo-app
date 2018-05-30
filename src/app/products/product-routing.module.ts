@@ -4,6 +4,7 @@ import { AuthGuard } from './../auth/auth.guard';
 
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { Page404Component } from '../page404/page404.component';
 
 const productRoutes: Routes = [
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },

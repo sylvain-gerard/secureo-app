@@ -7,6 +7,7 @@ import { EmployeeService } from './employee.service';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 import { EmployeeOrdersComponent } from './employee-orders/employee-orders.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { EmployeeOrdersComponent } from './employee-orders/employee-orders.compo
     CommonModule,
     FormsModule,
     MaterialModule,
-    EmployeeRoutingModule
+    EmployeeRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     EmployeeListComponent,

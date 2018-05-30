@@ -16,6 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IEmployees } from '../iemployees';
 import { IPosting } from '../../posting/iposting';
 import { EmployeeService } from '../employee.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-list',
@@ -23,6 +24,7 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
+  formEmployee: FormGroup;
   employee: IEmployees;
   // posting: IPosting;
   selectedRowIndex = -1;
@@ -93,6 +95,7 @@ export class EmployeeListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
@@ -123,6 +126,12 @@ export class EmployeeListComponent implements OnInit {
     };
     this.refreshTab();
     this.employeeService.update$.subscribe(() => this.refreshTab());
+    this.formEmployee = this.fb.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', Validators.required],
+      role: ['', Validators.required]
+    });
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {

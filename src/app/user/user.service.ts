@@ -5,6 +5,7 @@ import { IUser } from './iuser';
 import { Subject } from 'rxjs/Subject';
 import { environment } from '../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
+import { LogginUser } from './LogginUser';
 
 @Injectable()
 export class UserService {
@@ -16,7 +17,8 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.url}`) as Observable<IUser[]>;
+    return this.http
+      .get<IUser[]>(`${this.url}`) as Observable<IUser[]>;
   }
 
   getUser(id): Observable<IUser> {
@@ -30,10 +32,18 @@ export class UserService {
   }
 
   createUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${this.url}`, user).pipe(tap(data => this.update$.next()));
+    return this.http
+      .post<IUser>(`${this.url}`, user)
+      .pipe(tap(data => this.update$.next()));
   }
 
   deleteUser(id) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  postUserInfos(loggedUser: LogginUser) {
+    console.log('IN SERVICE');
+    console.log(loggedUser);
+    return this.http.post<LogginUser>(`${this.url}/loggin`, loggedUser);
   }
 }

@@ -74,7 +74,9 @@ export class UserDetailComponent implements OnInit {
         .deleteUser(this.urlParam.id)
         .subscribe(response => console.log('deleted'));
       this.showMessage('Suppression effectuée !', '');
-      this.goBackToList();
+      this.router.navigate([''], {
+        relativeTo: this.route
+      });
     } catch {
       this.showMessage('', 'ERREUR lors de la suppression.');
     }

@@ -15,12 +15,6 @@
         <mat-form-field class="inputFullWidth">
           <input matInput [readonly]="!edition" placeholder="Email" name="email" [(ngModel)]="user.email">
         </mat-form-field>
-        <!--
-        <br>
-        <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Rôle" name="role" [(ngModel)]="user.role.name">
-        </mat-form-field>
-        -->
         <br>
         <mat-form-field>
           <mat-select [disabled]="!edition" placeholder=" Rôle : {{user.role.name}}" [(ngModel)]="user.role" name="role">

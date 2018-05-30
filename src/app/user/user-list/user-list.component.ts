@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IUser } from './../iuser';
 import { IRole } from '../irole';
@@ -13,10 +12,11 @@ import {
   MatSelectModule,
   MatCheckboxModule,
   PageEvent,
-  MatPaginator,
+  MatPaginator
 } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-list',
@@ -24,6 +24,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
+  formUser: FormGroup;
 
   user: IUser;
   role: IRole;
@@ -33,9 +34,10 @@ export class UserListComponent implements OnInit {
   user$: Observable<IUser>;
   creation = false;
 
+  dataSourceUser = new MatTableDataSource();
+
   displayedColumns = ['userName', 'email', 'active', 'role'];
   formColumns = ['nom', 'mail', 'actif', 'rôle'];
-  dataSourceUser = new MatTableDataSource();
 
   // MatPaginator Inputs
   length = 100;
@@ -46,20 +48,21 @@ export class UserListComponent implements OnInit {
   pageEvent: PageEvent;
 
   roles = [
-    {value: {id: 3, name: 'EMPLOYEE' }, viewValue: 'Agent'},
-    {value: {id: 2, name: 'MANAGER' }, viewValue: 'Manager'},
-    {value: {id: 1, name: 'ADMIN' }, viewValue: 'Administrateur'}
+    { value: { id: 3, name: 'EMPLOYEE' }, viewValue: 'Agent' },
+    { value: { id: 2, name: 'MANAGER' }, viewValue: 'Manager' },
+    { value: { id: 1, name: 'ADMIN' }, viewValue: 'Administrateur' }
   ];
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private userService: UserService
-  ) { }
+  ) {}
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -78,6 +81,13 @@ export class UserListComponent implements OnInit {
     };
     this.refreshTab();
     this.userService.update$.subscribe(() => this.refreshTab());
+    this.formUser = this.fb.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', Validators.required],
+      role: ['', Validators.required],
+      active: ['true']
+    });
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -90,6 +100,7 @@ export class UserListComponent implements OnInit {
       this.dataSourceUser.sort = this.sort;
       this.dataSourceUser.paginator = this.paginator;
     });
+    console.log('REFRESH TAB');
   }
 
   highlight(row) {
@@ -101,8 +112,8 @@ export class UserListComponent implements OnInit {
 
   afficherMessage(message: string, erreur: string) {
     this.snackBar.open(message, erreur, {
-      duration: 2000,
-       });
+      duration: 2000
+    });
   }
 
   goToDetail(row) {
@@ -115,13 +126,25 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  createUser(user) {
+  createUser() {
+    console.log(this.formUser);
+    this.user = {
+      id: 0,
+      userName: this.formUser.value.userName,
+      password: this.formUser.value.password,
+      email: this.formUser.value.email,
+      active: this.formUser.value.active,
+      role: this.formUser.value.role
+    };
     console.log(this.user);
     this.userService.createUser(this.user).subscribe(
-      result => {this.afficherMessage('Création effectuée', ''); },
-     error => {this.afficherMessage('', 'Email déjà utilisé !'); }
+      result => {
+        this.afficherMessage('Création effectuée', '');
+      },
+      error => {
+        this.afficherMessage('', 'Requête invalide ou email déjà utilisé !');
+      }
     );
-
   }
 
   create() {
@@ -144,4 +167,3 @@ export class UserListComponent implements OnInit {
     };
   }
 }
-
