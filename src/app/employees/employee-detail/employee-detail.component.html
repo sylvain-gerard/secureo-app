@@ -1,6 +1,6 @@
 <div class="nav-content">
   <button (click)="goHome()" mat-raised-button color="primary">Accueil</button>
-  <button (click)="viewOrders(employee.id)" mat-raised-button color="primary">Voir Commandes</button>
+  
   <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
 </div>
 <div class="page-content">
@@ -68,6 +68,9 @@
         <br>
         <br>
         <button class="formButton" *ngIf="edition" (click)="viewMode()" mat-raised-button color="primary">Lecture seule</button>
+        <br>
+        <br>
+        <button (click)="viewOrders(employee.id)" mat-raised-button color="primary">Voir Commandes</button>
         <br>
         <br>
         <button class="formButton" (click)="delete()" mat-raised-button color="primary">Supprimer</button>
