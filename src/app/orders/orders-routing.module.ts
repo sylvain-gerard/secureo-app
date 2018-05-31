@@ -15,6 +15,11 @@ const orderRoutes: Routes = [
     path: 'orders/:id',
     component: OrdersDetailComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'orders/:id/items',
+    component: OrdersDetailComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

@@ -8,6 +8,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 import { EmployeeOrdersComponent } from './employee-orders/employee-orders.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OrdersRoutingModule } from '../orders/orders-routing.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MaterialModule,
     EmployeeRoutingModule,
+    OrdersRoutingModule,
     ReactiveFormsModule
   ],
   declarations: [

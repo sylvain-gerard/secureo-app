@@ -21,11 +21,6 @@ const employeeRoutes: Routes = [
     path: 'employee/:id/orders',
     component: EmployeeOrdersComponent,
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'orders/:id/items',
-    component: OrdersDetailComponent,
-    canActivate: [AuthGuard]
   }
 ];
 
