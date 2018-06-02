@@ -17,7 +17,8 @@ export class ProductService {
   product: IProduct;
   CartState = this.cartSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(`${this.url}`) as Observable<IProduct[]>;

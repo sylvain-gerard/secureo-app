@@ -31,11 +31,12 @@ export class AuthService {
     console.log('loggedUser in login() AUTHSERVICE', loggedUser);
     if (loggedUser.email !== '' && loggedUser.password !== '') {
       this.userService.postUserInfos(loggedUser).subscribe(
-        result => {
-          console.log(result);
+        user => {
+          console.log('USER FOUND BY AUTH', user);
           console.log('Auth Service accept ', loggedUser.email);
           this.loggedIn.next(true);
           sessionStorage.setItem('loggedIn', JSON.stringify(true));
+          sessionStorage.setItem('curentUser', JSON.stringify(user));
           this.router.navigate(['/']);
           this.showMessage('Utilisateur accepté !', '');
         },
@@ -54,6 +55,8 @@ export class AuthService {
   logout() {
     this.loggedIn.next(false);
     sessionStorage.setItem('loggedIn', JSON.stringify(false)); // {4}
+    sessionStorage.removeItem('curentUser');
+    sessionStorage.removeItem('cart');
     this.router.navigate(['/login']);
   }
 

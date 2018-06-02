@@ -11,6 +11,7 @@ import { CartService } from '../cart.service';
 export class CartComponent implements OnInit {
   cart: IProduct[] = [];
   items: CartItem[] = [];
+  item: CartItem;
   selectedRowIndex = -1;
   product: IProduct;
   id: number;
@@ -23,16 +24,29 @@ export class CartComponent implements OnInit {
     console.log('ITEMS IN SESSIONSTORAGE', this.items);
   }
 
+  deleteItem(item) {
+    item.product.added = false;
+    const id = this.items.indexOf(item);
+    console.log(id);
+    console.log(item);
+    console.log(item.product.id);
+    this.cartService.removeFromCart(item.product.id);
+    this.ngOnInit();
+  }
+
   quantityPlus(item, id) {
     console.log('ITEM IN COMPONENT (+)', item);
     console.log('ITEM ID IN COMPONENT (+)', id);
     this.cartService.plusItem(item, id);
+    // item.quantity++;
   }
+
 
   quantityMinus(item, id) {
     console.log('ITEM IN COMPONENT (-)', item);
     console.log('ITEM ID IN COMPONENT (-)', id);
     this.cartService.minusItem(item, id);
+    // item.quantity--;
   }
 
 }

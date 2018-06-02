@@ -11,7 +11,7 @@
       <th>Taille</th>
       <th>Taille Desc.</th>
       <th>Fournisseurs</th>
-      <th>Quantité</th>
+      <th>Actions</th>
 
       <tr *ngFor="let item of items">
         <td>{{item.product.productName}}</td>
@@ -21,8 +21,11 @@
         <td>{{item.product.sizeDescription}}</td>
         <td>{{item.product.supplier.supplierName}}</td>
         <td>
-          <button (click)="quantityPlus(this.item, items.indexOf(this.item))"> + </button> {{ item.quantity }}
-          <button *ngIf="item.quantity > 1" (click)="quantityMinus(this.item, items.indexOf(this.item))"> - </button>
+          <button mat-button (click)="deleteItem(item)"><mat-icon>remove_shopping_cart</mat-icon></button>
+          <!--
+          <button (click)="quantityPlus(item, items.indexOf(item))"> + </button> {{ item.quantity }}
+          <button *ngIf="item.quantity > 1" (click)="quantityMinus(item, items.indexOf(item))"> - </button>
+          -->
         </td>
 
       </tr>

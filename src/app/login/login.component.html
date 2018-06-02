@@ -2,7 +2,7 @@
     <mat-card>
       <mat-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <p>Please login to continue</p>
+          <p>Veuillez vous enregistrer :</p>
           <mat-form-field class="full-width-input">
             <input matInput placeholder="Email" 
                    formControlName="email" type="email" email="true" required>
@@ -11,7 +11,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field class="full-width-input">
-            <input matInput type="password" placeholder="Password" 
+            <input matInput type="password" placeholder="Mot de passe" 
                    formControlName="password" required>
             <mat-error *ngIf="isFieldInvalid('password')">
               Veuillez renseigner votre mot de passe
