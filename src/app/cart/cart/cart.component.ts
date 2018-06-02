@@ -9,7 +9,7 @@ import { CartService } from '../cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cart: IProduct[] = [];
+  // cart: IProduct[] = [];
   items: CartItem[] = [];
   item: CartItem;
   selectedRowIndex = -1;

@@ -52,7 +52,7 @@ export class CartService {
 
   plusItem(cartItem, id) {
     console.log('Item input in service (+)', cartItem); // la quantity est déjà incrémentée pour le produit pas pour le cartItem
-    this.cart = this.cart.filter(item => id === id); // => ne supprime pas l'item...
+    this.cart = this.cart.filter(cart => cart.product.id !== id); // => ne supprime pas l'item...
     console.log('CART AFTER FILTER', this.cart); // quantity updated mais duplique le cartItem (ancien + nouveau)
     cartItem.quantity++;
     cartItem.totalPrice = cartItem.product.productPrice * cartItem.quantity;
