@@ -74,6 +74,7 @@ export class SupplierProductsComponent implements AfterViewInit {
       productPrice: 0,
       size: '',
       sizeDescription: '',
+      imageUrl: '',
       disabled: false,
       category: null,
       supplier: null,

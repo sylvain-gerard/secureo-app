@@ -33,6 +33,7 @@ export class ProductDetailComponent implements OnInit {
   cartItems: CartItem[];
   itemsArray: CartItem[];
   id: number;
+  index: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,25 +47,16 @@ export class ProductDetailComponent implements OnInit {
     this.product$ = this.route.paramMap.switchMap((params: ParamMap) =>
       this.productService.getProduct(params.get('id'))
     );
+
     if (sessionStorage.getItem('cart') == null) {
       this.cartItems = [];
       sessionStorage.setItem('cart', JSON.stringify(this.cartItems));
+      console.log(this.cartItems);
     }
 
     if (this.cartService.getCart() !== null) {
-      this.itemsArray = JSON.parse(sessionStorage.getItem('cart'));
-
-      for (let i = 0; i < this.cartService.getCart().length; i++) {
-        this.route.params.subscribe(params => console.log(params)); // => un objet {id: ""}
-        // console.log(this.route.params.map(val => val.id)); // => AnonymousSubject
-        // console.log(this.itemsArray[i].product.id); // => un number
-        /*if (this.itemsArray[i].product.id = this.route.params.map(id => id.json())) {
-          console.log('PRODUCT ALREADY ADDED !');
-          // console.log(this.itemsArray[i].product); // => AnonymousObjet
-          this.product$.subscribe(console.log);
-          // this.cartItem.product.added = true;
-        }*/
-      }
+      this.cartItems = JSON.parse(sessionStorage.getItem('cart'));
+      console.log(this.cartItems);
     }
   }
 

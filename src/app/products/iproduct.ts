@@ -11,6 +11,7 @@ export interface IProduct {
     sizeDescription: string;
     productPrice: number;
     disabled: boolean;
+    imageUrl: string;
     category: ICategory;
     supplier: ISupplier;
     added: boolean;
