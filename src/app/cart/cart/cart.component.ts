@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     console.log('CART COMPONENT INIT');
     this.items = this.cartService.getCart();
-    console.log('ITEMS IN SESSIONSTORAGE', this.items);
+    console.log('getCart() :', this.items);
   }
 
   deleteItem(item) {

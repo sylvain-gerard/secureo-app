@@ -68,7 +68,6 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-
   goBackToList() {
     this.router.navigate(['products']);
   }

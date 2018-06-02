@@ -40,9 +40,9 @@ export class CartService {
     console.log('CART AFTER ADD', this.cart);
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
   }
-  // Pétée de chez pétée ..... supprime tout !!!
+
   removeFromCart(id: number) {
-    console.log(id); // => id de l'item dans le cart
+    console.log(id);
     this.cart = JSON.parse(sessionStorage.getItem('cart'));
     console.log('CART IN SERVICE', this.cart);
     this.cart = this.cart.filter(cart => cart.product.id !== id);
