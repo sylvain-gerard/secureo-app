@@ -6,7 +6,7 @@
       </button>
     </div>
     <div>
-      <button mat-button (click)="goHome()"><mat-icon>home</mat-icon> SECUREO</button>
+      <button mat-button (click)="goHome()" *ngIf="isLoggedIn$ | async"><mat-icon>home</mat-icon> SECUREO</button>
     </div>
     <div>
       <button mat-button (click)="viewCart()" *ngIf="isLoggedIn$ | async">
