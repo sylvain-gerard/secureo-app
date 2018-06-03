@@ -163,10 +163,10 @@ export class EmployeeListComponent implements OnInit {
     console.log('EMPLOYEE INPUT', this.employee);
     this.employeeService.createEmployee(this.employee).subscribe(
       result => {
-        this.afficherMessage('Création effectuée', '');
+        this.showMessage('Création effectuée', '');
       },
       error => {
-        this.afficherMessage('', 'Création en echec !');
+        this.showMessage('', 'Création en echec !');
       }
     );
   }
@@ -178,8 +178,8 @@ export class EmployeeListComponent implements OnInit {
   createEmpployee(employee) {
     console.log(this.employee);
     this.employeeService.createEmployee(employee).subscribe(
-      result => {this.afficherMessage('Création effectuée', ''); },
-     error => {this.afficherMessage('', 'Email déjà utilisé !'); }
+      result => {this.showMessage('Création effectuée', ''); },
+     error => {this.showMessage('', 'Email déjà utilisé !'); }
     );
   }
 
@@ -192,7 +192,7 @@ export class EmployeeListComponent implements OnInit {
     this.creation = false;
   }
 
-  afficherMessage(message: string, erreur: string) {
+  showMessage(message: string, erreur: string) {
     this.snackBar.open(message, erreur, {
       duration: 2000
     });

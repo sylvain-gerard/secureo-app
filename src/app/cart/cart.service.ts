@@ -2,30 +2,45 @@ import { Injectable, Input } from '@angular/core';
 import { IProduct } from '../products/iproduct';
 // TO USE ?
 
-
 import { CartState } from '../products/CartState';
 
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CartItem } from './CartItem';
+import { OrderService } from '../orders/order.service';
+import { IOrder } from '../orders/iorder';
+import { IUser } from '../user/iuser';
+import { EmployeeService } from '../employees/employee.service';
+import { IEmployees } from '../employees/iemployees';
+import { Observable } from 'rxjs/Observable';
+import { IOrderItem } from '../orders/IOrderItem';
 
 @Injectable()
 export class CartService {
   product: IProduct;
   products: IProduct[] = [];
   id: number;
+  order: IOrder;
+  item: IOrderItem;
+  user: IUser;
+  employee$: Observable<IEmployees>;
+  employee: IEmployees;
 
   // CartItem
   cartItem: CartItem;
   cart: CartItem[] = [];
 
-  constructor() {}
+  constructor(
+    private orderService: OrderService,
+    private employeeService: EmployeeService
+  ) {}
 
   getCart(): CartItem[] {
     return JSON.parse(sessionStorage.getItem('cart'));
   }
 
-  addToCart(product) { // BUG efface le cart du storage puis rajoute le produit détaillé
+  addToCart(product) {
+    // BUG efface le cart du storage puis rajoute le produit détaillé
     this.cart = JSON.parse(sessionStorage.getItem('cart'));
     console.log('CART IN SERVICE', this.cart);
     console.log('PRODUCT input in service', product);
@@ -33,7 +48,7 @@ export class CartService {
       added: true,
       product: product,
       quantity: 1,
-      totalPrice: product.productPrice,
+      totalPrice: product.productPrice
     };
     this.cartItem.totalPrice = product.productPrice * this.cartItem.quantity;
     this.cart.push(this.cartItem);
@@ -48,6 +63,65 @@ export class CartService {
     this.cart = this.cart.filter(cart => cart.product.id !== id);
     console.log('CART AFTER RM', this.cart);
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+
+  checkout() {
+    // get the employee
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    console.log(this.user.email);
+    this.employee = JSON.parse(sessionStorage.getItem('employee'));
+    console.log(this.employee);
+    // employee found
+    this.order = {
+      id: 0,
+      createdOn: null,
+      shipped: null,
+      total: 0,
+      status: '',
+      employee: null
+    };
+    this.order.createdOn = new Date();
+    this.order.shipped = new Date(0);
+    this.order.status = 'CREATED';
+    this.order.employee = this.employee;
+
+    this.cart = this.getCart();
+    console.log('CART IN CHECKOUT()', this.cart);
+    console.log(this.order);
+    // iterate items in cart
+    for ( let i = 0; i < this.cart.length; i++) {
+      console.log(this.cart[i]);
+      this.cartItem = this.cart[i];
+      this.order.total += this.cart[i].totalPrice;
+      console.log(this.order.total);
+    }
+    // order ready to fetch
+    console.log(this.order);
+    this.orderService.createOrder(this.order).subscribe(
+      result => console.log('success') ,
+     error => console.log('failure')
+    );
+
+    this.item = {
+      id: 0,
+      quantity: 0,
+      totalPrice: 0,
+      order: this.order, // ça pète ici car order.id = 0
+      product: this.product
+    };
+
+    for ( let i = 0; i < this.cart.length; i++) {
+
+      this.item.product = this.cart[i].product;
+      this.item.quantity = this.cart[i].quantity;
+      this.item.totalPrice = this.cart[i].totalPrice;
+
+      this.orderService.createOrderItem(this.item).subscribe(
+        result => console.log('success') ,
+       error => console.log('failure')
+      );
+    }
+
   }
 
   plusItem(cartItem, id) {
@@ -70,6 +144,5 @@ export class CartService {
     console.log('TOTAL PRICE UPDATED (-)', cartItem.totalPrice);
     console.log('CART UPDATED AFTER (-)', this.cart);
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
-
   }
 }

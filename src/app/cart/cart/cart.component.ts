@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../products/iproduct';
 import { CartItem } from '../CartItem';
 import { CartService } from '../cart.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { IOrder } from '../../orders/iorder';
 
 @Component({
   selector: 'app-cart',
@@ -15,13 +17,26 @@ export class CartComponent implements OnInit {
   selectedRowIndex = -1;
   product: IProduct;
   id: number;
+  order: IOrder;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     console.log('CART COMPONENT INIT');
     this.items = this.cartService.getCart();
     console.log('getCart() :', this.items);
+    this.order = {
+      id: 0,
+      createdOn: null,
+      shipped: null,
+      total: 0,
+      status: '',
+      employee: null
+    };
   }
 
   deleteItem(item) {
@@ -34,6 +49,14 @@ export class CartComponent implements OnInit {
     this.ngOnInit();
   }
 
+  checkoutCart() {
+    this.cartService.checkout();
+  }
+
+  backToProducts() {
+    this.router.navigate(['products']);
+  }
+
   quantityPlus(item, id) {
     console.log('ITEM IN COMPONENT (+)', item);
     console.log('ITEM ID IN COMPONENT (+)', id);
@@ -41,12 +64,10 @@ export class CartComponent implements OnInit {
     // item.quantity++;
   }
 
-
   quantityMinus(item, id) {
     console.log('ITEM IN COMPONENT (-)', item);
     console.log('ITEM ID IN COMPONENT (-)', id);
     this.cartService.minusItem(item, id);
     // item.quantity--;
   }
-
 }

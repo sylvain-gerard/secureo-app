@@ -12,6 +12,7 @@ import { tap, catchError } from 'rxjs/operators';
 export class EmployeeService {
   private url = environment.REST_API_URL + 'employees';
   id: number;
+  email: string;
   update$: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient) { }
@@ -22,6 +23,10 @@ export class EmployeeService {
 
   getEmployee(id): Observable<IEmployees> {
     return this.http.get<IEmployees>(`${this.url}/${id}`) as Observable<IEmployees>;
+  }
+
+  getEmployeeByEmail(email): Observable<IEmployees> {
+    return this.http.get<IEmployees>(`${this.url}/email/${email}`) as Observable<IEmployees>;
   }
 
   createEmployee(employee: IEmployees): Observable<IEmployees> {

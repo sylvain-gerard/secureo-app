@@ -5,6 +5,7 @@ import { IUser } from '../user/iuser';
 import { LogginUser } from '../user/LogginUser';
 import { UserService } from '../user/user.service';
 import { MatSnackBar } from '@angular/material';
+import { EmployeeService } from '../employees/employee.service';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +25,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
-    private userService: UserService
+    private userService: UserService,
+    private employeeService: EmployeeService
   ) {}
 
   login(loggedUser: LogginUser) {
@@ -36,9 +38,20 @@ export class AuthService {
           console.log('Auth Service accept ', loggedUser.email);
           this.loggedIn.next(true);
           sessionStorage.setItem('loggedIn', JSON.stringify(true));
-          sessionStorage.setItem('curentUser', JSON.stringify(user));
+          sessionStorage.setItem('currentUser', JSON.stringify(user));
           this.router.navigate(['/']);
           this.showMessage('Utilisateur accepté !', '');
+          this.employeeService.getEmployeeByEmail(loggedUser.email).subscribe(
+            employee => {
+              sessionStorage.setItem('employee', JSON.stringify(employee));
+              this.showMessage('Emlpoyé trouvé !', '');
+            },
+          error => {
+            console.log(error);
+            this.showMessage('', 'Employé introuvable !');
+          }
+
+          );
         },
         error => {
           console.log(error);
