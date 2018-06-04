@@ -7,6 +7,10 @@ body {
   margin: 0%;
   height: 100%;
   width: 100%;
+  background-color: teal;
+}
+app-root {
+  background-color: #004d40
 }
 
 sidenav {
@@ -38,6 +42,7 @@ sidenav {
   /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
      causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
   flex: 1;
+  background-color: rgb(175, 195, 201)
 }
 
 .footer {

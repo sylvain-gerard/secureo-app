@@ -14,6 +14,7 @@ import { EmployeeService } from '../employees/employee.service';
 import { IEmployees } from '../employees/iemployees';
 import { Observable } from 'rxjs/Observable';
 import { IOrderItem } from '../orders/IOrderItem';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class CartService {
@@ -31,6 +32,7 @@ export class CartService {
   cart: CartItem[] = [];
 
   constructor(
+    private snackBar: MatSnackBar,
     private orderService: OrderService,
     private employeeService: EmployeeService
   ) {}
@@ -66,24 +68,18 @@ export class CartService {
   }
 
   checkout() {
-    // get the employee
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-    console.log(this.user.email);
     this.employee = JSON.parse(sessionStorage.getItem('employee'));
-    console.log(this.employee);
-    // employee found
+
     this.order = {
       id: 0,
       createdOn: null,
       shipped: null,
       total: 0,
       status: '',
+      items: [],
       employee: null
     };
-    this.order.createdOn = new Date();
-    this.order.shipped = new Date(0);
-    this.order.status = 'CREATED';
-    this.order.employee = this.employee;
 
     this.cart = this.getCart();
     console.log('CART IN CHECKOUT()', this.cart);
@@ -94,34 +90,30 @@ export class CartService {
       this.cartItem = this.cart[i];
       this.order.total += this.cart[i].totalPrice;
       console.log(this.order.total);
+      this.order.items.push(this.cartItem);
+      console.log(this.cartItem);
     }
-    // order ready to fetch
+
+    this.order.createdOn = new Date();
+    this.order.shipped = new Date(0);
+    this.order.status = 'CREATED';
+    this.order.employee = this.employee;
     console.log(this.order);
     this.orderService.createOrder(this.order).subscribe(
-      result => console.log('success') ,
-     error => console.log('failure')
+      result => {sessionStorage.removeItem('cart');
+                  console.log('success');
+                  this.showMessage('Commande créée !', '');
+                },
+     error => {console.log('failure');
+               this.showMessage('', 'Echec de la requête');
+              }
     );
+  }
 
-    this.item = {
-      id: 0,
-      quantity: 0,
-      totalPrice: 0,
-      order: this.order, // ça pète ici car order.id = 0
-      product: this.product
-    };
-
-    for ( let i = 0; i < this.cart.length; i++) {
-
-      this.item.product = this.cart[i].product;
-      this.item.quantity = this.cart[i].quantity;
-      this.item.totalPrice = this.cart[i].totalPrice;
-
-      this.orderService.createOrderItem(this.item).subscribe(
-        result => console.log('success') ,
-       error => console.log('failure')
-      );
-    }
-
+  showMessage(message: string, erreur: string) {
+    this.snackBar.open(message, erreur, {
+      duration: 3000
+    });
   }
 
   plusItem(cartItem, id) {

@@ -29,7 +29,7 @@ export class OrderService {
   }
 
   createOrder(order: IOrder): Observable<IOrder> {
-    return this.http.post<IOrder>(`${this.url}`, order).pipe(tap(data => this.update$.next()));
+    return this.http.post<IOrder>(`${this.url}`, order) as Observable<IOrder>;
   }
 
   updateOrder(order: IOrder): Observable<IOrder> {

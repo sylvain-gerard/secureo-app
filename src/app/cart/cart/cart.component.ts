@@ -4,6 +4,7 @@ import { CartItem } from '../CartItem';
 import { CartService } from '../cart.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IOrder } from '../../orders/iorder';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-cart',
@@ -18,8 +19,10 @@ export class CartComponent implements OnInit {
   product: IProduct;
   id: number;
   order: IOrder;
+  cartEmpty: boolean;
 
   constructor(
+    private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
     private cartService: CartService
@@ -28,6 +31,12 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     console.log('CART COMPONENT INIT');
     this.items = this.cartService.getCart();
+    if (this.items == null || this.items.length === 0) {
+      this.cartEmpty = true;
+    } else {
+      this.cartEmpty = false;
+    }
+    console.log(this.cartEmpty);
     console.log('getCart() :', this.items);
     this.order = {
       id: 0,
@@ -35,6 +44,7 @@ export class CartComponent implements OnInit {
       shipped: null,
       total: 0,
       status: '',
+      items: [],
       employee: null
     };
   }
@@ -46,11 +56,12 @@ export class CartComponent implements OnInit {
     console.log(item);
     console.log(item.product.id);
     this.cartService.removeFromCart(item.product.id);
-    this.ngOnInit();
+
   }
 
   checkoutCart() {
     this.cartService.checkout();
+    this.router.navigate(['products']);
   }
 
   backToProducts() {

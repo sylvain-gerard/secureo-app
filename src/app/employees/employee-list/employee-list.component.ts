@@ -43,16 +43,7 @@ export class EmployeeListComponent implements OnInit {
     'gender',
     'grade'
   ];
-  formColumns = [
-    'firstName',
-    'lastName',
-    'email',
-    'phone',
-    'idRh',
-    'jobTitle',
-    'gender',
-    'grade'
-  ];
+
   dataSourceEmployee = new MatTableDataSource();
 
   // MatPaginator Inputs
@@ -127,10 +118,14 @@ export class EmployeeListComponent implements OnInit {
     this.refreshTab();
     this.employeeService.update$.subscribe(() => this.refreshTab());
     this.formEmployee = this.fb.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', Validators.required],
       email: ['', Validators.required],
-      role: ['', Validators.required]
+      idRh: ['', Validators.required],
+      jobTitle: ['', Validators.required],
+      gender: ['', Validators.required],
+      grade: ['', Validators.required]
     });
   }
 
@@ -161,6 +156,20 @@ export class EmployeeListComponent implements OnInit {
 
   createEmployee(employee) {
     console.log('EMPLOYEE INPUT', this.employee);
+    this.employee = {
+      id: 0,
+      firstName: this.formEmployee.value.firstName,
+      lastName: this.formEmployee.value.lastName,
+      phone: this.formEmployee.value.phone,
+      email: this.formEmployee.value.email,
+      idRh: this.formEmployee.value.idRh,
+      jobTitle: this.formEmployee.value.jobTitle,
+      gender: this.formEmployee.value.gender,
+      grade: this.formEmployee.value.grade,
+      posting: null,
+      manager: null,
+      employees: null
+    };
     this.employeeService.createEmployee(this.employee).subscribe(
       result => {
         this.showMessage('Création effectuée', '');
@@ -173,14 +182,6 @@ export class EmployeeListComponent implements OnInit {
 
   backTohome() {
     this.router.navigate(['']);
-  }
-
-  createEmpployee(employee) {
-    console.log(this.employee);
-    this.employeeService.createEmployee(employee).subscribe(
-      result => {this.showMessage('Création effectuée', ''); },
-     error => {this.showMessage('', 'Email déjà utilisé !'); }
-    );
   }
 
   create() {
@@ -212,7 +213,6 @@ export class EmployeeListComponent implements OnInit {
       posting: null,
       manager: null,
       employees: null
-      // orders: null
     };
   }
 }

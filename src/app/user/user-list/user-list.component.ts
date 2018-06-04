@@ -37,7 +37,7 @@ export class UserListComponent implements OnInit {
   dataSourceUser = new MatTableDataSource();
 
   displayedColumns = ['userName', 'email', 'active', 'role'];
-  formColumns = ['nom', 'mail', 'actif', 'rôle'];
+  // formColumns = ['nom', 'mail', 'actif', 'rôle'];
 
   // MatPaginator Inputs
   length = 100;

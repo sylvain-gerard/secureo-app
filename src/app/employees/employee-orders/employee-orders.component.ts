@@ -59,6 +59,7 @@ export class EmployeeOrdersComponent implements OnInit {
       shipped: null,
       total: 0,
       status: '',
+      items: [],
       employee: null
     };
     this.refreshTab();

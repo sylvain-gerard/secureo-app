@@ -1,14 +1,18 @@
-<div class="filtreTableProduit" fxLayoutAlign="space-between">
+<div class="page-container" fxLayoutAlign="space-between"  style="overflow-x:auto;">
   
-  <div>
-    <h1 class="tab-name">Panier :</h1>
+  <div class="tab-name">
+    <h1>Mon Panier</h1>
   </div>
+  <br>
   <div>
     <button (click)="backToProducts()" mat-raised-button color="primary">Produits</button>
+    <button (click)="checkoutCart()" mat-raised-button color="primary" *ngIf="!cartEmpty">Commander</button>
+    
   </div>
+  <br>
 
-  <table id="cartTable">
-    <thead>
+  <table id="cartTable" *ngIf="!cartEmpty">
+    
       <th>Nom</th>
       <th>Model</th>
       <th>Code</th>
@@ -31,11 +35,7 @@
           <button *ngIf="item.quantity > 1" (click)="quantityMinus(item, items.indexOf(item))"> - </button>
           -->
         </td>
-
       </tr>
-    </thead>
-    <tbody>
-      <button (click)="checkoutCart()" mat-raised-button color="primary">Commander</button>
-    </tbody>
   </table>
+  <div *ngIf="cartEmpty"><p class="mess-cart">Panier vide !</p></div>
 </div>
