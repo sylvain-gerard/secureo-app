@@ -23,16 +23,16 @@
             <input matInput placeholder="Modèle" name="model" [(ngModel)]="product.model">
           </mat-form-field>
 
-
+          <!--
           <mat-form-field class="inputFullWidth">
             <textarea matInput placeholder="Description" matTextareaAutosize name="description" [(ngModel)]="product.description"></textarea>
           </mat-form-field>
-
-
+           -->
+           
           <mat-form-field class="inputFullWidth">
             <input matInput placeholder="Taille" name="size" [(ngModel)]="product.size">
           </mat-form-field>
-
+         
 
           <mat-form-field class="inputFullWidth">
             <textarea matInput placeholder="Description" matTextareaAutosize name="sizeDescription" [(ngModel)]="product.sizeDescription"></textarea>
@@ -74,8 +74,8 @@
       </mat-card-content>
       <mat-card-actions>
         <div>
-          <button mat-button (click)="addProduct(product)" *ngIf="!product.added">
-            <mat-icon>add_shopping_cart</mat-icon>AJOUTER</button>
+          <button mat-button (click)="addProduct(product)" *ngIf="!product.added" mat-raised-button color="primary">
+            <mat-icon>add_shopping_cart</mat-icon>Ajouter</button>
             <!--
           <button mat-button (click)="removeProduct(product)" *ngIf="product.added">
             <mat-icon>remove_shopping_cart</mat-icon>SUPPRIMER</button> -->
