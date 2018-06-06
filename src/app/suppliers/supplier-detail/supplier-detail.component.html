@@ -1,4 +1,4 @@
-<div class="supplier-content" *ngIf="supplier$ | async as supplier">
+<div class="supplier-content" *ngIf="supplier$ | async as supplier" >
   <h2>Détails du fournisseur : {{ supplier.supplierName }}</h2>
   <div>
       <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>

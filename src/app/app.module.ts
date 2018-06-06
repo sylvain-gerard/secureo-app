@@ -34,16 +34,12 @@ import { PostingsModule } from './posting/postings.module';
 import { PostingsRoutingModule } from './posting/postings-routing.module';
 
 import { CartModule } from './cart/cart.module';
-import { Page404Component } from './page404/page404.component';
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
-    Page404Component
+    HomeComponent
   ],
   imports: [
     BrowserModule,

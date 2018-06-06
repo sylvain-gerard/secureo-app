@@ -33,6 +33,7 @@ export class UserListComponent implements OnInit {
   selectedId: number;
   user$: Observable<IUser>;
   creation = false;
+  urlParam: any;
 
   dataSourceUser = new MatTableDataSource();
 
@@ -64,27 +65,13 @@ export class UserListComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSourceUser.filter = filterValue;
-  }
-
   ngOnInit() {
-    this.user = {
-      id: 0,
-      userName: '',
-      password: '',
-      email: '',
-      active: false,
-      role: null
-    };
     this.refreshTab();
     this.userService.update$.subscribe(() => this.refreshTab());
     this.formUser = this.fb.group({
-      userName: ['', Validators.required],
+      userName: ['', Validators.pattern('^\\w+$')],
       password: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.pattern('^(\\w||\\.)+@\\w+\\.\\w+$')],
       role: ['', Validators.required],
       active: ['true']
     });
@@ -101,6 +88,12 @@ export class UserListComponent implements OnInit {
       this.dataSourceUser.paginator = this.paginator;
     });
     console.log('REFRESH TAB');
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSourceUser.filter = filterValue;
   }
 
   highlight(row) {
@@ -145,6 +138,27 @@ export class UserListComponent implements OnInit {
         this.afficherMessage('', 'Requête invalide ou email déjà utilisé !');
       }
     );
+  }
+
+  deleteUser(id) {
+    window.alert(
+      'Attention ! Cette action supprimera cet utilisateur du système. Continuer ?'
+    );
+    try {
+      this.userService
+        .deleteUser(this.urlParam.id)
+        .subscribe(response => console.log('deleted'));
+      this.showMessage('Suppression effectuée !', '');
+      this.router.navigate(['users']);
+    } catch {
+      this.showMessage('', 'ERREUR lors de la suppression.');
+    }
+  }
+
+  showMessage(message: string, erreur: string) {
+    this.snackBar.open(message, erreur, {
+      duration: 2000
+    });
   }
 
   create() {

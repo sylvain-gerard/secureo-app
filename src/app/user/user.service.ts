@@ -38,7 +38,7 @@ export class UserService {
   }
 
   deleteUser(id) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`).pipe(tap(data => this.update$.next()));
   }
 
   postUserInfos(loggedUser: LogginUser) {

@@ -94,8 +94,8 @@ export class CartService {
       console.log(this.cartItem);
     }
 
-    this.order.createdOn = new Date();
-    this.order.shipped = new Date(0);
+    // this.order.createdOn = new Date;
+    // this.order.shipped = new Date(0);
     this.order.status = 'CREATED';
     this.order.employee = this.employee;
     console.log(this.order);

@@ -1,17 +1,14 @@
-.employee-content {
-  border: 2px black solid;
-  padding: 10px;
-  margin: 0 auto;
-}
 
 .page-content {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
-  border: 2px black solid;
-  
   /*justify-content: space-around;*/
+}
+.employee-content {
+  padding: 10px;
+  margin: 0 auto;
 }
 
 /* Small screens */
@@ -25,7 +22,7 @@
   }
 }
 */
+
 .nav-content {
-  border: 2px black solid;
   padding: 10px;
 }

@@ -17,26 +17,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder, // {3}
     private authService: AuthService // {4}
-  ) {
-    this.todayDate = new Date();
-    this.dateToday =
-      this.todayDate.getFullYear() +
-      '-' +
-      (this.todayDate.getMonth() + 1) +
-      '-' +
-      this.todayDate.getDate() +
-      ' ' +
-      this.todayDate.getHours() +
-      ':' +
-      this.todayDate.getMinutes() +
-      ':' +
-      this.todayDate.getSeconds();
-  }
+  ) {  }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       // {5}
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', Validators.pattern('^(\\w||\\.)+@\\w+\\.\\w+$')],
       password: ['', Validators.required]
     });
     console.log('today date', this.dateToday);

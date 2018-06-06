@@ -7,13 +7,15 @@ import { SupplierDetailComponent } from './supplier-detail/supplier-detail.compo
 import { SupplierListComponent } from './supplier-list/supplier-list.component';
 import { SuppliersService } from './suppliers.service';
 import { SupplierProductsComponent } from './supplier-products/supplier-products.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SuppliersRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   declarations: [
     SupplierDetailComponent,

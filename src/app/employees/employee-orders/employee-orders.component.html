@@ -13,6 +13,7 @@
       <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
       <button (click)="backToEmployee()" mat-raised-button color="primary">Retour</button>
     </div>
+    <br>
   </div>
 
   <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
@@ -23,7 +24,7 @@
     <!-- Creation Date Column -->
     <ng-container matColumnDef="createdOn">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Date de création</mat-header-cell>
-      <mat-cell *matCellDef="let Order"> {{Order.createdOn}} </mat-cell>
+      <mat-cell *matCellDef="let Order"> {{Order.created_on}} </mat-cell>
     </ng-container>
 
     <!--LastName Column -->

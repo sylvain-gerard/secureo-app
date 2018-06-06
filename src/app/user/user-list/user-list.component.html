@@ -12,6 +12,7 @@
     <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
     <button (click)="create()" mat-raised-button color="primary">Créer</button>
   </div>
+  <br>
 </div>
 <!-- Formulaire de création d'un utilisateur -->
 <div class="creation-form" *ngIf="creation">
@@ -32,7 +33,7 @@
         </mat-form-field>
         <br>
         <mat-form-field class="inputFullWidth">
-          <input matInput formControlName="password" required placeholder="Password" name="password">
+          <input matInput type="password" formControlName="password" required placeholder="Password" name="password">
         </mat-form-field>
         <br>
         <mat-form-field class="inputFullWidth">
