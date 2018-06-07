@@ -67,38 +67,20 @@ export class CartService {
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
-  checkout() {
+  checkout(order) {
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.employee = JSON.parse(sessionStorage.getItem('employee'));
 
-    this.order = {
-      id: 0,
-      createdOn: null,
-      shipped: null,
-      total: 0,
-      status: '',
-      items: [],
-      employee: null
-    };
-
     this.cart = this.getCart();
     console.log('CART IN CHECKOUT()', this.cart);
-    console.log(this.order);
-    // iterate items in cart
     for ( let i = 0; i < this.cart.length; i++) {
-      console.log(this.cart[i]);
       this.cartItem = this.cart[i];
       this.order.total += this.cart[i].totalPrice;
-      console.log(this.order.total);
       this.order.items.push(this.cartItem);
-      console.log(this.cartItem);
     }
 
-    // this.order.createdOn = new Date;
-    // this.order.shipped = new Date(0);
     this.order.status = 'CREATED';
     this.order.employee = this.employee;
-    console.log(this.order);
     this.orderService.createOrder(this.order).subscribe(
       result => {sessionStorage.removeItem('cart');
                   console.log('success');

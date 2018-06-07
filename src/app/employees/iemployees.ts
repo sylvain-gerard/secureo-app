@@ -14,5 +14,4 @@ export interface IEmployees {
   posting: IPosting;
   manager: IEmployees;
   employees: IEmployees[];
-  // orders: IOrder[];
 }

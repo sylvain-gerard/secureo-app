@@ -89,7 +89,6 @@ export class OrdersDetailComponent implements OnInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.item = Object.assign({}, row);
-    console.log(this.item);
     // this.creation = false;
   }
 

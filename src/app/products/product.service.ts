@@ -28,11 +28,8 @@ export class ProductService {
     return this.http.get<IProduct>(`${this.url}/${id}`) as Observable<IProduct>;
   }
 
-  // CART SERVICE ESSAI
   addProduct(product) {
-    console.log('in service');
     this.products.push(product);
-    console.log('products: IProduct[] in productService:', this.products);
     this.cartSubject.next(<any>{ loaded: true, products: this.products });
     this.cartSubject.subscribe(console.log);
     this.CartState.subscribe(console.log);

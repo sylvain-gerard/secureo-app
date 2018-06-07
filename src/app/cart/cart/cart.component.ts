@@ -5,6 +5,8 @@ import { CartService } from '../cart.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IOrder } from '../../orders/iorder';
 import { MatSnackBar } from '@angular/material';
+import { IEmployees } from '../../employees/iemployees';
+import { OrderService } from '../../orders/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,12 +22,14 @@ export class CartComponent implements OnInit {
   id: number;
   order: IOrder;
   cartEmpty: boolean;
+  employee: IEmployees;
 
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
-    private cartService: CartService
+    private cartService: CartService,
+    private orderService: OrderService
   ) {}
 
   ngOnInit() {
@@ -49,6 +53,12 @@ export class CartComponent implements OnInit {
     };
   }
 
+  showMessage(message: string, erreur: string) {
+    this.snackBar.open(message, erreur, {
+      duration: 3000
+    });
+  }
+
   deleteItem(item) {
     item.product.added = false;
     const id = this.items.indexOf(item);
@@ -59,8 +69,29 @@ export class CartComponent implements OnInit {
 
   }
 
-  checkoutCart() {
-    this.cartService.checkout();
+  checkout() {
+    this.employee = JSON.parse(sessionStorage.getItem('employee'));
+    this.items = JSON.parse(sessionStorage.getItem('cart'));
+    for ( let i = 0; i < this.items.length; i++) {
+      this.item = this.items[i];
+      this.order.total += this.items[i].totalPrice;
+      this.order.items.push(this.item);
+    }
+    console.log(this.items);
+    this.order.status = 'CREATED';
+    this.order.employee = this.employee;
+    console.log(this.order);
+    this.orderService.createOrder(this.order).subscribe(
+      result => {sessionStorage.removeItem('cart');
+                  console.log('success');
+                  this.showMessage('Commande créée !', '');
+                  this.id = this.order.id;
+                  console.log(this.id);
+                },
+     error => {console.log('failure');
+               this.showMessage('', 'Echec de la requête');
+              }
+    );
     this.router.navigate(['products']);
   }
 

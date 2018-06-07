@@ -1,25 +1,23 @@
-<div class="home-content">
-
-  <div class=".bloc-card">
+<div fxLayout="column" fxLayoutGap="25px" fxLayoutAlign="center stretch" class="home-container">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center stretch" class="row1">
     <a href="" routerLink='home'>
       <mat-card class="card">
         <p>Mon Compte</p>
       </mat-card>
     </a>
-    <a href="" routerLink='users'>
+    <a href="" routerLink='products'>
       <mat-card class="card">
-        <p>Utilisateurs</p>
+        <p>Produits</p>
       </mat-card>
     </a>
-
     <a href="" routerLink='suppliers'>
       <mat-card class="card">Fournisseurs</mat-card>
     </a>
   </div>
-  <div class=".bloc-card">
-    <a href="" routerLink='products'>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" class="row2">
+    <a href="" routerLink='users'>
       <mat-card class="card">
-        <p>Produits</p>
+        <p>Utilisateurs</p>
       </mat-card>
     </a>
     <a href="" routerLink='employees'>
@@ -28,6 +26,6 @@
     <a href="" routerLink='postings'>
       <mat-card class="card">Affectations</mat-card>
     </a>
-  </div>
 
+  </div>
 </div>

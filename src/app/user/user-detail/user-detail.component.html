@@ -1,4 +1,4 @@
-<div class="user-content" *ngIf="user$ | async as user">
+<div fxFlex="100%" *ngIf="user$ | async as user">
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -26,16 +26,12 @@
         <p>Actif</p>
         <mat-checkbox [disabled]="!edition" name="active" [(ngModel)]="user.active"></mat-checkbox>
         <br>
-        <br>
         <button *ngIf="edition" class="formButton" type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Modifier</button>
-
       </form>
       <br>
       <button *ngIf="!edition" class="formButton" (click)="editMode()" mat-raised-button color="primary">Edition</button>
       <button *ngIf="edition" class="formButton" (click)="viewMode()" mat-raised-button color="primary">Lecture seule</button>
-      <br><br>
       <button class="formButton" (click)="deleteUser()" mat-raised-button color="primary">Supprimer</button>
-      <br><br>
       <button class="formButton" (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
     </mat-card-content>
   </mat-card>

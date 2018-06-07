@@ -96,8 +96,6 @@ export class PostingEmployeesComponent implements OnInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.employee = Object.assign({}, row);
-    console.log(this.employee);
-    console.log(this.selectedRowIndex);
   }
 
   goToDetail(row) {

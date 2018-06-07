@@ -144,7 +144,6 @@ export class EmployeeListComponent implements OnInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.employee = Object.assign({}, row);
-    console.log(this.employee);
     this.creation = false;
   }
 

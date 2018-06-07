@@ -9,6 +9,7 @@ import { EmployeeDetailComponent } from './employee-detail/employee-detail.compo
 import { EmployeeOrdersComponent } from './employee-orders/employee-orders.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrdersRoutingModule } from '../orders/orders-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { OrdersRoutingModule } from '../orders/orders-routing.module';
     MaterialModule,
     EmployeeRoutingModule,
     OrdersRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   declarations: [
     EmployeeListComponent,

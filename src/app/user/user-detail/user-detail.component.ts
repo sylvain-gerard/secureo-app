@@ -16,7 +16,6 @@ export class UserDetailComponent implements OnInit {
   id: number;
   user$: Observable<IUser>;
   role: IRole;
-  // private selectedId: number;
   urlParam: any;
   edition: boolean;
   roles = [
@@ -54,7 +53,6 @@ export class UserDetailComponent implements OnInit {
 
   edit(user) {
     this.user = user;
-    console.log(this.user);
     this.userService.updateUser(this.user).subscribe(
       result => {
         this.showMessage('Modification enregistrée !', '');

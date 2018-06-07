@@ -1,15 +1,6 @@
 
-.page-content {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  /*justify-content: space-around;*/
-}
-.employee-content {
-  padding: 10px;
-  margin: 0 auto;
-}
+
+
 
 /* Small screens */
 /* On small screens, we are no longer using row direction but column */
@@ -23,6 +14,3 @@
 }
 */
 
-.nav-content {
-  padding: 10px;
-}

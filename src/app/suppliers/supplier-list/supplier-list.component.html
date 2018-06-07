@@ -1,5 +1,5 @@
 <div class="table-container">
-  <div class="filtreTableSupplier" fxLayoutAlign="space-between">
+  <div fxLayout="column">
     <div>
       <mat-icon>search</mat-icon>
       <mat-form-field>
@@ -13,7 +13,7 @@
       <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
     </div>
   </div>
-
+  <br>
   <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
   </mat-paginator>
 

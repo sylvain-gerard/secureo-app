@@ -1,8 +1,10 @@
-<div class="supplier-content" *ngIf="supplier$ | async as supplier" >
-  <h2>Détails du fournisseur : {{ supplier.supplierName }}</h2>
-  <div>
+<div class="supplier-content" *ngIf="supplier$ | async as supplier">
+  <div fxLayout="column">
+    <h1 class="tab-name">Détails du fournisseur : {{ supplier.supplierName }}</h1>
+    <div>
       <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
       <button (click)="showProducts(supplier.id)" mat-raised-button color="primary">Produits</button>
+    </div>
   </div>
   <mat-card>
     <mat-card-content>

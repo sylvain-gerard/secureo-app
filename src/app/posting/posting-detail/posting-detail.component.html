@@ -1,5 +1,7 @@
 <div class="posting-content" *ngIf="posting$ | async as posting">
-  <h2>Détails de l'affectation : {{ posting.postingName }}</h2>
+  <div>
+      <h1 class="tab-name">Détails de l'affectation : {{ posting.postingName }}</h1>
+  </div>
   <div>
     <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
     <button (click)="showEmployees(posting.id)" mat-raised-button color="primary">Agents</button>

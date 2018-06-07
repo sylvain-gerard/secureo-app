@@ -1,10 +1,10 @@
 <div class="nav-content">
-  <button (click)="goHome()" mat-raised-button color="primary">Accueil</button>
-  
-  <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+    <button (click)="goHome()" mat-raised-button color="primary">Accueil</button>
+    <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
 </div>
-<div class="page-content">
-  <div class="employee-content" *ngIf="employee$ | async as employee">
+<br>
+<div class="container" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="10px">
+  <div fxFlex="50%" class="employee-content" *ngIf="employee$ | async as employee">
     <!-- Détails de l'employée -->
     <mat-card>
       <mat-card-header>
@@ -15,27 +15,27 @@
       </mat-card-header>
       <mat-card-content>
         <form #EmployeeForm="ngForm" (ngSubmit)="edit(employee)">
-          <mat-form-field class="inputFullWidth">
+          <mat-form-field fxFill>
             <input matInput [readonly]="!edition" placeholder="Nom" name="EmployeeName" [(ngModel)]="employee.firstName">
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
+          <mat-form-field fxFill>
             <input matInput [readonly]="!edition" placeholder="Prenom" name="lastName" [(ngModel)]="employee.lastName">
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
+          <mat-form-field fxFill>
             <input matInput [readonly]="!edition" placeholder="Email" name="email" [(ngModel)]="employee.email">
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
+          <mat-form-field fxFill>
             <input matInput [readonly]="!edition" placeholder="Phone" name="phone" [(ngModel)]="employee.phone">
           </mat-form-field>
           <br>
-          <mat-form-field class="inputFullWidth">
+          <mat-form-field fxFill>
             <input matInput [readonly]="!edition" placeholder="IdRh" name="idRh" [(ngModel)]="employee.idRh">
           </mat-form-field>
           <br>
-          <mat-form-field>
+          <mat-form-field fxFill>
             <mat-select [disabled]="!edition" placeholder=" Fonction : " name="jobTitle" [(ngModel)]="employee.jobTitle">
               <mat-option *ngFor="let jobTitle of jobTitles" [value]="jobTitle.value">
                 {{ jobTitle.viewValue }}
@@ -43,7 +43,7 @@
             </mat-select>
           </mat-form-field>
           <br>
-          <mat-form-field>
+          <mat-form-field fxFill>
             <mat-select [disabled]="!edition" placeholder=" Genre : " name="gender" [(ngModel)]="employee.gender">
               <mat-option *ngFor="let gender of genders" [value]="gender.value">
                 {{ gender.viewValue }}
@@ -51,162 +51,69 @@
             </mat-select>
           </mat-form-field>
           <br>
-          <br>
-          <mat-form-field>
+          <mat-form-field fxFill>
             <mat-select [disabled]="!edition" placeholder=" Grade : " name="grade" [(ngModel)]="employee.grade">
               <mat-option *ngFor="let grade of grades" [value]="grade.value">
                 {{ grade.viewValue }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
           <button type="submit" *ngIf="edition" mat-raised-button color="primary" [disabled]="!EmployeeForm.valid">Modifier</button>
-          <br>
-          <br>
         </form>
+        <br>
         <button class="formButton" *ngIf="!edition" (click)="editMode()" mat-raised-button color="primary">Edition</button>
-        <br>
-        <br>
         <button class="formButton" *ngIf="edition" (click)="viewMode()" mat-raised-button color="primary">Lecture seule</button>
-        <br>
-        <br>
-        <button (click)="viewOrders(employee.id)" mat-raised-button color="primary">Voir Commandes</button>
-        <br>
-        <br>
+        <button class="formButton" (click)="viewOrders(employee.id)" mat-raised-button color="primary">Commandes</button>
         <button class="formButton" (click)="delete()" mat-raised-button color="primary">Supprimer</button>
       </mat-card-content>
     </mat-card>
   </div>
-  <!-- Affecter un manager -->
-  <div class="employee-content" *ngIf="!manager && posting">
-    <p>MANAGER ADD</p>
-  </div>
-  <div class="employee-content" *ngIf="manager$ | async as manager">
-    <!-- Manager de l'employé -->
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          <h2>Manager de l'agent : </h2>
-          <h4>{{manager.firstName}} {{manager.lastName}}</h4>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form #ManagerForm="ngForm">
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Nom" name="manager.firstName" [(ngModel)]="manager.firstName">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Prenom" name="manager.lastName" [(ngModel)]="manager.lastName">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Email" name="manager.email" [(ngModel)]="manager.email">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Phone" name="manager.phone" [(ngModel)]="manager.phone">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="IdRh" name="manager.idRh" [(ngModel)]="manager.idRh">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Fonction" name="manager.jobTitle" [(ngModel)]="manager.jobTitle">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Genre" name="manager.genre" [(ngModel)]="manager.gender">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Grade" name="manager.grade" [(ngModel)]="manager.grade">
-          </mat-form-field>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <!-- choisir une affectation
-  <div class="employee-content" *ngIf="!posting && postingList | async as postings">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          <h2>Choisir une affectation :</h2>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form #PostingListForm="ngForm" (ngSubmit)="setPosting(posting)">
-          <mat-form-field>
-            <mat-select placeholder=" Affectation : " name="postingList" [(ngModel)]="postings.postingName">
-              <mat-option *ngFor="let posting of postings" [value]="posting.postingName">
-                {{ posting.postingName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <br>
-          <button class="formButton" type="submit" mat-raised-button color="primary">Affecter</button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  -->
-  <div class="employee-content" *ngIf="posting$ | async as posting">
-    <!-- Affectation de l'employé -->
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          <h2>Affectation de l'agent : </h2>
-          <h4>{{posting.postingName}}</h4>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form #PostingForm="ngForm">
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Nom" name="PostingName" [(ngModel)]="posting.postingName">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Numéro" name="streetNumber" [(ngModel)]="posting.address.streetNumber">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Rue" name="streetName" [(ngModel)]="posting.address.streetName">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Ligne 1" name="line1" [(ngModel)]="posting.address.line1">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Ligne 2" name="line2" [(ngModel)]="posting.address.line2">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Ligne 3" name="line3" [(ngModel)]="posting.address.line3">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Ville" name="city" [(ngModel)]="posting.address.city">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Pays" name="country" [(ngModel)]="posting.address.country">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
-          </mat-form-field>
-          <br>
-          <mat-form-field class="inputFullWidth">
-            <input [readonly]="true" matInput placeholder="Téléphone" name="phone" [(ngModel)]="posting.address.phone">
-          </mat-form-field>
-        </form>
-      </mat-card-content>
-    </mat-card>
+  <div fxLayout="column" fxLayoutGap="10px" fxLayoutGap.xs="10px" fxFlex="50%" class="employee-content">
+    <div *ngIf="manager$ | async as manager">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2>Manager de l'agent : </h2>
+            <h4>{{manager.firstName}} {{manager.lastName}}</h4>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form #ManagerForm="ngForm">
+            <mat-form-field fxFill>
+              <input [readonly]="true" matInput placeholder="Nom" name="manager.firstName" [(ngModel)]="manager.firstName">
+            </mat-form-field>
+            <br>
+            <mat-form-field fxFill>
+              <input [readonly]="true" matInput placeholder="Prenom" name="manager.lastName" [(ngModel)]="manager.lastName">
+            </mat-form-field>
+            <br>
+            <mat-form-field fxFill>
+              <input [readonly]="true" matInput placeholder="IdRh" name="manager.idRh" [(ngModel)]="manager.idRh">
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div *ngIf="posting$ | async as posting">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2>Affectation de l'agent : </h2>
+            <h4>{{posting.postingName}}</h4>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form #PostingForm="ngForm">
+            <mat-form-field fxFill>
+              <input [readonly]="true" matInput placeholder="Ville" name="city" [(ngModel)]="posting.address.city">
+            </mat-form-field>
+            <br>
+            <mat-form-field fxFill>
+              <input [readonly]="true" matInput placeholder="Code postal" name="zipCode" [(ngModel)]="posting.address.zipCode">
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>

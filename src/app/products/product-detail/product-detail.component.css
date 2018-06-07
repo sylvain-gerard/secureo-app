@@ -1,32 +1,4 @@
-mat-card {
-  /*max-width: 400px;*/
-  margin: 1em auto;
-  text-align: center;
-}
 
-.page-content {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-/* Small screens */
-@media all and (max-width: 500px) {
-  .page-content {
-    /* On small screens, we are no longer using row direction but column */
-    flex-direction: column;
-  }
-}
-.product-content {
-  padding: 10px;
- /* min-width: 400px;*/
- 
-}
-
-.option-content {
-  align-content: left;
-  padding: 10px;
- /* min-width: 300px;*/
-}
 
 .inputFullWidth {
   font-size: 18px;

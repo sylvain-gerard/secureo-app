@@ -34,6 +34,7 @@ import { PostingsModule } from './posting/postings.module';
 import { PostingsRoutingModule } from './posting/postings-routing.module';
 
 import { CartModule } from './cart/cart.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { CartModule } from './cart/cart.module';
     OrdersModule,
     PostingsModule,
     PostingsRoutingModule,
-    CartModule
+    CartModule,
+    HomeModule
 
   ],
   providers: [

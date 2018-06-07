@@ -1,4 +1,4 @@
-<div class="filtreTableUser" fxLayoutAlign="space-between" *ngIf="!creation">
+<div fxLayout="column" *ngIf="!creation">
   <div>
     <mat-icon>search</mat-icon>
     <mat-form-field>
@@ -15,7 +15,7 @@
   <br>
 </div>
 <!-- Formulaire de création d'un utilisateur -->
-<div class="creation-form" *ngIf="creation">
+<div fxLayout="50%" *ngIf="creation">
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -24,19 +24,19 @@
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="createUser()" [formGroup]="formUser">
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field fxFill>
           <input matInput formControlName="userName" required placeholder="Nom" name="userName">
         </mat-form-field>
         <br>
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field fxFill>
           <input matInput formControlName="email" required placeholder="Email" name="email">
         </mat-form-field>
         <br>
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field fxFill>
           <input matInput type="password" formControlName="password" required placeholder="Password" name="password">
         </mat-form-field>
         <br>
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field fxFill>
           <mat-select formControlName="role" required placeholder=" Rôle : " name="role">
             <mat-option *ngFor="let role of roles" [value]="role.value">
               {{ role.viewValue }}
@@ -93,10 +93,3 @@
 <div *ngIf='!dataSourceUser' fxLayoutAlign='center' class='spinner'>
   <mat-spinner></mat-spinner>
 </div>
-<!--
-  <div *ngIf="pageEvent">
-    <h5>Page Change Event Properties</h5>
-    <div>List length: {{pageEvent.length}}</div>
-    <div>Page size: {{pageEvent.pageSize}}</div>
-    <div>Page index: {{pageEvent.pageIndex + 1}}</div>
-  </div>-->

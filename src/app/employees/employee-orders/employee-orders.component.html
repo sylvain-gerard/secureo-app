@@ -1,13 +1,7 @@
 <div class="page-content">
-  <div class="filtreTableOrder" fxLayoutAlign="space-between">
+  <div fxLayout="column">
     <div>
-      <mat-icon>search</mat-icon>
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
-      </mat-form-field>
-    </div>
-    <div>
-      <h1 class="tab-name">Commandes</h1>
+      <h1 class="tab-name">Commandes de l'agent</h1>
     </div>
     <div>
       <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
@@ -27,19 +21,19 @@
       <mat-cell *matCellDef="let Order"> {{Order.created_on}} </mat-cell>
     </ng-container>
 
-    <!--LastName Column -->
+    <!-- Shipped Date Column -->
     <ng-container matColumnDef="shipped">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Date de livraison</mat-header-cell>
       <mat-cell *matCellDef="let Order"> {{Order.shipped}} </mat-cell>
     </ng-container>
 
-    <!--Email Column -->
+    <!--Total Column -->
     <ng-container matColumnDef="total">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
       <mat-cell *matCellDef="let Order"> {{Order.total}} </mat-cell>
     </ng-container>
 
-    <!--Phone Column -->
+    <!--Status Column -->
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
       <mat-cell *matCellDef="let Order"> {{Order.status}} </mat-cell>

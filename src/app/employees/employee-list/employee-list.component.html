@@ -1,4 +1,5 @@
-<div class="filtreTableEmployee" fxLayoutAlign="space-between" *ngIf="!creation">
+
+<div fxLayout="column" *ngIf="!creation">
   <div>
     <mat-icon>search</mat-icon>
     <mat-form-field>
@@ -25,27 +26,27 @@
     <mat-card-content>
       <form [formGroup]="formEmployee" (ngSubmit)="createEmployee(employee)">
 
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field  fxFill>
           <input matInput placeholder="Nom" name="firstName" required formControlName="firstName">
         </mat-form-field>
         <br>
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field  fxFill>
           <input matInput placeholder="Prenom" name="lastName" required formControlName="lastName">
         </mat-form-field>
         <br>
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field  fxFill>
           <input matInput placeholder="Email" name="email" required formControlName="email">
         </mat-form-field>
         <br>
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field  fxFill>
           <input matInput placeholder="Phone" name="phone" required formControlName="phone">
         </mat-form-field>
         <br>
-        <mat-form-field class="inputFullWidth">
+        <mat-form-field  fxFill>
           <input matInput placeholder="IdRh" name="idRh" required formControlName="idRh">
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field fxFill>
           <mat-select placeholder=" Fonction : " name="jobTitle" required formControlName="jobTitle">
             <mat-option *ngFor="let jobTitle of jobTitles" [value]="jobTitle.value">
               {{ jobTitle.viewValue }}
@@ -53,7 +54,7 @@
           </mat-select>
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field fxFill>
           <mat-select placeholder=" Genre : " name="gender" required formControlName="gender">
             <mat-option *ngFor="let gender of genders" [value]="gender.value">
               {{ gender.viewValue }}
@@ -61,19 +62,13 @@
           </mat-select>
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field fxFill>
           <mat-select placeholder=" Grade : " name="grade" required formControlName="grade">
             <mat-option *ngFor="let grade of grades" [value]="grade.value">
               {{ grade.viewValue }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <br>
-        <!--
-          <mat-form-field class="inputFullWidth">
-            <input matInput placeholder="Affectation" name="postingName" [(ngModel)]="employee.posting.postingName">
-          </mat-form-field>-->
-        <br>
         <br>
         <button type="submit" mat-raised-button color="primary" [disabled]="!formEmployee.valid">Valider cet ajout</button>
       </form>

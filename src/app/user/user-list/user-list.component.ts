@@ -87,7 +87,6 @@ export class UserListComponent implements OnInit {
       this.dataSourceUser.sort = this.sort;
       this.dataSourceUser.paginator = this.paginator;
     });
-    console.log('REFRESH TAB');
   }
 
   applyFilter(filterValue: string) {
@@ -99,7 +98,6 @@ export class UserListComponent implements OnInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.user = Object.assign({}, row);
-    console.log(this.user);
     this.creation = false;
   }
 

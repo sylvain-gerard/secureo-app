@@ -7,13 +7,15 @@ import { PostingDetailComponent } from './posting-detail/posting-detail.componen
 import { PostingListComponent } from './posting-list/posting-list.component';
 import { PostingService } from './posting.service';
 import { PostingEmployeesComponent } from './posting-employees/posting-employees.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    PostingsRoutingModule
+    PostingsRoutingModule,
+    FlexLayoutModule
   ],
   declarations: [
     PostingDetailComponent,

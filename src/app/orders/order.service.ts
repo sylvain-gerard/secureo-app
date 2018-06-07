@@ -29,13 +29,14 @@ export class OrderService {
   }
 
   createOrder(order: IOrder): Observable<IOrder> {
+    console.log(order);
     return this.http.post<IOrder>(`${this.url}`, order) as Observable<IOrder>;
   }
 
   updateOrder(order: IOrder): Observable<IOrder> {
     return this.http.put<IOrder>(`${this.url}/${order.id}`, order).pipe(tap(data => this.update$.next()));
   }
-  // to test
+
   createOrderItem(item: IOrderItem): Observable<IOrderItem> {
     return this.http.post<IOrderItem>(`${this.url}/${item.order.id}/items`, item).pipe(tap(data => this.update$.next()));
   }

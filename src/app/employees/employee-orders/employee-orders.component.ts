@@ -45,11 +45,6 @@ export class EmployeeOrdersComponent implements OnInit {
     private employeeService: EmployeeService
   ) {}
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSourceOrder.filter = filterValue;
-  }
 
   ngOnInit() {
     this.urlParam = this.route.snapshot.params;
@@ -83,7 +78,6 @@ export class EmployeeOrdersComponent implements OnInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.order = Object.assign({}, row);
-    console.log(this.order);
   }
 
   backTohome() {

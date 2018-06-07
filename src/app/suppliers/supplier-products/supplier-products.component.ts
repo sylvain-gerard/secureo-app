@@ -96,8 +96,6 @@ export class SupplierProductsComponent implements AfterViewInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.product = Object.assign({}, row);
-    console.log(this.product);
-    console.log(this.selectedRowIndex);
   }
 
   goToDetail(row) {

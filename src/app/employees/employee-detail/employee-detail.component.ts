@@ -74,14 +74,7 @@ export class EmployeeDetailComponent implements OnInit {
     this.manager$ = this.route.paramMap.switchMap((params: ParamMap) =>
       this.employeeService.getManagerOfEmployee(params.get('id'))
     );
-
-    this.employee$.subscribe(console.log);
-    this.posting$.subscribe(console.log);
-    this.manager$.subscribe(console.log);
-
     this.postingList = this.postingService.getPostings();
-    this.postingList.subscribe(console.log);
-    // this.managerList = this.postingService.getManagersOfPosting(); => on ne connait pas l'id du posting
   }
 
   goBackToList() {
@@ -109,7 +102,6 @@ export class EmployeeDetailComponent implements OnInit {
 
   edit(employee) {
     this.employee = employee;
-    console.log(this.employee);
     this.employeeService.updateEmployee(this.employee).subscribe(
       result => {
         this.showMessage('Modification enregistrée !', '');
@@ -142,18 +134,4 @@ export class EmployeeDetailComponent implements OnInit {
       duration: 2000
     });
   }
-  /*
-  setPosting(posting) {
-    this.posting = posting;
-    console.log(this.posting);
-    this.employeeService.updateEmployee(this.urlParam.id).subscribe(
-      result => {
-        this.showMessage('Nouvelle affectation enregistrée !', '');
-      },
-      error => {
-        this.showMessage('', 'ERREUR lors de l\'édition.');
-      }
-    );
-  }
-  */
 }

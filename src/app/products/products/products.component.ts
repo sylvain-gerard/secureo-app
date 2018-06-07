@@ -98,11 +98,6 @@ export class ProductsComponent implements AfterViewInit {
   highlight(row) {
     this.selectedRowIndex = row.id;
     this.product = Object.assign({}, row);
-    // this.router.navigate(['/products', this.product.id]);
-    // this.productService.getProduct(this.product.id).subscribe(product => this.product = product);
-    // this.edition = true;
-    console.log(this.product);
-    console.log(this.selectedRowIndex);
   }
 
   goToDetail(row) {

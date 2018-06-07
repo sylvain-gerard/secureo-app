@@ -66,21 +66,12 @@ export class ProductDetailComponent implements OnInit {
 
   removeProduct(product) {
     product.added = false;
-    console.log('PROD to RM from product-detail', product);
-    // CART SERVICE
     this.cartService.removeFromCart(product.id);
-
-    // this.productService.removeProduct(product.id);
-    // sessionStorage.setItem('cart', JSON.stringify(this.products));
   }
 
   addProduct(product) {
     product.added = true;
-    console.log('PROD to ADD from product-detail', product);
-    // CART SERVICE
     this.cartService.addToCart(product);
-    // this.productService.addProduct(product);
-    // sessionStorage.setItem('cart', JSON.stringify(this.products));
   }
 
 }

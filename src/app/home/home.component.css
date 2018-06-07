@@ -1,33 +1,23 @@
-.home-content {
-   
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    padding:1rem;
-}
+.home-container {
 
-.bloc-card {
-    
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    border: 2px black solid;
 }
-
+.row1, .row2 {
+    border: 2px black solid;
+}
 .card {
-    
-    margin: 10px;
+    border: 2px white solid;
+    border-radius: 10px;
+    margin: 30px;
     align-content: center;
-    padding-left: 60px 1rem;
-    padding-right: 60px 1rem;
     max-width: 400px;
     background-color: teal;
-    font-family: 'Verdana, Segoe UI', Tahoma, sans-serif;
     color: white;
     font-weight: bold;
 }
 
 a {
     text-decoration: none;
+    font-size: 1.2em;
 }
 

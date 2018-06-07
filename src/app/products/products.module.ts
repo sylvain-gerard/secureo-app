@@ -9,13 +9,15 @@ import { ProductDetailComponent} from './product-detail/product-detail.component
 import { ProductService } from './product.service';
 
 import { ProductRoutingModule } from './product-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ProductRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   declarations: [
     ProductsComponent,
