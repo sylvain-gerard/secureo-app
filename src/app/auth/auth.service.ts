@@ -44,7 +44,7 @@ export class AuthService {
           this.employeeService.getEmployeeByEmail(loggedUser.email).subscribe(
             employee => {
               sessionStorage.setItem('employee', JSON.stringify(employee));
-              this.showMessage('Emlpoyé trouvé !', '');
+              this.showMessage('Employé trouvé !', '');
             },
           error => {
             console.log(error);

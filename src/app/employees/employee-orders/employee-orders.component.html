@@ -18,13 +18,13 @@
     <!-- Creation Date Column -->
     <ng-container matColumnDef="createdOn">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Date de création</mat-header-cell>
-      <mat-cell *matCellDef="let Order"> {{Order.created_on}} </mat-cell>
+      <mat-cell *matCellDef="let Order"> {{Order.createdAt}} </mat-cell>
     </ng-container>
 
     <!-- Shipped Date Column -->
     <ng-container matColumnDef="shipped">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Date de livraison</mat-header-cell>
-      <mat-cell *matCellDef="let Order"> {{Order.shipped}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Date de mise à jour</mat-header-cell>
+      <mat-cell *matCellDef="let Order"> {{Order.updatedAt}} </mat-cell>
     </ng-container>
 
     <!--Total Column -->

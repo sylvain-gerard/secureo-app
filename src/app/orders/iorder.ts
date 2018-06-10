@@ -4,8 +4,8 @@ import { CartItem } from '../cart/CartItem';
 
 export interface IOrder {
     id: number;
-    createdOn: Date;
-    shipped: Date;
+    createdAt: Date;
+    updatedAt: Date;
     total: number;
     status: string;
     items: CartItem[];

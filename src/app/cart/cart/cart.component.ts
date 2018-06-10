@@ -44,8 +44,8 @@ export class CartComponent implements OnInit {
     console.log('getCart() :', this.items);
     this.order = {
       id: 0,
-      createdOn: null,
-      shipped: null,
+      createdAt: null,
+      updatedAt: null,
       total: 0,
       status: '',
       items: [],

@@ -50,8 +50,8 @@ export class EmployeeOrdersComponent implements OnInit {
     this.urlParam = this.route.snapshot.params;
     this.order = {
       id: 0,
-      createdOn: null,
-      shipped: null,
+      createdAt: null,
+      updatedAt: null,
       total: 0,
       status: '',
       items: [],
