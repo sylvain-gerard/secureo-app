@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   title = 'Secureo';
   public shoppingCartItem$: Observable<IProduct[]>;
   isLoggedIn$: Observable<boolean>; // {1}

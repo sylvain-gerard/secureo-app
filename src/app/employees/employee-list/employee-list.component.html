@@ -129,12 +129,6 @@
     <mat-cell *matCellDef="let Employee"> {{Employee.grade}} </mat-cell>
   </ng-container>
 
-  <!-- Posting Column 
-    <ng-container matColumnDef="postingName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Affectation</mat-header-cell>
-      <mat-cell *matCellDef="let Employee"> {{Employee.posting.postingName}} </mat-cell>
-    </ng-container>-->
-
   <!-- Sexe Column -->
   <ng-container matColumnDef="gender">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Sexe</mat-header-cell>
@@ -142,8 +136,8 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
-    (click)="goToDetail(row)"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" 
+  (mouseover)="highlight(row)" (click)="goToDetail(row)"></mat-row>
 </mat-table>
 <div *ngIf='!dataSourceEmployee' fxLayoutAlign='center' class='spinner'>
   <mat-spinner></mat-spinner>

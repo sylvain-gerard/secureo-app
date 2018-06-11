@@ -25,10 +25,6 @@ export class EmployeeService {
     return this.http.get<IEmployees>(`${this.url}/${id}`) as Observable<IEmployees>;
   }
 
-  getEmployeeByEmail(email): Observable<IEmployees> {
-    return this.http.get<IEmployees>(`${this.url}/email/${email}`) as Observable<IEmployees>;
-  }
-
   createEmployee(employee: IEmployees): Observable<IEmployees> {
     return this.http.post<IEmployees>(`${this.url}`, employee).pipe(tap(data => this.update$.next()));
   }
@@ -41,6 +37,10 @@ export class EmployeeService {
 
   deleteEmployee(id) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+
+  getEmployeeByEmail(email): Observable<IEmployees> {
+    return this.http.get<IEmployees>(`${this.url}/email/${email}`) as Observable<IEmployees>;
   }
 
   getEmployeePosting(id): Observable<IPosting> {

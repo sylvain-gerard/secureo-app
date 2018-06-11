@@ -24,13 +24,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
+  dataSourceEmployee = new MatTableDataSource();
   formEmployee: FormGroup;
   employee: IEmployees;
-  // posting: IPosting;
   selectedRowIndex = -1;
-  // selectedemployee: false;
-  // selectedId: number;
-  employee$: Observable<IEmployees>;
   creation = false;
 
   displayedColumns = [
@@ -43,8 +40,6 @@ export class EmployeeListComponent implements OnInit {
     'gender',
     'grade'
   ];
-
-  dataSourceEmployee = new MatTableDataSource();
 
   // MatPaginator Inputs
   length = 100;
@@ -100,6 +95,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.refreshTab();
     this.employee = {
       id: 0,
       firstName: '',
@@ -113,10 +109,7 @@ export class EmployeeListComponent implements OnInit {
       posting: null,
       manager: null,
       employees: null
-      // orders: null
     };
-    this.refreshTab();
-    this.employeeService.update$.subscribe(() => this.refreshTab());
     this.formEmployee = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -143,7 +136,6 @@ export class EmployeeListComponent implements OnInit {
 
   highlight(row) {
     this.selectedRowIndex = row.id;
-    this.employee = Object.assign({}, row);
     this.creation = false;
   }
 
@@ -154,7 +146,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   createEmployee(employee) {
-    console.log('EMPLOYEE INPUT', this.employee);
     this.employee = {
       id: 0,
       firstName: this.formEmployee.value.firstName,

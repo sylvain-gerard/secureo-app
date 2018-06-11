@@ -97,7 +97,6 @@ export class UserListComponent implements OnInit {
 
   highlight(row) {
     this.selectedRowIndex = row.id;
-    this.user = Object.assign({}, row);
     this.creation = false;
   }
 

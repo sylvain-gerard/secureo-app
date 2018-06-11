@@ -83,7 +83,6 @@ export class PostingListComponent implements OnInit {
 
   highlight(row) {
     this.selectedRowIndex = row.id;
-    this.posting = Object.assign({}, row);
   }
 
   goToDetail(row) {

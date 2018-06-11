@@ -83,7 +83,6 @@ export class SupplierListComponent implements AfterViewInit {
 
   highlight(row) {
     this.selectedRowIndex = row.id;
-    this.supplier = Object.assign({}, row);
   }
 
   goToDetail(row) {

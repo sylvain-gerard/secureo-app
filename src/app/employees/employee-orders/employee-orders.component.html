@@ -16,13 +16,13 @@
   <mat-table class="filtreTableOrder" #table [dataSource]="dataSourceOrder" matSort *ngIf='dataSourceOrder'>
 
     <!-- Creation Date Column -->
-    <ng-container matColumnDef="createdOn">
+    <ng-container matColumnDef="createdAt">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Date de création</mat-header-cell>
       <mat-cell *matCellDef="let Order"> {{Order.createdAt}} </mat-cell>
     </ng-container>
 
     <!-- Shipped Date Column -->
-    <ng-container matColumnDef="shipped">
+    <ng-container matColumnDef="updatedAt">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Date de mise à jour</mat-header-cell>
       <mat-cell *matCellDef="let Order"> {{Order.updatedAt}} </mat-cell>
     </ng-container>

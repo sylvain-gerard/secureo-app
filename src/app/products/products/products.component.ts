@@ -97,7 +97,6 @@ export class ProductsComponent implements AfterViewInit {
 
   highlight(row) {
     this.selectedRowIndex = row.id;
-    this.product = Object.assign({}, row);
   }
 
   goToDetail(row) {

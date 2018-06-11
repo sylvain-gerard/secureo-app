@@ -1,5 +1,5 @@
-<div [style.minHeight.%]="100"  fxLayout="column" layout-fill flex>
-  <mat-toolbar class="toolbar" fxLayoutAlign="space-between center">
+<div [style.minHeight.%]="100" fxLayout="column" layout-fill flex>
+  <mat-toolbar class="toolbar" fxLayout="row">
     <div>
       <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn$ | async">
         <mat-icon>menu</mat-icon>
@@ -19,6 +19,18 @@
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #snav class="mat-sidenav">
       <mat-nav-list>
+          <mat-list>
+              <mat-list-item routerLinkActive="active" routerLink="" (click)="snav.toggle()"><mat-icon>home</mat-icon> Acceuil</mat-list-item>
+              <hr style="width:100%">
+              <mat-list-item routerLinkActive="active" routerLink="products" (click)="snav.toggle()"><mat-icon>view_list</mat-icon> Produits</mat-list-item>
+              <mat-list-item routerLinkActive="active" routerLink="suppliers" (click)="snav.toggle()"><mat-icon>perm_identity</mat-icon> Fournisseurs</mat-list-item>
+              <hr style="width:100%">
+              <mat-list-item routerLinkActive="active" routerLink="users" (click)="snav.toggle()"><mat-icon>view_list</mat-icon> Utilisateurs</mat-list-item>
+              <mat-list-item routerLinkActive="active" routerLink="employees" (click)="snav.toggle()"><mat-icon>person</mat-icon> Agents</mat-list-item>
+              <mat-list-item routerLinkActive="active" routerLink="postings" (click)="snav.toggle()"><mat-icon>business</mat-icon> Affectations</mat-list-item>
+              <hr style="width:100%">
+              <mat-list-item (click)="onLogout()"><mat-icon>exit_to_app</mat-icon> Déconnexion</mat-list-item>
+            </mat-list><!--
         <a href="" routerLink='' mat-list-item (click)="snav.toggle()">
           <mat-icon>home</mat-icon> Acceuil</a>
         <a href="" fxHide="true" routerLink='employee' mat-list-item (click)="snav.toggle()">
@@ -41,8 +53,8 @@
         <a href="" routerLink='postings' mat-list-item (click)="snav.toggle()">
           <mat-icon>business</mat-icon> Affectations</a>
         <hr style="width:100%">
-        <a href="" mat-list-item (click)="snav.toggle()">
-          <mat-icon>exit_to_app</mat-icon> Déconnexion</a>
+        <a href="" mat-list-item (click)="onLogout()">
+          <mat-icon>exit_to_app</mat-icon> Déconnexion</a>-->
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

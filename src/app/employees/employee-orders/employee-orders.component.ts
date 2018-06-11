@@ -25,7 +25,7 @@ export class EmployeeOrdersComponent implements OnInit {
   employee: IEmployees;
   selectedRowIndex = -1;
   dataSourceOrder = new MatTableDataSource();
-  displayedColumns = ['createdOn', 'shipped', 'total', 'status'];
+  displayedColumns = ['createdAt', 'updatedAt', 'total', 'status'];
   id: any;
 
   // MatPaginator Inputs

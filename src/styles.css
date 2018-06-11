@@ -4,33 +4,17 @@
 
 html,
 body {
-  margin: 0%;
+
   height: 100%;
-  width: 100%;
   background-color: teal;
 }
 app-root {
   background-color: #004d40
 }
 
-sidenav {
-  width: 200px;
-}
-
 .toolbar {
   background-color: #004d40;
   color: white;
-}
-
-.mat-sidenav-content {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  flex: 1;
 }
 
 .highlight {
@@ -44,6 +28,9 @@ sidenav {
   flex: 1;
   background-color: rgb(188, 191, 193)
 }
+.mat-sidenav {
+    overflow-x:hidden;
+}
 
 .footer {
   background-color: #004d40;
@@ -52,7 +39,6 @@ sidenav {
 
 .mat-table {
   overflow: auto;
-  /* max-height: 500px;*/
 }
 .tab-name {
   font-family: 'Roboto', Georgia, 'Times New Roman', Times, serif;
