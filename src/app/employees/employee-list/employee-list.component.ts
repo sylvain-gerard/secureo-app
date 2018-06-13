@@ -96,6 +96,7 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit() {
     this.refreshTab();
+    this.employeeService.update$.subscribe(() => this.refreshTab());
     this.employee = {
       id: 0,
       firstName: '',
@@ -163,6 +164,7 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.createEmployee(this.employee).subscribe(
       result => {
         this.showMessage('Création effectuée', '');
+        this.creation = false;
       },
       error => {
         this.showMessage('', 'Création en echec !');

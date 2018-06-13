@@ -117,7 +117,6 @@ export class UserListComponent implements OnInit {
   }
 
   createUser() {
-    console.log(this.formUser);
     this.user = {
       id: 0,
       userName: this.formUser.value.userName,
@@ -126,7 +125,6 @@ export class UserListComponent implements OnInit {
       active: this.formUser.value.active,
       role: this.formUser.value.role
     };
-    console.log(this.user);
     this.userService.createUser(this.user).subscribe(
       result => {
         this.afficherMessage('Création effectuée', '');

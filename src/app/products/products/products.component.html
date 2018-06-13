@@ -28,26 +28,26 @@
 
     <!--Code Column -->
     <ng-container matColumnDef="productCode">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
-      <mat-cell *matCellDef="let Product"> {{Product.productCode}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Code</mat-header-cell>
+      <mat-cell *matCellDef="let Product" fxHide.xs="true"> {{Product.productCode}} </mat-cell>
     </ng-container>
 
     <!-- Model Column -->
     <ng-container matColumnDef="model">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Modèle</mat-header-cell>
-      <mat-cell *matCellDef="let Product"> {{Product.model}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Modèle</mat-header-cell>
+      <mat-cell *matCellDef="let Product" fxHide.xs="true"> {{Product.model}} </mat-cell>
     </ng-container>
 
     <!-- Size Column -->
     <ng-container matColumnDef="size">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Taille</mat-header-cell>
-      <mat-cell *matCellDef="let Product"> {{Product.size}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Taille</mat-header-cell>
+      <mat-cell *matCellDef="let Product" fxHide.xs="true"> {{Product.size}} </mat-cell>
     </ng-container>
 
     <!-- SizeDescription Column -->
     <ng-container matColumnDef="sizeDescription">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
-      <mat-cell *matCellDef="let Product"> {{Product.sizeDescription}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Description</mat-header-cell>
+      <mat-cell *matCellDef="let Product" fxHide.xs="true"> {{Product.sizeDescription}} </mat-cell>
     </ng-container>
 
     <!-- Disabled Column -->
@@ -60,14 +60,14 @@
 
     <!-- Category Column -->
     <ng-container matColumnDef="category">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Catégorie</mat-header-cell>
-      <mat-cell *matCellDef="let Product"> {{Product.category.nameCategory}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Catégorie</mat-header-cell>
+      <mat-cell *matCellDef="let Product" fxHide.xs="true"> {{Product.category.nameCategory}} </mat-cell>
     </ng-container>
 
     <!-- Supplier Column -->
     <ng-container matColumnDef="supplier">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Fournisseur</mat-header-cell>
-      <mat-cell *matCellDef="let Product"> {{Product.supplier.supplierName}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Fournisseur</mat-header-cell>
+      <mat-cell *matCellDef="let Product" fxHide.xs="true"> {{Product.supplier.supplierName}} </mat-cell>
     </ng-container>
     <!--
     <ng-container matColumnDef="details">

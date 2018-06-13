@@ -35,12 +35,16 @@ import { PostingsRoutingModule } from './posting/postings-routing.module';
 
 import { CartModule } from './cart/cart.module';
 import { HomeModule } from './home/home.module';
+import { MeComponent } from './me/me.component';
+import { MeModule } from './me/me.module';
+import { MeRoutingModule } from './me/me-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    MeComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,9 @@ import { HomeModule } from './home/home.module';
     PostingsModule,
     PostingsRoutingModule,
     CartModule,
-    HomeModule
+    HomeModule,
+    MeModule,
+    MeRoutingModule
 
   ],
   providers: [

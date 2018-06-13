@@ -58,7 +58,8 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <button type="submit" *ngIf="edition" mat-raised-button color="primary" [disabled]="!EmployeeForm.valid">Modifier</button>
+          <button type="submit" *ngIf="edition" mat-raised-button 
+          color="primary" [disabled]="!EmployeeForm.valid">Modifier</button>
         </form>
         <br>
         <button class="formButton" *ngIf="!edition" (click)="editMode()" mat-raised-button color="primary">Edition</button>

@@ -18,11 +18,11 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   getEmployees(): Observable<IEmployees[]> {
-    return this.http.get<IEmployees[]>(`${this.url}`) as Observable<IEmployees[]>;
+    return this.http.get<IEmployees[]>(`${this.url}`);
   }
 
   getEmployee(id): Observable<IEmployees> {
-    return this.http.get<IEmployees>(`${this.url}/${id}`) as Observable<IEmployees>;
+    return this.http.get<IEmployees>(`${this.url}/${id}`);
   }
 
   createEmployee(employee: IEmployees): Observable<IEmployees> {
@@ -40,18 +40,18 @@ export class EmployeeService {
   }
 
   getEmployeeByEmail(email): Observable<IEmployees> {
-    return this.http.get<IEmployees>(`${this.url}/email/${email}`) as Observable<IEmployees>;
+    return this.http.get<IEmployees>(`${this.url}/email/${email}`);
   }
 
   getEmployeePosting(id): Observable<IPosting> {
-    return this.http.get<IPosting>(`${this.url}/${id}/posting`) as Observable<IPosting>;
+    return this.http.get<IPosting>(`${this.url}/${id}/posting`);
   }
 
   getManagerOfEmployee(id): Observable<IEmployees> {
-    return this.http.get<IEmployees>(`${this.url}/${id}/manager`) as Observable<IEmployees>;
+    return this.http.get<IEmployees>(`${this.url}/${id}/manager`);
   }
 
   getOrdersOfEmployee(id): Observable<IOrder[]> {
-    return this.http.get<IOrder[]>(`${this.url}/${id}/orders`) as Observable<IOrder[]>;
+    return this.http.get<IOrder[]>(`${this.url}/${id}/orders`);
   }
 }

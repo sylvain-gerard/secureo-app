@@ -1,19 +1,18 @@
-<div [style.minHeight.%]="100" fxLayout="column" layout-fill flex>
+<div class="header" [style.min.%]="100" [style.minHeight.%]="100" fxLayout="column">
+
   <mat-toolbar class="toolbar" fxLayout="row">
     <div>
       <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn$ | async">
         <mat-icon>menu</mat-icon>
       </button>
-    </div>
+    </div> 
     <div>
       <button mat-button (click)="goHome()" *ngIf="isLoggedIn$ | async">
-        <mat-icon>home<p fxHide.xs="true">Secureo</p></mat-icon></button>
-    </div>
-    <div>
+        <mat-icon>home</mat-icon></button>
       <button mat-button (click)="viewCart()" *ngIf="isLoggedIn$ | async">
-        <mat-icon>shopping_cart<p fxHide.xs="true">Panier</p></mat-icon></button>
+        <mat-icon>shopping_cart</mat-icon></button>
       <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">
-        <mat-icon>exit_to_app<p fxHide.xs="true">Déconnexion</p></mat-icon></button>
+        <mat-icon>exit_to_app</mat-icon></button>
     </div>
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container">

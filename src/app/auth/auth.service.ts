@@ -6,18 +6,20 @@ import { LogginUser } from '../user/LogginUser';
 import { UserService } from '../user/user.service';
 import { MatSnackBar } from '@angular/material';
 import { EmployeeService } from '../employees/employee.service';
+import { IEmployees } from '../employees/iemployees';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
+
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
+  public employeeLogged = new Observable<IEmployees>();
 
   get isLoggedIn() {
     if (sessionStorage.getItem('loggedIn')) {
       this.loggedIn.next(true);
-      console.log(sessionStorage.getItem('loggedIn'));
     } else {
       this.loggedIn.next(false);
-      console.log(sessionStorage.getItem('loggedIn'));
     }
     return this.loggedIn.asObservable();
   }
@@ -30,12 +32,9 @@ export class AuthService {
   ) {}
 
   login(loggedUser: LogginUser) {
-    console.log('loggedUser in login() AUTHSERVICE', loggedUser);
     if (loggedUser.email !== '' && loggedUser.password !== '') {
       this.userService.postUserInfos(loggedUser).subscribe(
         user => {
-          console.log('USER FOUND BY AUTH', user);
-          console.log('Auth Service accept ', loggedUser.email);
           this.loggedIn.next(true);
           sessionStorage.setItem('loggedIn', JSON.stringify(true));
           sessionStorage.setItem('currentUser', JSON.stringify(user));
@@ -45,6 +44,8 @@ export class AuthService {
             employee => {
               sessionStorage.setItem('employee', JSON.stringify(employee));
               this.showMessage('Employé trouvé !', '');
+              this.employeeLogged = new BehaviorSubject<IEmployees>(employee);
+              this.employeeLogged.subscribe(console.log);
             },
           error => {
             console.log(error);
@@ -55,7 +56,6 @@ export class AuthService {
         },
         error => {
           console.log(error);
-          console.log('Auth Service refuse ', loggedUser.email);
           this.loggedIn.next(false);
           sessionStorage.setItem('loggedIn', JSON.stringify(false)); // {4}
           this.router.navigate(['/login']);

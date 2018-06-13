@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.pattern('^(\\w||\\.)+@\\w+\\.\\w+$')],
       password: ['', Validators.required]
     });
-    console.log('today date', this.dateToday);
   }
 
   isFieldInvalid(field: string) {

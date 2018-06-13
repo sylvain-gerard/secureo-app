@@ -1,0 +1,92 @@
+<div class="container" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="10px">
+  <div class="employee-content" *ngIf="employee">
+    <!-- Détails de l'employée -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Mes Infos:</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #EmployeeForm="ngForm">
+          <mat-form-field fxFill>
+            <input matInput [readonly]="!edition" placeholder="Nom" name="EmployeeName" [(ngModel)]="employee.firstName">
+          </mat-form-field>
+          <br>
+          <mat-form-field fxFill>
+            <input matInput [readonly]="!edition" placeholder="Prenom" name="lastName" [(ngModel)]="employee.lastName">
+          </mat-form-field>
+          <br>
+          <mat-form-field fxFill>
+            <input matInput [readonly]="!edition" placeholder="Email" name="email" [(ngModel)]="employee.email">
+          </mat-form-field>
+          <br>
+          <mat-form-field fxFill>
+            <input matInput [readonly]="!edition" placeholder="Phone" name="phone" [(ngModel)]="employee.phone">
+          </mat-form-field>
+          <br>
+          <mat-form-field fxFill>
+            <input matInput [readonly]="!edition" placeholder="IdRh" name="idRh" [(ngModel)]="employee.idRh">
+          </mat-form-field>
+          <br>
+          <mat-form-field fxFill>
+            <input matInput [readonly]="!edition" placeholder="Grade" name="grade" [(ngModel)]="employee.grade">
+          </mat-form-field>
+          <br>
+          <mat-form-field fxFill>
+            <input matInput [readonly]="!edition" placeholder="Fonction" name="idRh" [(ngModel)]="employee.jobTitle">
+          </mat-form-field>
+        </form>
+        <br>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="page-content">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2 class="tab-name">Mes commandes</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+        </mat-paginator>
+
+        <mat-table class="filtreTableOrder" #table [dataSource]="dataSourceOrder" matSort *ngIf='dataSourceOrder'>
+
+          <!-- Creation Date Column -->
+          <ng-container matColumnDef="createdAt">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date de création</mat-header-cell>
+            <mat-cell *matCellDef="let Order"> {{Order.createdAt}} </mat-cell>
+          </ng-container>
+
+          <!-- Shipped Date Column -->
+          <ng-container matColumnDef="updatedAt">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date de mise à jour</mat-header-cell>
+            <mat-cell *matCellDef="let Order"> {{Order.updatedAt}} </mat-cell>
+          </ng-container>
+
+          <!--Total Column -->
+          <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+            <mat-cell *matCellDef="let Order"> {{Order.total}} </mat-cell>
+          </ng-container>
+
+          <!--Status Column -->
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-cell *matCellDef="let Order"> {{Order.status}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
+            (click)="viewItem(row)"></mat-row>
+        </mat-table>
+        <div *ngIf='!dataSourceOrder' fxLayoutAlign='center' class='spinner'>
+          <mat-spinner></mat-spinner>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

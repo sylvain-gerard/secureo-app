@@ -74,7 +74,6 @@ export class EmployeeDetailComponent implements OnInit {
     this.manager$ = this.route.paramMap.switchMap((params: ParamMap) =>
       this.employeeService.getManagerOfEmployee(params.get('id'))
     );
-    this.postingList = this.postingService.getPostings();
   }
 
   goBackToList() {
@@ -119,11 +118,9 @@ export class EmployeeDetailComponent implements OnInit {
     try {
       this.employeeService
         .deleteEmployee(this.urlParam.id)
-        .subscribe(response => console.log('deleted'));
+        .subscribe();
       this.showMessage('Suppression effectuée !', '');
-      this.router.navigate([''], {
-        relativeTo: this.route
-      });
+      this.router.navigate(['employees']);
     } catch {
       this.showMessage('', 'ERREUR lors de la suppression.');
     }

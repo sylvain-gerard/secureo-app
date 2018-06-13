@@ -42,7 +42,6 @@ export class UserService {
   }
 
   postUserInfos(loggedUser: LogginUser) {
-    console.log('IN SERVICE');
     console.log(loggedUser);
     return this.http.post<LogginUser>(`${this.url}/loggin`, loggedUser);
   }

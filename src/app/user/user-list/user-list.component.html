@@ -68,8 +68,8 @@
 
   <!--Email Column -->
   <ng-container matColumnDef="email">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-    <mat-cell *matCellDef="let User"> {{User.email}} </mat-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Email</mat-header-cell>
+    <mat-cell *matCellDef="let User" fxHide.xs="true"> {{User.email}} </mat-cell>
   </ng-container>
 
   <!-- Active Column -->
