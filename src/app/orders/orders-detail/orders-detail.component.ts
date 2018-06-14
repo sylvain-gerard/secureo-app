@@ -53,12 +53,6 @@ export class OrdersDetailComponent implements OnInit {
     private orderService: OrderService
   ) {}
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
-
   ngOnInit() {
     this.urlParam = this.route.snapshot.params;
     this.item = {

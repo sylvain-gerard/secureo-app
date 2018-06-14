@@ -11,9 +11,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup; // {1}
   private formSubmitAttempt: boolean; // {2}
 
-  todayDate: Date;
-  dateToday: string;
-
   constructor(
     private fb: FormBuilder, // {3}
     private authService: AuthService // {4}

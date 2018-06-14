@@ -1,11 +1,5 @@
 <div class="table-container">
-  <div class="filtreTableItems" fxLayoutAlign="space-between">
-    <div>
-      <mat-icon>search</mat-icon>
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
-      </mat-form-field>
-    </div>
+  <div class="filtreTableItems" fxLayout="column">
     <div>
       <h1 class="tab-name">Produits commandés</h1>
     </div>
@@ -24,14 +18,14 @@
   
       <!--Code Column -->
       <ng-container matColumnDef="productCode">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
-        <mat-cell *matCellDef="let Item"> {{Item.product.productCode}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Code</mat-header-cell>
+        <mat-cell *matCellDef="let Item" fxHide.xs="true"> {{Item.product.productCode}} </mat-cell>
       </ng-container>
   
       <!-- Model Column -->
       <ng-container matColumnDef="model">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Modèle</mat-header-cell>
-        <mat-cell *matCellDef="let Item"> {{Item.product.model}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Modèle</mat-header-cell>
+        <mat-cell *matCellDef="let Item" fxHide.xs="true"> {{Item.product.model}} </mat-cell>
       </ng-container>
   
       <!-- Quantity Column -->

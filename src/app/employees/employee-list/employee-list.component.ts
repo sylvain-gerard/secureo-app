@@ -83,7 +83,6 @@ export class EmployeeListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private employeeService: EmployeeService
   ) {}
@@ -97,20 +96,6 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit() {
     this.refreshTab();
     this.employeeService.update$.subscribe(() => this.refreshTab());
-    this.employee = {
-      id: 0,
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      idRh: '',
-      jobTitle: '',
-      gender: '',
-      grade: '',
-      posting: null,
-      manager: null,
-      employees: null
-    };
     this.formEmployee = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],

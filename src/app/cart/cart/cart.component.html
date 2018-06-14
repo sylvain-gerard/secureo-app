@@ -22,18 +22,14 @@
       <th>Actions</th>
 
       <tr *ngFor="let item of items">
-        <td>{{item.product.productName}}</td>
-        <td>{{item.product.model}}</td>
-        <td>{{item.product.productCode}}</td>
-        <td>{{item.product.size}}</td>
-        <td>{{item.product.sizeDescription}}</td>
-        <td>{{item.product.supplier.supplierName}}</td>
+        <td><span *ngIf="item.product.added">{{item.product.productName}}</span></td>
+        <td><span *ngIf="item.product.added">{{item.product.model}}</span></td>
+        <td><span *ngIf="item.product.added">{{item.product.productCode}}</span></td>
+        <td><span *ngIf="item.product.added">{{item.product.size}}</span></td>
+        <td><span *ngIf="item.product.added">{{item.product.sizeDescription}}</span></td>
+        <td><span *ngIf="item.product.added">{{item.product.supplier.supplierName}}</span></td>
         <td>
-          <button mat-button (click)="deleteItem(item)"><mat-icon>remove_shopping_cart</mat-icon></button>
-          <!--
-          <button (click)="quantityPlus(item, items.indexOf(item))"> + </button> {{ item.quantity }}
-          <button *ngIf="item.quantity > 1" (click)="quantityMinus(item, items.indexOf(item))"> - </button>
-          -->
+          <button mat-button (click)="deleteItem(item)"><mat-icon *ngIf="item.product.added">remove_shopping_cart</mat-icon></button>
         </td>
       </tr>
   </table>

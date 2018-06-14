@@ -69,14 +69,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Fournisseur</mat-header-cell>
       <mat-cell *matCellDef="let Product" fxHide.xs="true"> {{Product.supplier.supplierName}} </mat-cell>
     </ng-container>
-    <!--
-    <ng-container matColumnDef="details">
-      <mat-header-cell *matHeaderCellDef>Détails</mat-header-cell>
-      <mat-cell *matCellDef>
-        <a [routerLink]="['/products', product.id]">Détails</a>
-      </mat-cell>
-    </ng-container>
-    -->
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
       (click)="goToDetail(row)"></mat-row>

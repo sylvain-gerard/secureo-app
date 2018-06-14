@@ -21,7 +21,7 @@ export class MeComponent implements OnInit {
   myOrders: Observable<IOrder[]>;
   selectedRowIndex = -1;
   dataSourceOrder = new MatTableDataSource();
-  displayedColumns = ['createdAt', 'updatedAt', 'total', 'status'];
+  displayedColumns = ['createdAt', 'updatedAt', 'status'];
 
   // MatPaginator Inputs
   length = 100;
@@ -43,17 +43,7 @@ export class MeComponent implements OnInit {
     this.employee = JSON.parse(sessionStorage.getItem('employee'));
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.id = this.employee.id;
-    console.log(this.id);
     this.myOrders = this.employeeService.getOrdersOfEmployee(this.id);
-    this.order = {
-      id: 0,
-      createdAt: null,
-      updatedAt: null,
-      total: 0,
-      status: '',
-      items: [],
-      employee: null
-    };
     this.refreshTab();
 
   }
@@ -74,7 +64,7 @@ export class MeComponent implements OnInit {
     this.selectedRowIndex = row.id;
     this.order = Object.assign({}, row);
   }
-  viewItem(row) {
+  viewItems(row) {
     this.selectedRowIndex = row.id;
     this.order = Object.assign({}, row);
     this.router.navigate(['/orders', this.order.id, 'items']);

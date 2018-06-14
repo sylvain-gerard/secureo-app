@@ -12,24 +12,17 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-  title = 'Secureo';
-  public shoppingCartItem$: Observable<IProduct[]>;
+
   isLoggedIn$: Observable<boolean>; // {1}
-  cartEmpty = new BehaviorSubject<boolean>(true);
-  constructor(private authService: AuthService, private router: Router, private cartService: CartService) {
-    // this.shoppingCartItem$ = this.cartService.getItems();
-    // this.shoppingCartItem$.subscribe(_ => _);
-  }
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
-    console.log(this.isLoggedIn$._subscribe);
-    if (sessionStorage.getItem('cart') != null) {
-      this.cartEmpty.next(false);
-    } else {
-      this.cartEmpty.next(true);
-    }
   }
 
   onLogout() {

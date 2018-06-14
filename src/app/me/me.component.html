@@ -34,10 +34,13 @@
           </mat-form-field>
           <br>
           <mat-form-field fxFill>
-            <input matInput [readonly]="!edition" placeholder="Fonction" name="idRh" [(ngModel)]="employee.jobTitle">
+            <input matInput [readonly]="!edition" placeholder="Fonction" name="jobTitle" [(ngModel)]="employee.jobTitle">
+          </mat-form-field>
+          <br>
+          <mat-form-field fxFill>
+            <input matInput [readonly]="!edition" placeholder="Affectation" name="posting" [(ngModel)]="employee.posting.postingName">
           </mat-form-field>
         </form>
-        <br>
       </mat-card-content>
     </mat-card>
   </div>
@@ -63,14 +66,8 @@
 
           <!-- Shipped Date Column -->
           <ng-container matColumnDef="updatedAt">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Date de mise à jour</mat-header-cell>
-            <mat-cell *matCellDef="let Order"> {{Order.updatedAt}} </mat-cell>
-          </ng-container>
-
-          <!--Total Column -->
-          <ng-container matColumnDef="total">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
-            <mat-cell *matCellDef="let Order"> {{Order.total}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs="true">Date de mise à jour</mat-header-cell>
+            <mat-cell *matCellDef="let Order" fxHide.xs="true"> {{Order.updatedAt}} </mat-cell>
           </ng-container>
 
           <!--Status Column -->
@@ -81,7 +78,7 @@
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (mouseover)="highlight(row)"
-            (click)="viewItem(row)"></mat-row>
+            (click)="viewItems(row)"></mat-row>
         </mat-table>
         <div *ngIf='!dataSourceOrder' fxLayoutAlign='center' class='spinner'>
           <mat-spinner></mat-spinner>

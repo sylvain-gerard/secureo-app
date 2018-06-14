@@ -29,7 +29,6 @@ export class ProductsComponent implements AfterViewInit {
   category: ICategory;
   supplier: ISupplier;
   selectedRowIndex = -1;
-  // edition = false;
   selectedProduct = false;
 
   products$: Observable<IProduct[]>;
@@ -116,27 +115,4 @@ export class ProductsComponent implements AfterViewInit {
       this.dataSourceProduct.paginator = this.paginator;
     });
   }
-  /*
-  cancelSelect() {
-    this.selectedRowIndex = -1;
-    // this.edition = false;
-    this.clearInput();
-  }
-
-  clearInput() {
-    this.product = {
-      id: 0,
-      productName: '',
-      productCode: '',
-      model: '',
-      description: '',
-      productPrice: 0,
-      size: '',
-      sizeDescription: '',
-      disabled: false,
-      category: null,
-      supplier: null
-    };
-  }
-  */
 }

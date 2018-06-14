@@ -6,13 +6,15 @@ import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersDetailComponent } from './orders-detail/orders-detail.component';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { OrderService } from './order.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    OrdersRoutingModule
+    OrdersRoutingModule,
+    FlexLayoutModule
   ],
   declarations: [
     OrdersDetailComponent,

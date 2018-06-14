@@ -42,10 +42,7 @@ export class CartService {
   }
 
   addToCart(product) {
-    // BUG efface le cart du storage puis rajoute le produit détaillé
     this.cart = JSON.parse(sessionStorage.getItem('cart'));
-    console.log('CART IN SERVICE', this.cart);
-    console.log('PRODUCT input in service', product);
     this.cartItem = {
       added: true,
       product: product,
@@ -54,25 +51,21 @@ export class CartService {
     };
     this.cartItem.totalPrice = product.productPrice * this.cartItem.quantity;
     this.cart.push(this.cartItem);
-    console.log('CART AFTER ADD', this.cart);
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
   removeFromCart(id: number) {
-    console.log(id);
     this.cart = JSON.parse(sessionStorage.getItem('cart'));
-    console.log('CART IN SERVICE', this.cart);
     this.cart = this.cart.filter(cart => cart.product.id !== id);
-    console.log('CART AFTER RM', this.cart);
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
+    this.getCart();
   }
 
   checkout(order) {
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
     this.employee = JSON.parse(sessionStorage.getItem('employee'));
-
     this.cart = this.getCart();
-    console.log('CART IN CHECKOUT()', this.cart);
+
     for ( let i = 0; i < this.cart.length; i++) {
       this.cartItem = this.cart[i];
       this.order.total += this.cart[i].totalPrice;
@@ -81,6 +74,7 @@ export class CartService {
 
     this.order.status = 'CREATED';
     this.order.employee = this.employee;
+
     this.orderService.createOrder(this.order).subscribe(
       result => {sessionStorage.removeItem('cart');
                   console.log('success');
@@ -96,27 +90,5 @@ export class CartService {
     this.snackBar.open(message, erreur, {
       duration: 3000
     });
-  }
-
-  plusItem(cartItem, id) {
-    console.log('Item input in service (+)', cartItem); // la quantity est déjà incrémentée pour le produit pas pour le cartItem
-    this.cart = this.cart.filter(cart => cart.product.id !== id); // => ne supprime pas l'item...
-    console.log('CART AFTER FILTER', this.cart); // quantity updated mais duplique le cartItem (ancien + nouveau)
-    cartItem.quantity++;
-    cartItem.totalPrice = cartItem.product.productPrice * cartItem.quantity;
-    console.log('QUANTITY UPDATED (+)', cartItem.quantity);
-    console.log('TOTAL PRICE UPDATED (+)', cartItem.totalPrice);
-    this.cart.push(this.cartItem);
-    console.log('CART UPDATED AFTER (+)', this.cart);
-    sessionStorage.setItem('cart', JSON.stringify(this.cart));
-  }
-
-  minusItem(cartItem, id) {
-    cartItem.quantity--;
-    cartItem.totalPrice = cartItem.product.productPrice * cartItem.quantity;
-    console.log('QUANTITY UPDATED (-)', cartItem.quantity);
-    console.log('TOTAL PRICE UPDATED (-)', cartItem.totalPrice);
-    console.log('CART UPDATED AFTER (-)', this.cart);
-    sessionStorage.setItem('cart', JSON.stringify(this.cart));
   }
 }
