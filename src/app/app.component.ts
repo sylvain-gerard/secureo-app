@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
+    this.isLoggedIn$.subscribe(console.log);
   }
 
   onLogout() {

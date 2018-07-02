@@ -7,7 +7,7 @@
   <div>
     <button (click)="backToProducts()" mat-raised-button color="primary">Produits</button>
     <button (click)="checkout()" mat-raised-button color="primary" *ngIf="!cartEmpty">Commander</button>
-    
+    <button (click)="backToMe()" mat-raised-button color="primary">Mon Compte</button>
   </div>
   <br>
 
@@ -33,5 +33,5 @@
         </td>
       </tr>
   </table>
-  <div *ngIf="cartEmpty"><p class="mess-cart">Panier vide !</p></div>
+  <div *ngIf="cartEmpty"><p class="mess-cart">Aucun produit dans le panier.</p></div>
 </div>

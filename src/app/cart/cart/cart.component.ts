@@ -82,6 +82,9 @@ export class CartComponent implements OnInit {
                this.showMessage('', 'Echec de la requête');
               }
     );
+  }
+
+  backToMe() {
     this.router.navigate(['me']);
   }
 

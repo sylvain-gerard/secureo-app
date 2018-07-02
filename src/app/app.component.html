@@ -1,4 +1,4 @@
-<div class="header" [style.min.%]="100" [style.minHeight.%]="100" fxLayout="column">
+<div [style.minHeight.%]="100" fxLayout="column">
   <mat-toolbar class="toolbar" fxLayout="row" fxLayoutAlign="space-between center">
     <div>
       <button mat-icon-button (click)="snav.toggle()" *ngIf="isLoggedIn$ | async">

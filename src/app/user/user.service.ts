@@ -12,7 +12,6 @@ export class UserService {
   private url = environment.REST_API_URL + 'users';
 
   update$: Subject<any> = new Subject<any>();
-  // selectedUser: IUser;
 
   constructor(private http: HttpClient) {}
 
@@ -42,7 +41,6 @@ export class UserService {
   }
 
   postUserInfos(loggedUser: LogginUser) {
-    console.log(loggedUser);
     return this.http.post<LogginUser>(`${this.url}/loggin`, loggedUser);
   }
 }
