@@ -3,8 +3,8 @@
       <h1 class="tab-name">Détails de l'affectation : {{ posting.postingName }}</h1>
   </div>
   <div>
-    <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
-    <button (click)="showEmployees(posting.id)" mat-raised-button color="primary">Agents</button>
+    <button class="formButton" (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+    <button class="formButton" (click)="showEmployees(posting.id)" mat-raised-button color="primary">Agents</button>
   </div>
   <mat-card>
     <mat-card-content>

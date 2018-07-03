@@ -11,7 +11,7 @@ import {
   PageEvent,
   MatPaginator
 } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IPosting } from '../iposting';
 import { PostingService } from '../posting.service';

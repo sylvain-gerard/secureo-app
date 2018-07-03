@@ -48,3 +48,8 @@ app-root {
 .tab-name {
   font-family: 'Roboto', Georgia, 'Times New Roman', Times, serif;
 }
+
+.formButton {
+  margin: 2px;
+  padding: 2px;
+}

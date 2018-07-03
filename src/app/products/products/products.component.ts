@@ -1,4 +1,4 @@
-import 'rxjs/add/operator/switchMap';
+
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IProduct } from './../iproduct';
 import { ICategory } from '../../categories/icategory';
@@ -15,7 +15,7 @@ import {
   PageEvent,
   MatPaginator
 } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ISupplier } from '../../suppliers/isupplier';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 

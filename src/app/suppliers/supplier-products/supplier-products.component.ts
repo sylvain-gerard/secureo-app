@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, Input, Output, Inject } fr
 import { IProduct } from '../../products/iproduct';
 import { ICategory } from '../../categories/icategory';
 import { ISupplier } from '../isupplier';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { MaterialModule } from '../../material.module';
 import {
   MatTableDataSource,

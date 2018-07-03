@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  Subject } from 'rxjs';
 import { IUser } from './iuser';
-import { Subject } from 'rxjs/Subject';
 import { environment } from '../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { LogginUser } from './LogginUser';

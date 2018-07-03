@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
-import { Subject } from 'rxjs/Subject';
+import { Subject ,  Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { IOrder } from './iorder';
 import { IOrderItem } from './IOrderItem';
 import { tap, catchError } from 'rxjs/operators';

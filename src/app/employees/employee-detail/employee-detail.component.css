@@ -1,16 +1,5 @@
-
-
-
-
-/* Small screens */
-/* On small screens, we are no longer using row direction but column */
-/*
-@media all and (max-width: 760px) {
-  .page-content {
-    
-    display: -webkit-flex;
-    flex-direction: column;
-  }
+.formButton{
+  padding: 2px;
+  margin: 2px;
 }
-*/
 

@@ -4,12 +4,11 @@
       <h1 class="tab-name">Commandes de l'agent</h1>
     </div>
     <div>
-      <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
-      <button (click)="backToEmployee()" mat-raised-button color="primary">Retour</button>
+      <button class="formButton" (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
+      <button class="formButton" (click)="backToEmployee()" mat-raised-button color="primary">Retour</button>
     </div>
-    <br>
   </div>
-
+  <br>
   <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
   </mat-paginator>
 

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../iuser';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { IRole } from '../irole';
 import { UserService } from '../user.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-detail',
@@ -33,9 +34,10 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.urlParam = this.route.snapshot.params;
-    this.user$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    this.user$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.userService.getUser(params.get('id'))
-    );
+    ));
     this.user$.subscribe(console.log);
   }
 

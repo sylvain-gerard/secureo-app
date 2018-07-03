@@ -1,18 +1,13 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { ISupplier } from '../../suppliers/isupplier';
-import { ICategory } from '../../categories/icategory';
 import { IProduct } from '../iproduct';
 import { ProductService } from '../product.service';
 import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { Subscription ,  Observable ,  BehaviorSubject ,  Subject } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CartState } from '../CartState';
-import { Subject } from 'rxjs/Subject';
 import { CartService } from '../../cart/cart.service';
 import { CartItem } from '../../cart/CartItem';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-detail',
@@ -44,9 +39,10 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.product$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    this.product$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.productService.getProduct(params.get('id'))
-    );
+    ));
 
     if (sessionStorage.getItem('cart') == null) {
       this.cartItems = [];

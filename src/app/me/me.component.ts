@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { IEmployees } from '../employees/iemployees';
 import { IUser } from '../user/iuser';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { IOrder } from '../orders/iorder';
 import { EmployeeService } from '../employees/employee.service';
 import { PageEvent, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
@@ -62,7 +62,6 @@ export class MeComponent implements OnInit {
 
   highlight(row) {
     this.selectedRowIndex = row.id;
-    this.order = Object.assign({}, row);
   }
   viewItems(row) {
     this.selectedRowIndex = row.id;

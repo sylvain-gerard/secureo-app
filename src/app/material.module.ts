@@ -1,6 +1,5 @@
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
   MatCheckboxModule,
@@ -21,7 +20,6 @@ import {
   MatSortModule,
   MatSnackBarModule,
   MatPaginatorModule,
-  PageEvent,
   MatProgressSpinnerModule
 } from '@angular/material';
 

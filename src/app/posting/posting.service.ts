@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs/Subject';
+import { Subject ,  Observable } from 'rxjs';
 import { IPosting } from './iposting';
-import { Observable } from 'rxjs/Observable';
 import { IEmployees } from '../employees/iemployees';
 
 @Injectable()

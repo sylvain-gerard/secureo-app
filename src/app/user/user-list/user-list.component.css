@@ -6,4 +6,8 @@
 .inputFullWidth {
   width: 100%;
 }
+.formButton {
+  margin: 2px;
+  padding: 2px;
+}
 

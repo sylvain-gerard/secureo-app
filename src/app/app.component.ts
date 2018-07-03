@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
 import { CartService } from './cart/cart.service';
 import { IProduct } from './products/iproduct';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-root',

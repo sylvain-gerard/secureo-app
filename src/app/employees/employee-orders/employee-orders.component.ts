@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EmployeeService } from '../employee.service';
 import { IOrder } from '../../orders/iorder';

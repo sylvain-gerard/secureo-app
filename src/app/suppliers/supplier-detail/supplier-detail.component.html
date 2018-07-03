@@ -2,8 +2,8 @@
   <div fxLayout="column">
     <h1 class="tab-name">Détails du fournisseur : {{ supplier.supplierName }}</h1>
     <div>
-      <button (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
-      <button (click)="showProducts(supplier.id)" mat-raised-button color="primary">Produits</button>
+      <button class="formButton" (click)="goBackToList()" mat-raised-button color="primary">Retour</button>
+      <button class="formButton" (click)="showProducts(supplier.id)" mat-raised-button color="primary">Produits</button>
     </div>
   </div>
   <mat-card>

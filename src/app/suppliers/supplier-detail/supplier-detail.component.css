@@ -1,13 +1,20 @@
 mat-card {
-    /*max-width: 400px;*/
-    margin: 2em auto;
-    text-align: center;
-  }
-  .supplier-content {
-    padding: 10px;
-  }
-  .inputFullWidth {
-    font-size: 18px;
-    font-family: Verdana, Georgia, 'Times New Roman', Times, serif;
-    width: 100%;
-  }
+  /*max-width: 400px;*/
+  margin: 2em auto;
+  text-align: center;
+}
+
+.supplier-content {
+  padding: 10px;
+}
+
+.inputFullWidth {
+  font-size: 18px;
+  font-family: Verdana, Georgia, 'Times New Roman', Times, serif;
+  width: 100%;
+}
+
+.formButton {
+  margin: 2px;
+  padding: 2px;
+}

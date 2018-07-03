@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IEmployees } from '../iemployees';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { EmployeeService } from '../employee.service';
 import { IPosting } from '../../posting/iposting';
 import { IOrder } from '../../orders/iorder';
 import { PostingService } from '../../posting/posting.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employee-detail',
@@ -65,15 +66,18 @@ export class EmployeeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.urlParam = this.route.snapshot.params;
-    this.employee$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    this.employee$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.employeeService.getEmployee(params.get('id'))
-    );
-    this.posting$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    ));
+    this.posting$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.employeeService.getEmployeePosting(params.get('id'))
-    );
-    this.manager$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    ));
+    this.manager$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.employeeService.getManagerOfEmployee(params.get('id'))
-    );
+    ));
   }
 
   goBackToList() {
@@ -93,9 +97,10 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   viewOrders(id) {
-    this.orders$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    this.orders$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.employeeService.getOrdersOfEmployee(params.get('id'))
-    );
+    ));
     this.router.navigate(['employee', id, 'orders']);
   }
 

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { IPosting } from '../iposting';
 import { IAddress } from '../../addresses/iaddress';
 import { IEmployees } from '../../employees/iemployees';
 import { PostingService } from '../posting.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-posting-detail',
@@ -25,9 +26,10 @@ export class PostingDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.posting$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    this.posting$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.postingService.getPosting(params.get('id'))
-    );
+    ));
   }
 
   goBackToList() {
@@ -35,9 +37,10 @@ export class PostingDetailComponent implements OnInit {
   }
 
   showEmployees(id: number) {
-    this.employees$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    this.employees$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.postingService.getEmployeesOfPosting(params.get('id'))
-    );
+    ));
     this.router.navigate(['postings', id, 'employees']);
   }
 

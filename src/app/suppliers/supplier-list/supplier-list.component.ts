@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ISupplier } from '../isupplier';
 import { IProduct } from '../../products/iproduct';
 import { IAddress } from '../../addresses/iaddress';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {
   MatTableDataSource,
   MatDialog,

@@ -2,3 +2,7 @@
     padding: 10px;    
     /*justify-content: space-around;*/
   }
+  .formButton{
+    padding: 2px;
+    margin: 2px;
+  }

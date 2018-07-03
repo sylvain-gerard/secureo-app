@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { ISupplier } from '../isupplier';
-import { Observable } from 'rxjs/Observable';
-import { IAddress } from '../../addresses/iaddress';
+import { Observable } from 'rxjs';
 import { IProduct } from '../../products/iproduct';
 import { SuppliersService } from '../suppliers.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-supplier-detail',
@@ -25,9 +25,10 @@ export class SupplierDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.supplier$ = this.route.paramMap.switchMap((params: ParamMap) =>
+    this.supplier$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.supplierService.getSupplier(params.get('id'))
-    );
+    ));
   }
 
   goBackToList() {
@@ -35,9 +36,10 @@ export class SupplierDetailComponent implements OnInit {
   }
 
   showProducts(id: number) {
-    this.products = this.route.paramMap.switchMap((params: ParamMap) =>
+    this.products = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
       this.supplierService.getProductsOfSupplier(params.get('id'))
-    );
+    ));
     this.router.navigate(['suppliers', id, 'products']);
   }
 }

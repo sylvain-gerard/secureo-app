@@ -11,3 +11,7 @@ mat-card {
     font-family: Verdana, Georgia, 'Times New Roman', Times, serif;
     width: 100%;
   }
+  .formButton {
+    padding: 2px;
+    margin: 2px;
+  }

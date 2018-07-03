@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject ,  Observable } from 'rxjs';
 import { IUser } from '../user/iuser';
 import { LogginUser } from '../user/LogginUser';
 import { UserService } from '../user/user.service';
 import { MatSnackBar } from '@angular/material';
 import { EmployeeService } from '../employees/employee.service';
 import { IEmployees } from '../employees/iemployees';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {

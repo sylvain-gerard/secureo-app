@@ -9,11 +9,11 @@
     <h1 class="tab-name">Utilisateurs</h1>
   </div>
   <div>
-    <button (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
-    <button (click)="create()" mat-raised-button color="primary">Créer</button>
+    <button class="formButton" (click)="backTohome()" mat-raised-button color="primary">Accueil</button>
+    <button class="formButton" (click)="create()" mat-raised-button color="primary">Créer</button>
   </div>
-  <br>
 </div>
+<br>
 <!-- Formulaire de création d'un utilisateur -->
 <div fxLayout="50%" *ngIf="creation">
   <mat-card>
@@ -47,8 +47,8 @@
         <mat-checkbox formControlName="active" name="active"></mat-checkbox>
         <br>
         <br>
-        <button type="submit" mat-raised-button color="primary" [disabled]="!formUser.valid">Valider</button>
-        <button (click)="closeForm()" mat-raised-button color="primary">Fermer</button>
+        <button class="formButton" type="submit" mat-raised-button color="primary" [disabled]="!formUser.valid">Valider</button>
+        <button class="formButton" (click)="closeForm()" mat-raised-button color="primary">Fermer</button>
       </form>
     </mat-card-content>
   </mat-card>

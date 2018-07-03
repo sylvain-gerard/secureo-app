@@ -12,7 +12,7 @@ import { IOrder } from '../orders/iorder';
 import { IUser } from '../user/iuser';
 import { EmployeeService } from '../employees/employee.service';
 import { IEmployees } from '../employees/iemployees';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { IOrderItem } from '../orders/IOrderItem';
 import { MatSnackBar } from '@angular/material';
 
