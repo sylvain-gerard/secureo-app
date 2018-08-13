@@ -39,7 +39,7 @@ export class EmployeeService {
   }
 
   getEmployeeByEmail(email): Observable<IEmployees> {
-    return this.http.get<IEmployees>(`${this.url}/email/${email}`);
+    return this.http.get<IEmployees>(`${this.url}/email/${email}/`);
   }
 
   getEmployeePosting(id): Observable<IPosting> {

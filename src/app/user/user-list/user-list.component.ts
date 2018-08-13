@@ -1,31 +1,29 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { IUser } from './../iuser';
 import { IRole } from '../irole';
 import { UserService } from '../user.service';
-import { MaterialModule } from '../../material.module';
 import {
   MatTableDataSource,
-  MatDialog,
-  MatDialogConfig,
   MatSort,
   MatSnackBar,
-  MatSelectModule,
-  MatCheckboxModule,
   PageEvent,
   MatPaginator
 } from '@angular/material';
-import { Observable } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import {catchError, map, startWith, switchMap, mergeMap } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IPagedUsers } from '../IPagedUsers';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements AfterViewInit {
   formUser: FormGroup;
-
+  data: IPagedUsers;
+  content: IUser[];
   user: IUser;
   role: IRole;
   selectedRowIndex = -1;
@@ -34,16 +32,20 @@ export class UserListComponent implements OnInit {
   user$: Observable<IUser>;
   creation = false;
   urlParam: any;
-
   dataSourceUser = new MatTableDataSource();
+
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
 
   displayedColumns = ['userName', 'email', 'active', 'role'];
   // formColumns = ['nom', 'mail', 'actif', 'rôle'];
 
   // MatPaginator Inputs
-  length = 100;
-  pageSize = 10;
-  pageSizeOptions = [5, 10, 25, 50, 100];
+  length: IPagedUsers["totalElements"];
+  pageSize: IPagedUsers["size"];
+  number: IPagedUsers["number"];
+  pageSizeOptions = [10, 25, 50, 100];
 
   // MatPaginator Output
   pageEvent: PageEvent;
@@ -58,14 +60,14 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private userService: UserService
   ) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.refreshTab();
     this.userService.update$.subscribe(() => this.refreshTab());
     this.formUser = this.fb.group({
@@ -82,10 +84,40 @@ export class UserListComponent implements OnInit {
   }
 
   refreshTab() {
-    this.userService.getUsers().subscribe((data: IUser[]) => {
-      this.dataSourceUser = new MatTableDataSource(data);
+    /*
+    merge(this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          return  this.userService.getUsers(
+            this.paginator.pageIndex, this.paginator.pageSize);
+        }),
+        map(data => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.isRateLimitReached = false;
+          this.resultsLength = data.totalElements;
+
+          return data;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          // Catch if the GitHub API has reached its rate limit. Return empty data.
+          this.isRateLimitReached = true;
+          return observableOf([]);
+        })
+      ).subscribe(data =>{ this.data = data});
+      */
+    
+    this.userService.getUsers(this.number, this.pageSize).subscribe(data => {
+      this.dataSourceUser = new MatTableDataSource(data.content);
       this.dataSourceUser.sort = this.sort;
-      this.dataSourceUser.paginator = this.paginator;
+      //this.dataSourceUser.paginator = this.paginator;
+      this.paginator.length = data.totalElements;
+      this.dataSourceUser.paginator.pageSize = this.pageSize;
+      this.dataSourceUser.paginator.pageIndex = this.number;
+      console.log(this.paginator);
+      console.log(data);
     });
   }
 

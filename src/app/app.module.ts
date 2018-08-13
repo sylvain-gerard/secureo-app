@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './interfaces/counter';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -70,7 +72,8 @@ import { MeRoutingModule } from './me/me-routing.module';
     CartModule,
     HomeModule,
     MeModule,
-    MeRoutingModule
+    MeRoutingModule,
+    StoreModule.forRoot({ count: counterReducer }),
 
   ],
   providers: [

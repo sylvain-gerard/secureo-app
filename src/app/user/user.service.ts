@@ -5,18 +5,24 @@ import { IUser } from './iuser';
 import { environment } from '../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { LogginUser } from './LogginUser';
+import { IPagedUsers } from './IPagedUsers';
+import { PageEvent } from '@angular/material';
 
 @Injectable()
 export class UserService {
   private url = environment.REST_API_URL + 'users';
 
   update$: Subject<any> = new Subject<any>();
+  number=0;
+  pageSize=10;
+  pageEvent: PageEvent;
+
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<IUser[]> {
+  getUsers(page: number, pageSize: number): Observable<IPagedUsers> {
     return this.http
-      .get<IUser[]>(`${this.url}`) as Observable<IUser[]>;
+      .get<IPagedUsers>(`${this.url}/?page=${page+1}&size=${pageSize}`);
   }
 
   getUser(id): Observable<IUser> {

@@ -6,7 +6,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const userRoutes: Routes = [
   {
-    path: 'users',
+    path: 'users?page=0&size=10',
     component: UserListComponent,
     canActivate: [AuthGuard]
   },

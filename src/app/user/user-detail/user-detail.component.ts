@@ -42,7 +42,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   goBackToList() {
-    this.router.navigate(['users']);
+    this.router.navigate(['users?page=0&size=10']);
   }
 
   editMode() {
